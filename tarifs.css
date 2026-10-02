@@ -1,0 +1,40 @@
+.pricing-intro,.pricing-offers,.pricing-tailored,.pricing-practical{width:87.4%;max-width:1280px;margin-inline:auto}
+.pricing-intro{padding:4.5rem 0 0}
+.page-tarifs .eyebrow{font-size:.875rem;line-height:1.6;margin-bottom:1.75rem;color:var(--muted)}
+.pricing-intro-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:end}
+.pricing-intro h1{font-size:clamp(5.5rem,10vw,10rem);line-height:.9}
+.pricing-intro-copy{max-width:560px;font-size:1.0625rem;line-height:1.9}
+.pricing-intro-copy p{margin:0;color:var(--muted)}
+.pricing-intro-copy .pricing-lead{font-size:1.35rem;line-height:1.65;color:var(--text);margin:0 0 1.5rem}
+.formula-nav{display:flex;flex-wrap:wrap;gap:1rem 3rem;margin-top:3.5rem;padding:1.4rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.formula-nav a{display:flex;align-items:center;gap:.8rem;min-height:44px;font-size:.9375rem}
+.formula-nav a span{font-size:.8125rem;color:var(--amber)}
+.formula-nav a:hover{color:var(--accent)}
+.pricing-offer{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(3rem,8vw,8rem);padding:5rem 0;border-bottom:1px solid var(--line);scroll-margin-top:2rem}
+.offer-number{color:var(--amber);font-size:.875rem;letter-spacing:.12em;margin:0 0 1.75rem}
+.offer-heading h2{font-size:clamp(3.2rem,5.3vw,5.3rem);line-height:1;overflow-wrap:normal}
+.offer-category{font-size:1.0625rem;color:var(--muted);line-height:1.7;max-width:330px;margin:1.25rem 0 0}
+.offer-price{margin:2.5rem 0 1rem}
+.offer-price>span{display:block;font-size:.875rem;color:var(--muted);margin-bottom:.3rem}
+.offer-price strong{display:block;font-family:var(--display);font-size:clamp(4.5rem,6vw,6rem);line-height:1.05;font-weight:400;color:var(--accent);white-space:nowrap}
+.offer-price .currency{font-size:.64em}
+.offer-heading .button-link{margin-top:1rem;justify-content:center;min-height:48px;font-size:.9375rem}
+.offer-detail{padding-top:.25rem}
+.offer-description{font-size:1.125rem;line-height:1.85;margin:0 0 2rem;max-width:620px}
+.included-label{margin:0 0 .85rem;font-family:var(--body);font-size:.875rem;letter-spacing:.09em;text-transform:uppercase;font-weight:500;color:var(--muted)}
+.offer-features{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.offer-features li{position:relative;padding:1rem 0 1rem 1.4rem;border-bottom:1px solid var(--line);font-size:1rem;line-height:1.8;color:var(--muted)}
+.offer-features li::before{content:"";position:absolute;left:0;top:1.75rem;width:5px;height:5px;background:var(--accent)}
+.offer-features strong{font-weight:500;color:var(--text)}
+.pricing-tailored{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(3rem,8vw,8rem);padding:5rem 0}
+.pricing-tailored h2{font-size:clamp(3rem,5vw,5rem);line-height:1}
+.tailored-copy>p{font-size:1.125rem;line-height:1.85;margin:0 0 1rem}
+.tailored-copy .email-note{max-width:490px;font-size:.875rem;color:var(--muted);line-height:1.7;margin-top:1.5rem}
+.pricing-practical{border-top:1px solid var(--line);padding:3rem 0 5rem}
+.pricing-practical h2{font-size:2.5rem;margin-bottom:2rem}
+.practical-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem}
+.practical-grid h3{font-size:1.0625rem;font-weight:500;margin:0 0 1rem}
+.practical-grid p{font-size:.9375rem;line-height:1.9;color:var(--muted);margin:0 0 1.25rem}
+.practical-grid .quiet-link{font-size:.9375rem;line-height:1.8}
+@media(max-width:900px){.pricing-intro-layout{gap:2.5rem}.pricing-intro h1{font-size:6.5rem}.pricing-intro-copy .pricing-lead{font-size:1.15rem}.pricing-offer,.pricing-tailored{gap:3rem;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}.offer-heading h2{font-size:3.4rem}.formula-nav{gap:.5rem 2rem}.practical-grid{gap:3rem}}
+@media(max-width:700px){.pricing-intro,.pricing-offers,.pricing-tailored,.pricing-practical{width:88%}.pricing-intro{padding-top:3rem}.pricing-intro-layout,.pricing-offer,.pricing-tailored,.practical-grid{grid-template-columns:1fr}.pricing-intro-layout{gap:2rem}.pricing-intro h1{font-size:clamp(4.8rem,19vw,7rem)}.pricing-intro-copy .pricing-lead{font-size:1.2rem}.formula-nav{margin-top:2.5rem;display:grid;grid-template-columns:1fr;padding:1rem 0;gap:.15rem}.pricing-offer{gap:2.5rem;padding:3.5rem 0}.offer-number{margin-bottom:1.25rem}.offer-heading h2{font-size:clamp(3.1rem,11vw,4.4rem)}.offer-category{max-width:100%;margin-top:1rem}.offer-price{margin:1.75rem 0 .5rem}.offer-price strong{font-size:4.8rem}.offer-description{font-size:1.0625rem}.pricing-tailored{gap:2rem;padding:3.5rem 0}.pricing-tailored h2{font-size:3.5rem}.tailored-copy>p{font-size:1.0625rem}.pricing-practical{padding-bottom:3.5rem}.practical-grid{gap:2rem}}
