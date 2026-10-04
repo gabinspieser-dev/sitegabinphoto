@@ -42,7 +42,7 @@
     preload.onerror = () => {
       if (token !== request) return;
       clearTimeout(statusTimer);
-      status.textContent = 'Cette photo n’a pas pu se charger. Passe à la suivante ou réessaie en ouvrant l’image depuis la galerie.';
+      status.textContent = 'Cette photo n’a pas pu se charger. Passez à la suivante ou réessayez en ouvrant l’image depuis la galerie.';
       status.hidden = false;
     };
     preload.src = link.href;

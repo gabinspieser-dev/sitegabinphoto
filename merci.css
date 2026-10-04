@@ -1,0 +1,50 @@
+/* Une page offerte aux rencontres de Gabin. Les marques restent originales. */
+.thanks-page{width:88%;max-width:1480px;margin:0 auto;padding:5.8rem 0 5rem}
+.thanks-letter{display:grid;grid-template-columns:1fr 1.12fr;gap:clamp(3rem,7vw,7rem);padding-bottom:5rem}
+.thanks-kicker{margin:0 0 2rem;font-size:.72rem;line-height:1.6;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);max-width:26ch}
+.thanks-letter h1{font-family:var(--display);font-weight:400;font-size:clamp(6.5rem,10.5vw,10.6rem);line-height:.9;letter-spacing:.005em;margin:0}
+.thanks-letter h1 em{font-style:normal;color:var(--accent)}
+.thanks-letter-copy{padding-top:.15rem;max-width:36rem;font-family:var(--body);font-size:1rem;line-height:1.85;color:var(--muted)}
+.thanks-letter-copy p{margin:0 0 1.5rem}
+.thanks-letter-copy .thanks-letter-lead{font-size:1.3rem;line-height:1.5;color:var(--text);margin-bottom:2rem;font-weight:500}
+.thanks-letter-copy .thanks-signature{color:var(--text);margin:2rem 0 0}
+.thanks-signature span{display:inline-block;margin-top:.45rem;font-weight:500}
+.thanks-categories{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4rem 1.8rem}
+.thanks-category{grid-column:span 6;min-width:0;scroll-margin-top:2rem}
+.thanks-category--solo{grid-column:span 2}
+.thanks-category-head{border-top:1px solid var(--line);padding-top:1.2rem;margin-bottom:1.5rem}
+.thanks-category-head h2{font-family:var(--display);font-size:2rem;line-height:1.1;font-weight:400;text-transform:uppercase;letter-spacing:.01em;margin:0}
+.thanks-roster{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem;list-style:none;margin:0;padding:0}
+.thanks-category--venues .thanks-roster,.thanks-category--artists .thanks-roster{grid-template-columns:repeat(3,minmax(0,1fr))}
+.thanks-category--solo .thanks-roster{grid-template-columns:minmax(0,1fr)}
+.thanks-roster li{margin:0;padding:0;min-width:0}
+.thanks-card{display:flex;flex-direction:column;height:100%;color:var(--text);text-decoration:none}
+.thanks-logo{display:flex;align-items:center;justify-content:center;min-height:180px;padding:1.4rem 1.2rem}
+.thanks-logo img{display:block;width:100%;max-width:270px;height:130px;object-fit:contain;object-position:center;filter:none;transform:none}
+.thanks-logo--light{background:var(--text)}
+.thanks-logo--square img{max-width:138px;height:138px}
+.thanks-logo--tall img{max-width:120px;height:150px}
+.thanks-card:focus-visible{outline-offset:6px}
+.thanks-name{display:flex;justify-content:space-between;gap:.8rem;align-items:baseline;padding:.9rem 0 .5rem;font-family:var(--body);font-size:.8rem;line-height:1.45;font-weight:400;color:var(--muted)}
+.thanks-name>span:last-child{color:var(--accent);font-size:1rem;flex-shrink:0}
+.thanks-card:hover .thanks-name{color:var(--text)}
+.thanks-wordmark{display:block;font-family:var(--display);font-size:clamp(2.2rem,3.4vw,3.8rem);line-height:1;text-transform:uppercase;font-weight:400;text-align:center;overflow-wrap:anywhere;max-width:100%}
+.thanks-wordmark span{color:var(--accent)}
+.thanks-closing{padding-top:3rem;margin:4.5rem 0 0;border-top:1px solid var(--line);font-family:var(--body);font-size:1rem;line-height:1.8;color:var(--muted)}
+.thanks-closing span{color:var(--text)}
+.thanks-footer-link{display:inline-flex;align-items:center;min-height:44px;margin:.6rem 0;color:var(--text);font-size:.8rem;text-decoration:none}
+.thanks-footer-link:hover{color:var(--accent)}
+.reviews-footer-link{display:inline-flex;align-items:center;min-height:44px;margin:.6rem 0 .6rem 1.25rem;color:var(--text);font-size:.8rem;text-decoration:none}
+.reviews-footer-link:hover{color:var(--accent)}
+/* Ces liens commencent toujours après la localisation, sur leur propre ligne. */
+footer .footer-discover-links{display:flex;flex-wrap:wrap;gap:0 1.25rem;width:100%;margin:.35rem 0 .6rem}
+footer .footer-discover-links a{margin:0}
+.legal-footer-links{min-width:0}
+.thanks-social-links{display:flex;flex-wrap:wrap;gap:0 1.1rem;margin:.1rem 0 .7rem;font-family:var(--body);font-size:.75rem;color:var(--muted)}
+.thanks-social-links a{display:inline-flex;align-items:center;min-height:44px;text-decoration:underline;text-underline-offset:.3em}
+.thanks-social-links a:hover{color:var(--accent)}
+@media(min-width:1051px) and (max-width:1200px){.site-header .main-nav{font-size:.75rem;letter-spacing:.055em;column-gap:.85rem}}
+@media(max-width:1000px){.thanks-letter{gap:2.5rem}.thanks-letter h1{font-size:7rem}.thanks-logo{padding:1.2rem .9rem;min-height:170px}.thanks-roster{gap:1rem}.thanks-categories{gap:3.5rem 1rem}.thanks-name{font-size:.75rem}}
+@media(max-width:720px){.thanks-page{padding:3.5rem 0 3rem}.thanks-letter{grid-template-columns:1fr;gap:2.8rem;padding-bottom:3.5rem}.thanks-letter h1{font-size:clamp(5.8rem,16vw,7.5rem)}.thanks-kicker{margin-bottom:1.4rem;max-width:none}.thanks-letter-copy{font-size:.95rem;max-width:36rem}.thanks-letter-copy .thanks-letter-lead{font-size:1.2rem;margin-bottom:1.5rem}.thanks-roster,.thanks-category--venues .thanks-roster,.thanks-category--artists .thanks-roster{grid-template-columns:repeat(2,minmax(0,1fr))}.thanks-category--solo{grid-column:span 6}.thanks-category--solo .thanks-logo{min-height:185px}.thanks-category--solo .thanks-logo img{max-width:270px}.thanks-category--solo .thanks-logo--square img{max-width:138px}.thanks-category--solo .thanks-logo--tall img{max-width:120px}.thanks-logo{min-height:175px;padding:1.15rem .85rem}.thanks-logo img{height:115px}.thanks-logo--square img{max-width:120px;height:120px}.thanks-name{font-size:.77rem}.thanks-wordmark{font-size:2.25rem}}
+@media(max-width:520px){.site-header .main-nav .social-jump{grid-column:auto}.thanks-category--festivals .thanks-roster,.thanks-category--venues .thanks-roster{grid-template-columns:minmax(0,1fr)}.thanks-category--festivals .thanks-logo img,.thanks-category--venues .thanks-logo img{max-width:290px;height:140px}.thanks-category--festivals .thanks-wordmark{font-size:3rem}.thanks-category--artists .thanks-wordmark{font-size:clamp(1.4rem,6.3vw,2rem);overflow-wrap:normal}}
+@media print{.thanks-page{width:100%;padding:0}.thanks-letter{display:block;padding-bottom:1rem}.thanks-letter h1{font-size:48pt}.thanks-letter-copy{color:#111;max-width:none}.thanks-logo--light{background:white}.thanks-name{color:#111}.thanks-footer-link,.thanks-social-links{display:none}}

@@ -1,0 +1,35 @@
+/* Vos mots : citations lisibles, auteurs présents, étoiles ambre de la charte. */
+.reviews-page{width:88%;max-width:1480px;margin:0 auto;padding:5.2rem 0 5rem}
+.reviews-intro{display:grid;grid-template-columns:1fr 1.12fr;gap:clamp(3rem,7vw,7rem);padding-bottom:4.8rem}
+.reviews-kicker{margin:0 0 2rem;font-family:var(--body);font-size:.72rem;line-height:1.6;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.reviews-intro h1{font-family:var(--display);font-weight:400;font-size:clamp(6rem,10vw,10.2rem);line-height:.9;letter-spacing:.005em;margin:0}
+.reviews-intro h1 em{font-style:normal;color:var(--accent)}
+.reviews-letter{padding-top:.1rem;max-width:36rem;font-size:1rem;line-height:1.85;color:var(--muted)}
+.reviews-letter p{margin:0 0 1.5rem}
+.reviews-letter .reviews-letter-lead{font-size:1.3rem;line-height:1.5;font-weight:500;color:var(--text);margin-bottom:2rem}
+.reviews-letter .reviews-signature{color:var(--text);margin:2rem 0 0}
+.reviews-signature strong{font-weight:500}
+.reviews-signature span{display:inline-block;margin-top:.75rem}
+.reviews-section-head{display:flex;justify-content:space-between;align-items:baseline;gap:1.5rem;padding:1.6rem 0;border-top:1px solid var(--line)}
+.reviews-section-head h2{font-family:var(--display);font-size:2.3rem;font-weight:400;line-height:1.1;letter-spacing:.005em;margin:0}
+.reviews-section-head>p{color:var(--muted);font-size:.75rem;line-height:1.6;margin:0}
+.reviews-section-head>p>span{color:var(--accent);margin:0 .4rem}
+.review{display:grid;grid-template-columns:minmax(180px,.85fr) minmax(0,2fr);gap:clamp(2rem,4vw,4.5rem);padding:2.6rem 0;border-top:1px solid var(--line);scroll-margin-top:2rem}
+.review--featured{padding:3rem 0;border-top:2px solid var(--accent)}
+.review-author h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:2rem;line-height:1.1;letter-spacing:.01em;margin:0 0 1rem;overflow-wrap:anywhere}
+.review-rating{display:flex;align-items:center;gap:.8rem;line-height:1}
+.review-stars{display:inline-flex;gap:.2rem;color:var(--amber)}
+.review-stars svg{display:block;width:17px;height:17px;fill:currentColor}
+.review-score{font-family:var(--body);font-weight:500;font-size:.85rem;color:var(--text)}
+.review-source{font-size:.7rem;line-height:1.5;color:var(--muted);margin:.9rem 0 0}
+.review-comment{position:relative;margin:0;padding:0 0 0 1.9rem;min-width:0;color:var(--text);font-family:var(--body);font-size:1.05rem;line-height:1.85;font-weight:400;font-style:normal}
+.review-quote-mark{position:absolute;left:0;top:-.25rem;font-family:var(--display);font-size:3rem;line-height:1;color:var(--accent)}
+.review-quote-text p{margin:0 0 .9rem}
+.review-quote-text p:last-child{margin-bottom:0}
+.reviews-closing{border-top:1px solid var(--line);margin-top:1.5rem;padding-top:3rem}
+.reviews-closing .reviews-kicker{margin-bottom:1.5rem}
+.reviews-closing>p:last-child{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.005em;font-size:clamp(2.8rem,4.8vw,4.7rem);line-height:1.04;margin:0}
+.reviews-closing>p:last-child span{color:var(--accent)}
+@media(max-width:1000px){.reviews-intro{gap:2.5rem}.reviews-intro h1{font-size:6.7rem}.review{grid-template-columns:minmax(180px,.8fr) minmax(0,2fr);gap:2rem}.review-author h3{font-size:1.85rem}}
+@media(max-width:720px){.reviews-page{padding:3.5rem 0 3rem}.reviews-intro{grid-template-columns:1fr;gap:2.8rem;padding-bottom:3.5rem}.reviews-intro h1{font-size:clamp(5.6rem,16vw,7.5rem)}.reviews-kicker{margin-bottom:1.4rem;max-width:30ch}.reviews-letter{font-size:.95rem}.reviews-letter .reviews-letter-lead{font-size:1.2rem;margin-bottom:1.5rem}.reviews-section-head{display:block;padding:1.4rem 0}.reviews-section-head h2{font-size:2rem}.reviews-section-head>p{margin-top:.7rem}.review{grid-template-columns:1fr;gap:1.6rem;padding:2rem 0}.review-author h3{font-size:1.9rem;margin-bottom:.8rem}.review-source{margin-top:.75rem}.review-comment{padding-left:1.5rem;font-size:.97rem;line-height:1.85}.review-quote-mark{font-size:2.5rem}.reviews-closing{padding-top:2.5rem}.reviews-closing>p:last-child{font-size:clamp(2.2rem,9vw,3.3rem)}}
+@media print{.reviews-page{width:100%;padding:0}.reviews-intro{display:block;padding-bottom:1rem}.reviews-intro h1{font-size:42pt}.reviews-letter{color:#111;max-width:none}.review{break-inside:avoid;padding:1rem 0}.review-source,.reviews-kicker,.reviews-section-head>p{color:#333}.review-comment,.review-score{color:#111}.review-comment,.review--featured .review-comment{font-size:11pt}.review-author h3{font-size:15pt}.reviews-closing{display:none}}
