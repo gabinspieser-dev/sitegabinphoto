@@ -9,6 +9,9 @@
   const status = dialog.querySelector('#image-status');
   const counter = dialog.querySelector('#image-counter');
   const title = dialog.querySelector('#lightbox-title');
+  const artist = dialog.querySelector('#lightbox-artist');
+  const stage = dialog.querySelector('.lightbox-photo-stage');
+  const details = dialog.querySelector('#lightbox-details');
   let current = 0;
   let opener;
   let savedOverflow = '';
@@ -25,6 +28,26 @@
     image.removeAttribute('src');
     image.alt = link.querySelector('img').alt;
     title.textContent = link.dataset.title;
+    // Crédit lié à cette photo seulement : aucune recherche ni attribution automatique.
+    if (artist && stage && details) {
+      const caption = link.closest('figure').querySelector('.photo-caption');
+      const name = caption?.querySelector('.artist-name');
+      if (artist.contains(document.activeElement)) {
+        (name ? details : dialog.querySelector('#close-lightbox')).focus({ preventScroll: true });
+      }
+      artist.replaceChildren();
+      artist.hidden = !name;
+      details.hidden = !name;
+      stage.classList.remove('is-caption-open', 'is-caption-dismissed');
+      details.setAttribute('aria-expanded', 'false');
+      if (name) {
+        ['.artist-name', '.artist-event', '.artist-links'].forEach(selector => {
+          const node = caption.querySelector(selector);
+          if (node) artist.append(node.cloneNode(true));
+        });
+        details.setAttribute('aria-label', `Informations sur ${name.textContent}`);
+      }
+    }
     counter.textContent = `${String(current + 1).padStart(2, '0')} / ${String(links.length).padStart(2, '0')}`;
     statusTimer = setTimeout(() => {
       if (token !== request) return;
@@ -48,18 +71,46 @@
     preload.src = link.href;
   }
 
+  function openPhoto(index, trigger) {
+    if (dialog.open) return;
+    opener = trigger;
+    savedOverflow = document.body.style.overflow;
+    showPhoto(index);
+    dialog.showModal();
+    document.body.style.overflow = 'hidden';
+  }
+
   links.forEach((link, index) => {
     link.setAttribute('aria-haspopup', 'dialog');
     link.addEventListener('click', event => {
       if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
-      opener = link;
-      savedOverflow = document.body.style.overflow;
-      showPhoto(index);
-      dialog.showModal();
-      document.body.style.overflow = 'hidden';
+      openPhoto(index, link);
+    });
+    link.closest('figure').querySelector('[data-photo-expand]')?.addEventListener('click', event => {
+      // La légende se masque à l'ouverture : rendre ensuite le focus à la photo.
+      openPhoto(index, link);
     });
   });
+  if (details && stage) {
+    details.addEventListener('click', () => {
+      const open = !stage.classList.contains('is-caption-open');
+      stage.classList.toggle('is-caption-open', open);
+      stage.classList.toggle('is-caption-dismissed', !open);
+      details.setAttribute('aria-expanded', String(open));
+    });
+    stage.addEventListener('pointerenter', event => {
+      if (event.pointerType === 'mouse') stage.classList.remove('is-caption-dismissed');
+    });
+    dialog.addEventListener('keydown', event => {
+      if (event.key !== 'Escape' || artist.hidden || getComputedStyle(artist).visibility !== 'visible') return;
+      event.preventDefault();
+      details.focus({ preventScroll: true });
+      stage.classList.remove('is-caption-open');
+      stage.classList.add('is-caption-dismissed');
+      details.setAttribute('aria-expanded', 'false');
+    });
+  }
   dialog.querySelector('#close-lightbox').addEventListener('click', () => dialog.close());
   dialog.querySelector('#previous').addEventListener('click', () => showPhoto(current - 1));
   dialog.querySelector('#next').addEventListener('click', () => showPhoto(current + 1));
