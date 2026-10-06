@@ -1,35 +1,30 @@
-# Copie officielle OVH : https://gabin-spieser.fr/
-# Les redirections ne concernent que ce domaine, pas les apercus locaux.
-# Le certificat SSL doit couvrir gabin-spieser.fr et www.gabin-spieser.fr.
-
+# Official site: https://gabin-spieser.fr/
+# SSL must cover both gabin-spieser.fr and www.gabin-spieser.fr before deployment.
+ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
-    RewriteEngine On
-
-    RewriteCond %{HTTP_HOST} ^www\.gabin-spieser\.fr$ [NC]
-    RewriteRule ^ https://gabin-spieser.fr%{REQUEST_URI} [R=301,L,NE]
-
-    RewriteCond %{HTTP_HOST} ^gabin-spieser\.fr$ [NC]
-    RewriteCond %{HTTPS} !=on
-    RewriteCond %{HTTP:X-Forwarded-Proto} !^https$ [NC]
-    RewriteRule ^ https://gabin-spieser.fr%{REQUEST_URI} [R=301,L,NE]
-
-    RewriteCond %{HTTP_HOST} ^gabin-spieser\.fr$ [NC]
-    RewriteCond %{THE_REQUEST} \s/+index\.html[?\s] [NC]
-    RewriteRule ^index\.html$ https://gabin-spieser.fr/ [R=301,L,NE]
+ RewriteEngine On
+ # Explicit index request: one hop to the HTTPS canonical root.
+ RewriteCond %{HTTP_HOST} ^(?:www\.)?gabin\-spieser\.fr$ [NC]
+ RewriteCond %{THE_REQUEST} \s/+index\.html[?\s] [NC]
+ RewriteRule ^index\.html$ https://gabin-spieser.fr/ [R=301,L,NE]
+ RewriteCond %{HTTP_HOST} ^www\.gabin\-spieser\.fr$ [NC]
+ RewriteRule ^ https://gabin-spieser.fr%{REQUEST_URI} [R=301,L,NE]
+ RewriteCond %{HTTP_HOST} ^gabin\-spieser\.fr$ [NC]
+ RewriteCond %{HTTPS} !=on
+ RewriteCond %{HTTP:X-Forwarded-Proto} !^https$ [NC]
+ RewriteRule ^ https://gabin-spieser.fr%{REQUEST_URI} [R=301,L,NE]
 </IfModule>
-
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/xml text/xml image/svg+xml
+ AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/xml text/xml image/svg+xml
 </IfModule>
-
 <IfModule mod_headers.c>
-    <FilesMatch "\.(html|xml|txt)$">
-        Header set Cache-Control "no-cache"
-    </FilesMatch>
-    <FilesMatch "\.(css|js)$">
-        Header set Cache-Control "public, max-age=3600, must-revalidate"
-    </FilesMatch>
-    <FilesMatch "\.(woff2|webp|png|svg)$">
-        Header set Cache-Control "public, max-age=2592000"
-    </FilesMatch>
+ <FilesMatch "\.(html|xml|txt)$">
+  Header set Cache-Control "no-cache"
+ </FilesMatch>
+ <FilesMatch "\.(css|js)$">
+  Header set Cache-Control "public, max-age=3600, must-revalidate"
+ </FilesMatch>
+ <FilesMatch "\.(woff2|webp|png|jpg|jpeg|svg|ico)$">
+  Header set Cache-Control "public, max-age=2592000"
+ </FilesMatch>
 </IfModule>
