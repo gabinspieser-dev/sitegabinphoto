@@ -1,1 +1,1 @@
-Mise à jour du site photo.
+Mise à jour du site photo.git
