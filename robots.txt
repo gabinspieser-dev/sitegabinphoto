@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gabin-spieser.fr/sitemap.xml
+Sitemap: https://gabin-spieser.com/sitemap.xml

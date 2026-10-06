@@ -8,6 +8,7 @@
 
   const phone = window.matchMedia('(max-width: 650px)');
   const label = button.querySelector('.nav-toggle-label');
+  const icon = button.querySelector('.nav-toggle-icon');
   let open = false;
 
   function setOpen(next, returnFocus = false) {
@@ -15,6 +16,7 @@
     button.setAttribute('aria-expanded', String(open));
     button.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
     if (label) label.textContent = open ? 'Fermer' : 'Menu';
+    if (icon) icon.textContent = open ? 'x' : '=';
     navigation.hidden = phone.matches && !open;
     if (returnFocus && phone.matches) button.focus();
   }

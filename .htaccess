@@ -1,18 +1,51 @@
-# Official site: https://gabin-spieser.fr/
-# SSL must cover both gabin-spieser.fr and www.gabin-spieser.fr before deployment.
+# Official site: https://gabin-spieser.com/
+# SSL must cover both gabin-spieser.com and www.gabin-spieser.com before deployment.
 ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
  RewriteEngine On
  # Explicit index request: one hop to the HTTPS canonical root.
- RewriteCond %{HTTP_HOST} ^(?:www\.)?gabin\-spieser\.fr$ [NC]
+ RewriteCond %{HTTP_HOST} ^(?:www\.)?gabin\-spieser\.com$ [NC]
  RewriteCond %{THE_REQUEST} \s/+index\.html[?\s] [NC]
- RewriteRule ^index\.html$ https://gabin-spieser.fr/ [R=301,L,NE]
- RewriteCond %{HTTP_HOST} ^www\.gabin\-spieser\.fr$ [NC]
- RewriteRule ^ https://gabin-spieser.fr%{REQUEST_URI} [R=301,L,NE]
- RewriteCond %{HTTP_HOST} ^gabin\-spieser\.fr$ [NC]
+ RewriteRule ^index\.html$ https://gabin-spieser.com/ [R=301,L,NE]
+ RewriteCond %{HTTP_HOST} ^www\.gabin\-spieser\.com$ [NC]
+ RewriteRule ^ https://gabin-spieser.com%{REQUEST_URI} [R=301,L,NE]
+ RewriteCond %{HTTP_HOST} ^gabin\-spieser\.com$ [NC]
  RewriteCond %{HTTPS} !=on
  RewriteCond %{HTTP:X-Forwarded-Proto} !^https$ [NC]
- RewriteRule ^ https://gabin-spieser.fr%{REQUEST_URI} [R=301,L,NE]
+ RewriteRule ^ https://gabin-spieser.com%{REQUEST_URI} [R=301,L,NE]
+ # Preserve previously published photograph URLs with permanent redirects.
+ RewriteRule ^assets/photos/gabin-spieser-live-01-(small|medium|large)\.webp$ /assets/photos/stomy-bugsy-concert-gabin-spieser-live-01-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-02-(small|medium|large)\.webp$ /assets/photos/lokyto-concert-gabin-spieser-live-02-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-03-(small|medium|large)\.webp$ /assets/photos/virginie-rohart-concert-gabin-spieser-live-03-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-04-(small|medium|large)\.webp$ /assets/photos/julien-dore-concert-gabin-spieser-live-04-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-05-(small|medium|large)\.webp$ /assets/photos/mika-concert-gabin-spieser-live-05-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-06-(small|medium|large)\.webp$ /assets/photos/feu-chatterton-concert-gabin-spieser-live-06-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-07-(small|medium|large)\.webp$ /assets/photos/choriste-danna-winkin-concert-gabin-spieser-live-07-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-08-(small|medium|large)\.webp$ /assets/photos/noa-sax-concert-gabin-spieser-live-08-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-09-(small|medium|large)\.webp$ /assets/photos/cut-capers-concert-gabin-spieser-live-09-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-10-(small|medium|large)\.webp$ /assets/photos/ina-forsman-concert-gabin-spieser-live-10-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-11-(small|medium|large)\.webp$ /assets/photos/eda-diaz-concert-gabin-spieser-live-11-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-12-(small|medium|large)\.webp$ /assets/photos/saxophoniste-electro-symphony-concert-gabin-spieser-live-12-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-13-(small|medium|large)\.webp$ /assets/photos/electro-symphony-concert-gabin-spieser-live-13-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-14-(small|medium|large)\.webp$ /assets/photos/eben-concert-gabin-spieser-live-14-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-15-(small|medium|large)\.webp$ /assets/photos/dela-concert-gabin-spieser-live-15-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-16-(small|medium|large)\.webp$ /assets/photos/guitariste-de-rori-concert-gabin-spieser-live-16-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-17-(small|medium|large)\.webp$ /assets/photos/sun-brutal-pop-concert-gabin-spieser-live-17-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-18-(small|medium|large)\.webp$ /assets/photos/bassiste-de-sun-concert-gabin-spieser-live-18-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-19-(small|medium|large)\.webp$ /assets/photos/chanteur-electro-symphony-concert-gabin-spieser-live-19-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-20-(small|medium|large)\.webp$ /assets/photos/electro-symphony-concert-gabin-spieser-live-20-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-21-(small|medium|large)\.webp$ /assets/photos/electro-symphony-concert-gabin-spieser-live-21-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-22-(small|medium|large)\.webp$ /assets/photos/electro-symphony-concert-gabin-spieser-live-22-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-23-(small|medium|large)\.webp$ /assets/photos/electro-symphony-concert-gabin-spieser-live-23-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-24-(small|medium|large)\.webp$ /assets/photos/electro-symphony-concert-gabin-spieser-live-24-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-25-(small|medium|large)\.webp$ /assets/photos/electro-symphony-concert-gabin-spieser-live-25-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-26-(small|medium|large)\.webp$ /assets/photos/pixel-syndrome-concert-gabin-spieser-live-26-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-27-(small|medium|large)\.webp$ /assets/photos/luiza-concert-gabin-spieser-live-27-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-28-(small|medium|large)\.webp$ /assets/photos/ridsa-concert-gabin-spieser-live-28-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-29-(small|medium|large)\.webp$ /assets/photos/one-night-of-queen-concert-gabin-spieser-live-29-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-30-(small|medium|large)\.webp$ /assets/photos/one-night-of-queen-concert-gabin-spieser-live-30-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-31-(small|medium|large)\.webp$ /assets/photos/one-night-of-queen-concert-gabin-spieser-live-31-$1.webp [R=301,L,NE]
+ RewriteRule ^assets/photos/gabin-spieser-live-32-(small|medium|large)\.webp$ /assets/photos/one-night-of-queen-concert-gabin-spieser-live-32-$1.webp [R=301,L,NE]
 </IfModule>
 <IfModule mod_deflate.c>
  AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/xml text/xml image/svg+xml
