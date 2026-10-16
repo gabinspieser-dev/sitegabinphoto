@@ -31,3 +31,8 @@
 @media(max-width:350px){.social-card{padding:.8rem}.social-card-name{font-size:1.7rem}.social-card-index{font-size:.6rem}}
 @media(prefers-reduced-motion:reduce){.social-card,.social-card-arrow{transition:none}}
 @media print{.social-stage{display:none!important}}
+
+/* Audit 2026-10-15: original social SVG artwork, inline and decorative. */
+.social-icon-defs{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}.social-card-icon .social-icon-svg{display:block;width:100%;height:auto}
+.seo-reportages>p:not(.live-kicker){max-width:48rem;line-height:1.8;color:var(--muted)}
+.editorial-gallery-single{grid-template-columns:minmax(0,1fr)}

@@ -413,3 +413,8 @@
   .report-facts > div,
   .editorial-cta {border-color:#777}
 }
+
+/* Audit 2026-10-15: original social SVG artwork, inline and decorative. */
+.social-icon-defs{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}.social-card-icon .social-icon-svg{display:block;width:100%;height:auto}
+.seo-reportages>p:not(.live-kicker){max-width:48rem;line-height:1.8;color:var(--muted)}
+.editorial-gallery-single{grid-template-columns:minmax(0,1fr)}

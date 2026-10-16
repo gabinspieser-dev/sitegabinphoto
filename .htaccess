@@ -1,8 +1,12 @@
+Options -Indexes
+AddDefaultCharset UTF-8
 # Official site: https://gabin-spieser.com/
 # SSL must cover both gabin-spieser.com and www.gabin-spieser.com before deployment.
 ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
  RewriteEngine On
+ # Never expose Git metadata or private dot files.
+ RewriteRule (^|/)\.(?!well-known(?:/|$)) - [F,L]
  # Explicit index request: one hop to the HTTPS canonical root.
  RewriteCond %{HTTP_HOST} ^(?:www\.)?gabin\-spieser\.com$ [NC]
  RewriteCond %{THE_REQUEST} \s/+index\.html[?\s] [NC]
