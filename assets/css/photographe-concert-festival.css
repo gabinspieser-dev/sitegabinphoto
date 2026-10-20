@@ -59,3 +59,8 @@
 .social-icon-defs{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}.social-card-icon .social-icon-svg{display:block;width:100%;height:auto}
 .seo-reportages>p:not(.live-kicker){max-width:48rem;line-height:1.8;color:var(--muted)}
 .editorial-gallery-single{grid-template-columns:minmax(0,1fr)}
+
+/* Analytics preference, 2026-10-20. */
+.cookie-toggle{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:.875rem;min-height:44px}
+.cookie-toggle input{appearance:auto;width:20px;height:20px;margin:0;accent-color:#FF4D32;cursor:pointer}
+.cookie-toggle input:focus-visible{outline:2px solid #FF9638;outline-offset:4px}

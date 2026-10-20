@@ -74,6 +74,9 @@ body { padding-bottom: var(--cookie-banner-space, 0px); }
 .cookie-category-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; justify-content: space-between; }
 #cookie-settings h3 { font: 400 1.5rem/1.2 'Bebas Neue', sans-serif; color: #F6F2EA; margin: 0 0 8px; }
 .cookie-category-state { color: #F6F2EA; font-size: .8125rem; border-left: 2px solid #FF4D32; padding-left: 8px; }
+.cookie-toggle { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-size: .875rem; min-height: 44px; }
+.cookie-toggle input { appearance: auto; width: 20px; height: 20px; margin: 0; accent-color: #FF4D32; cursor: pointer; }
+.cookie-toggle input:focus-visible { outline: 2px solid #FF9638; outline-offset: 4px; }
 #cookie-settings .cookie-category p:last-child { margin-bottom: 0; }
 #cookie-settings .cookie-settings-note { font-size: .875rem; margin-top: 16px; }
 .cookie-settings-actions { flex-shrink: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 16px 24px; border-top: 1px solid #555; }

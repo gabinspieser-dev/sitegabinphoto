@@ -1,15 +1,16 @@
 'use strict';
 (() => {
-  // This version has no optional trackers. A saved choice never authorizes future tools.
+  // A new policy invalidates technical-only choices made before Analytics was added.
   const COOKIE_NAME = 'gabin_cookie_choices';
-  const POLICY = 'technical-only-20261004';
-  const VERSION = 1;
+  const POLICY = 'analytics-opt-in-20261020';
+  const VERSION = 2;
   const DECISIONS = ['accept', 'reject', 'necessary'];
   let scopePath = '/';
   try {
     const src = document.currentScript && document.currentScript.src;
     if (src) scopePath = new URL('.', src).pathname;
   } catch (_) { /* Root hosting is the fallback. */ }
+  const DENIAL_KEY = COOKIE_NAME + '_session_denial_' + scopePath;
 
   function sixMonthsFrom(timestamp) {
     const date = new Date(timestamp);
@@ -23,15 +24,20 @@
 
   function validRecord(record, now) {
     return record && typeof record === 'object' && !Array.isArray(record)
-      && Object.keys(record).sort().join(',') === 'decision,expiresAt,policy,savedAt,scopePath,version'
+      && Object.keys(record).sort().join(',') === 'analytics,decision,expiresAt,policy,savedAt,scopePath,version'
       && record.version === VERSION && record.policy === POLICY && record.scopePath === scopePath
-      && DECISIONS.includes(record.decision) && Number.isSafeInteger(record.savedAt)
+      && DECISIONS.includes(record.decision) && typeof record.analytics === 'boolean'
+      && record.analytics === (record.decision === 'accept') && Number.isSafeInteger(record.savedAt)
       && record.savedAt > 0 && record.savedAt <= now + 60000
       && Number.isSafeInteger(record.expiresAt) && record.expiresAt > now
       && record.expiresAt === sixMonthsFrom(record.savedAt);
   }
 
-  function readChoice(now = Date.now()) {
+  function readChoice(now = Date.now(), ignoreSessionDenial = false) {
+    if (!ignoreSessionDenial) {
+      try { if (window.sessionStorage.getItem(DENIAL_KEY) === '1') return null; }
+      catch (_) { /* Preference storage can also be blocked. */ }
+    }
     try {
       if (window.location.protocol === 'file:') return null;
       for (const part of document.cookie.split(';')) {
@@ -50,7 +56,7 @@
 
   function saveChoice(decision, now = Date.now()) {
     if (!DECISIONS.includes(decision)) throw new TypeError('Unknown cookie choice');
-    const record = {version: VERSION, policy: POLICY, decision, savedAt: now,
+    const record = {version: VERSION, policy: POLICY, decision, analytics: decision === 'accept', savedAt: now,
       expiresAt: sixMonthsFrom(now), scopePath};
     let persisted = false;
     try {
@@ -60,10 +66,14 @@
         document.cookie = COOKIE_NAME + '=' + encodeURIComponent(JSON.stringify(record))
           + '; Path=' + scopePath + '; Max-Age=' + age
           + '; Expires=' + new Date(record.expiresAt).toUTCString() + '; SameSite=Lax' + secure;
-        const stored = readChoice(now);
+        const stored = readChoice(now, true);
         persisted = !!stored && stored.savedAt === now && stored.decision === decision;
       }
     } catch (_) { /* Report an unavailable preference cookie in the UI. */ }
+    try {
+      if (!persisted && decision !== 'accept') window.sessionStorage.setItem(DENIAL_KEY, '1');
+      else window.sessionStorage.removeItem(DENIAL_KEY);
+    } catch (_) { /* An unsaved refusal is still retained for the current page. */ }
     return {record, persisted};
   }
 
@@ -74,15 +84,40 @@
   const feedback = document.getElementById('cookie-feedback');
   const currentChoice = document.getElementById('cookie-current-choice');
   const policyLink = document.querySelector('[data-cookie-policy]');
-  if (!banner || !settings || !status || !feedback || !currentChoice || !policyLink) return;
+  const analyticsChoice = document.getElementById('cookie-analytics');
+  if (!banner || !settings || !status || !feedback || !currentChoice || !policyLink || !analyticsChoice) return;
   const supportsDialog = typeof settings.showModal === 'function';
   const footerButtons = [...document.querySelectorAll('[data-cookie-open]')];
   let choice = readChoice();
+  let choicePersisted = true;
+  let forceBanner = false;
   let opener = null;
   let previousOverflow = '';
   let feedbackAfterClose = false;
   let reserveFrame = 0;
-  const labels = {accept: 'Acceptés', reject: 'Refusés', necessary: 'Nécessaires uniquement'};
+  let expiryTimer = 0;
+  let consentChannel = null;
+  try { consentChannel = new BroadcastChannel('gabin-cookie-consent-' + scopePath); } catch (_) { /* Optional tab sync. */ }
+
+  function applyAnalytics(allowReload = true) {
+    const result = window.GabinAnalytics && window.GabinAnalytics.setConsent(
+      !!choice && choice.analytics, choice ? choice.expiresAt : 0);
+    if (result && result.reloadRequired && allowReload) window.location.reload();
+  }
+
+  function watchExpiry() {
+    clearTimeout(expiryTimer);
+    if (!choice) return;
+    const remaining = choice.expiresAt - Date.now();
+    if (remaining <= 0) {
+      choice = null;
+      applyAnalytics();
+      describeChoice();
+      renderBanner();
+      return;
+    }
+    expiryTimer = setTimeout(watchExpiry, Math.min(remaining + 50, 2147483647));
+  }
 
   function reserveSpace() {
     const height = banner.hidden ? 0 : Math.ceil(banner.getBoundingClientRect().height);
@@ -90,14 +125,15 @@
   }
 
   function renderBanner() {
-    banner.hidden = !!choice || settings.open;
+    banner.hidden = (!!choice && !forceBanner) || settings.open;
     reserveSpace();
   }
 
   function describeChoice() {
+    analyticsChoice.checked = !!choice && choice.analytics;
     currentChoice.textContent = choice
-      ? 'Votre choix : ' + labels[choice.decision] + '. Aucun cookie facultatif n’est utilisé.'
-      : 'Vous n’avez pas encore enregistré de choix. Aucun cookie facultatif n’est utilisé.';
+      ? 'Votre choix : mesure d’audience ' + (choice.analytics ? 'acceptée.' : 'refusée. Seuls les cookies nécessaires sont utilisés.')
+      : 'Aucun choix enregistré. La mesure d’audience reste désactivée.';
   }
 
   function restorePageFocus(preferred) {
@@ -116,7 +152,9 @@
 
   function openSettings(event) {
     if (!supportsDialog) {
-      window.location.href = policyLink.href;
+      forceBanner = true;
+      renderBanner();
+      banner.querySelector('[data-cookie-choice="reject"]').focus();
       return;
     }
     if (settings.open) return;
@@ -135,6 +173,11 @@
     const clicked = document.activeElement;
     const result = saveChoice(decision);
     choice = result.record;
+    choicePersisted = result.persisted;
+    forceBanner = false;
+    applyAnalytics(result.persisted);
+    watchExpiry();
+    if (consentChannel) consentChannel.postMessage('choice-changed');
     feedback.hidden = result.persisted;
     status.textContent = result.persisted
       ? 'Votre choix est enregistré pour six mois. Vous pouvez le modifier dans « Gérer les cookies ».'
@@ -155,9 +198,10 @@
   document.querySelectorAll('[data-cookie-choice]').forEach(button => {
     button.addEventListener('click', () => choose(button.dataset.cookieChoice));
   });
+  document.querySelector('[data-cookie-save]').addEventListener('click', () => choose(analyticsChoice.checked ? 'accept' : 'necessary'));
   document.querySelector('[data-cookie-personalize]').addEventListener('click', openSettings);
   footerButtons.forEach(button => {
-    button.hidden = !supportsDialog;
+    button.hidden = false;
     button.addEventListener('click', openSettings);
   });
   document.querySelector('[data-cookie-close]').addEventListener('click', closeSettings);
@@ -167,7 +211,7 @@
   });
   settings.addEventListener('keydown', event => {
     if (event.key === 'Tab') {
-      const controls = [...settings.querySelectorAll('a[href], button:not([disabled])')];
+      const controls = [...settings.querySelectorAll('a[href], button:not([disabled]), input:not([disabled])')];
       const first = controls[0];
       const last = controls[controls.length - 1];
       if (event.shiftKey && (document.activeElement === first || document.activeElement === document.getElementById('cookie-settings-title'))) {
@@ -206,5 +250,21 @@
   });
   if (typeof ResizeObserver === 'function') new ResizeObserver(reserveSpace).observe(banner);
   else window.addEventListener('resize', reserveSpace);
+  function syncChoice() {
+    if (!choicePersisted && choice) { watchExpiry(); return; }
+    const latest = readChoice();
+    if (JSON.stringify(latest) === JSON.stringify(choice)) { watchExpiry(); return; }
+    choice = latest;
+    applyAnalytics();
+    watchExpiry();
+    if (!settings.open) describeChoice();
+    renderBanner();
+  }
+  if (consentChannel) consentChannel.addEventListener('message', syncChoice);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) syncChoice(); });
+  window.addEventListener('focus', syncChoice);
+  applyAnalytics();
+  watchExpiry();
+  describeChoice();
   renderBanner();
 })();
