@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <!-- Google Analytics: loaded only after audience consent. -->
-<script src="./analytics.js?v=0c03e293351e" data-measurement-id="G-CT5N47S6ZF"></script>
+<script src="./analytics.js?v=0c03e293351e" data-measurement-id="G-CT5N47S6ZF" defer></script>
 
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#08090A">
 <meta name="description" content="La musique, la scène et ce qu’elles font ressentir. Découvrez Gabin Spieser, photographe de concerts basé à Châlons-en-Champagne.">
 <title>Gabin Spieser | Photographe de concerts</title>
 <link rel="icon" type="image/png" sizes="48x48" href="./assets/brand/favicon-48.png"><link rel="icon" href="./favicon.ico" sizes="any"><link rel="apple-touch-icon" sizes="180x180" href="./assets/brand/apple-touch-icon.png">
-<link rel="stylesheet" href="./assets/css/a-propos.css?v=922178840050">
+<link rel="stylesheet" href="./assets/css/a-propos.css?v=935c98407a7c">
 
 
 
@@ -119,53 +119,7 @@
 <header class="header site-header" id="haut">
   <a class="brand" href="./" aria-label="Gabin Spieser, accueil"><img class="brand-logo" src="./assets/brand/gabin-spieser-dark-web-640.png" width="1200" height="326" alt="Gabin Spieser — Photographie de concerts" srcset="./assets/brand/gabin-spieser-dark-web-320.png 320w, ./assets/brand/gabin-spieser-dark-web-640.png 640w, ./assets/brand/gabin-spieser-dark-web-960.png 960w, ./assets/brand/gabin-spieser-dark-web.png 1200w" sizes="(max-width:650px) 220px, (max-width:1000px) 270px, (max-width:1296px) 27vw, 350px"></a>
   <!-- BEGIN MOBILE NAV V1 --><button class="nav-toggle" type="button" data-nav-toggle aria-controls="navigation-principale" aria-expanded="false" aria-label="Ouvrir le menu"><span class="nav-toggle-icon" aria-hidden="true">=</span><span class="nav-toggle-label">Menu</span></button><!-- END MOBILE NAV V1 --><nav class="main-nav" aria-label="Navigation principale" id="navigation-principale"><a href="./portfolio.html">Portfolio</a><a href="./a-propos.html" aria-current="page">À propos de moi</a><a href="./tarifs-devis.html">Tarif &amp; devis</a><a href="./contact.html">Contact</a><a class="thanks-menu-link" href="./merci.html">Merci</a><a class="reviews-menu-link" href="./avis.html">Vos mots</a><a class="social-jump" href="#social-stage-title" aria-label="Hors cadre : Instagram, Facebook, Behance et courriel">Hors cadre <span aria-hidden="true">-&gt;</span></a></nav>
-<script data-initial-nav>
-'use strict';
-(() => {
-  const header = document.querySelector('.site-header');
-  if (!header) return;
-  const button = header.querySelector('[data-nav-toggle]');
-  const navigation = header.querySelector('.main-nav');
-  if (!button || !navigation || button.getAttribute('aria-controls') !== navigation.id) return;
-
-  const phone = window.matchMedia('(max-width: 650px)');
-  const label = button.querySelector('.nav-toggle-label');
-  const icon = button.querySelector('.nav-toggle-icon');
-  let open = false;
-
-  function setOpen(next, returnFocus = false) {
-    open = phone.matches && next;
-    button.setAttribute('aria-expanded', String(open));
-    button.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
-    if (label) label.textContent = open ? 'Fermer' : 'Menu';
-    if (icon) icon.textContent = open ? 'x' : '=';
-    navigation.hidden = phone.matches && !open;
-    if (returnFocus && phone.matches) button.focus();
-  }
-
-  // Sans cette amélioration, tous les liens de navigation restent accessibles.
-  header.classList.add('nav-enhanced');
-  setOpen(false);
-  button.addEventListener('click', () => setOpen(!open));
-  navigation.addEventListener('click', (event) => {
-    if (event.target instanceof Element && event.target.closest('a')) setOpen(false);
-  });
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && open) {
-      event.preventDefault();
-      setOpen(false, true);
-    }
-  });
-  document.addEventListener('click', (event) => {
-    if (open && event.target instanceof Node && !header.contains(event.target)) setOpen(false);
-  });
-  phone.addEventListener('change', () => {
-    const focusedLink = navigation.contains(document.activeElement);
-    setOpen(false, focusedLink);
-  });
-})();
-
-</script></header>
+<script src="./menu.js?v=1d69b4584419"></script></header>
 <main id="contenu">
   <header class="story-intro">
     <p class="eyebrow">À PROPOS DE MOI</p>
@@ -236,7 +190,7 @@
       <h2 id="cookie-banner-title">Cookies &amp; confidentialité</h2>
       <p>Avec votre accord, Google Analytics mesure les visites. Votre choix est conservé six mois. <a href="./confidentialite.html#cookies" data-cookie-policy>Confidentialité et cookies</a></p>
     </div>
-    <div class="cookie-actions" aria-label="Votre choix de cookies">
+    <div class="cookie-actions" role="group" aria-label="Votre choix de cookies">
       <button class="cookie-action" type="button" data-cookie-choice="accept">Accepter</button>
       <button class="cookie-action" type="button" data-cookie-choice="reject">Refuser</button>
       <button class="cookie-action" type="button" data-cookie-personalize aria-haspopup="dialog" aria-controls="cookie-settings">Personnaliser</button>

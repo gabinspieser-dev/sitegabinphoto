@@ -77,6 +77,8 @@
     savedOverflow = document.body.style.overflow;
     showPhoto(index);
     dialog.showModal();
+    // Focus sur « Fermer » à l'ouverture ; à la fermeture, il revient à la photo.
+    dialog.querySelector('#close-lightbox').focus();
     document.body.style.overflow = 'hidden';
   }
 

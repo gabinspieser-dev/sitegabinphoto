@@ -1,3 +1,4 @@
+// Ne pas ajouter defer : ce script doit s'exécuter avant l'affichage du header, comme l'ancien script inline.
 'use strict';
 (() => {
   const header = document.querySelector('.site-header');

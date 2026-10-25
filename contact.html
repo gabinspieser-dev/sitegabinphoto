@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <!-- Google Analytics: loaded only after audience consent. -->
-<script src="./analytics.js?v=0c03e293351e" data-measurement-id="G-CT5N47S6ZF"></script>
+<script src="./analytics.js?v=0c03e293351e" data-measurement-id="G-CT5N47S6ZF" defer></script>
 
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#08090A">
 <meta name="description" content="Préparez votre concert, festival ou portrait d’artiste avec Gabin Spieser. Contact, coordonnées et demande de devis dans le Grand Est et en Belgique.">
 <title>Contact photographe Grand Est &amp; Belgique | Gabin Spieser</title>
 <link rel="icon" type="image/png" sizes="48x48" href="./assets/brand/favicon-48.png"><link rel="icon" href="./favicon.ico" sizes="any"><link rel="apple-touch-icon" sizes="180x180" href="./assets/brand/apple-touch-icon.png">
-<link rel="stylesheet" href="./assets/css/contact.css?v=99bcbc2ab22a">
+<link rel="stylesheet" href="./assets/css/contact.css?v=c286d5bca650">
 
 
 
@@ -114,53 +114,7 @@
 </head>
 <body class="page-contact">
 <a class="skip" href="#contenu">Aller au contenu</a>
-<header class="header site-header" id="haut"><a class="brand" href="./" aria-label="Gabin Spieser, accueil"><img class="brand-logo" src="./assets/brand/gabin-spieser-dark-web-640.png" width="1200" height="326" alt="Gabin Spieser — Photographie de concerts" srcset="./assets/brand/gabin-spieser-dark-web-320.png 320w, ./assets/brand/gabin-spieser-dark-web-640.png 640w, ./assets/brand/gabin-spieser-dark-web-960.png 960w, ./assets/brand/gabin-spieser-dark-web.png 1200w" sizes="(max-width:650px) 220px, (max-width:1000px) 270px, (max-width:1296px) 27vw, 350px"></a><!-- BEGIN MOBILE NAV V1 --><button class="nav-toggle" type="button" data-nav-toggle aria-controls="navigation-principale" aria-expanded="false" aria-label="Ouvrir le menu"><span class="nav-toggle-icon" aria-hidden="true">=</span><span class="nav-toggle-label">Menu</span></button><!-- END MOBILE NAV V1 --><nav class="main-nav" aria-label="Navigation principale" id="navigation-principale"><a href="./portfolio.html">Portfolio</a><a href="./a-propos.html">À propos de moi</a><a href="./tarifs-devis.html">Tarif &amp; devis</a><a href="./contact.html" aria-current="page">Contact</a><a class="thanks-menu-link" href="./merci.html">Merci</a><a class="reviews-menu-link" href="./avis.html">Vos mots</a><a class="social-jump" href="#social-stage-title" aria-label="Hors cadre : Instagram, Facebook, Behance et courriel">Hors cadre <span aria-hidden="true">-&gt;</span></a></nav><script data-initial-nav>
-'use strict';
-(() => {
-  const header = document.querySelector('.site-header');
-  if (!header) return;
-  const button = header.querySelector('[data-nav-toggle]');
-  const navigation = header.querySelector('.main-nav');
-  if (!button || !navigation || button.getAttribute('aria-controls') !== navigation.id) return;
-
-  const phone = window.matchMedia('(max-width: 650px)');
-  const label = button.querySelector('.nav-toggle-label');
-  const icon = button.querySelector('.nav-toggle-icon');
-  let open = false;
-
-  function setOpen(next, returnFocus = false) {
-    open = phone.matches && next;
-    button.setAttribute('aria-expanded', String(open));
-    button.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
-    if (label) label.textContent = open ? 'Fermer' : 'Menu';
-    if (icon) icon.textContent = open ? 'x' : '=';
-    navigation.hidden = phone.matches && !open;
-    if (returnFocus && phone.matches) button.focus();
-  }
-
-  // Sans cette amélioration, tous les liens de navigation restent accessibles.
-  header.classList.add('nav-enhanced');
-  setOpen(false);
-  button.addEventListener('click', () => setOpen(!open));
-  navigation.addEventListener('click', (event) => {
-    if (event.target instanceof Element && event.target.closest('a')) setOpen(false);
-  });
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && open) {
-      event.preventDefault();
-      setOpen(false, true);
-    }
-  });
-  document.addEventListener('click', (event) => {
-    if (open && event.target instanceof Node && !header.contains(event.target)) setOpen(false);
-  });
-  phone.addEventListener('change', () => {
-    const focusedLink = navigation.contains(document.activeElement);
-    setOpen(false, focusedLink);
-  });
-})();
-
-</script></header>
+<header class="header site-header" id="haut"><a class="brand" href="./" aria-label="Gabin Spieser, accueil"><img class="brand-logo" src="./assets/brand/gabin-spieser-dark-web-640.png" width="1200" height="326" alt="Gabin Spieser — Photographie de concerts" srcset="./assets/brand/gabin-spieser-dark-web-320.png 320w, ./assets/brand/gabin-spieser-dark-web-640.png 640w, ./assets/brand/gabin-spieser-dark-web-960.png 960w, ./assets/brand/gabin-spieser-dark-web.png 1200w" sizes="(max-width:650px) 220px, (max-width:1000px) 270px, (max-width:1296px) 27vw, 350px"></a><!-- BEGIN MOBILE NAV V1 --><button class="nav-toggle" type="button" data-nav-toggle aria-controls="navigation-principale" aria-expanded="false" aria-label="Ouvrir le menu"><span class="nav-toggle-icon" aria-hidden="true">=</span><span class="nav-toggle-label">Menu</span></button><!-- END MOBILE NAV V1 --><nav class="main-nav" aria-label="Navigation principale" id="navigation-principale"><a href="./portfolio.html">Portfolio</a><a href="./a-propos.html">À propos de moi</a><a href="./tarifs-devis.html">Tarif &amp; devis</a><a href="./contact.html" aria-current="page">Contact</a><a class="thanks-menu-link" href="./merci.html">Merci</a><a class="reviews-menu-link" href="./avis.html">Vos mots</a><a class="social-jump" href="#social-stage-title" aria-label="Hors cadre : Instagram, Facebook, Behance et courriel">Hors cadre <span aria-hidden="true">-&gt;</span></a></nav><script src="./menu.js?v=1d69b4584419"></script></header>
 <main id="contenu"><section class="page-intro"><p class="eyebrow"><span>03</span> / CONTACT</p><h1>PARLONS<br><em>DE VOTRE LIVE.</em></h1><p class="intro-copy">Un concert à photographier, une collaboration ou une question sur une image&nbsp;? Écrivez-moi.</p></section><section class="page-block" aria-label="Coordonnées"><p class="eyebrow">LE PREMIER CONTACT</p><a class="contact-email" href="mailto:contact@gabin-spieser.com">contact@gabin-spieser.com</a><p class="contact-note">Votre messagerie s’ouvre pour rédiger votre message. Aucun message n’est envoyé automatiquement par ce site.</p><div class="contact-grid"><div><h2>Par téléphone</h2><p><a href="tel:+33699174061">06 99 17 40 61</a></p></div><div><h2>Basé à</h2><p>Châlons-en-Champagne<br>Marne, France</p></div><div><h2>Adresse professionnelle</h2><p>Gabin Spieser EI<br>Studio RDC<br>20B rue Jules Lobet<br>51000 Châlons-en-Champagne</p></div></div><p class="contact-note" id="zone-intervention">Basé à Châlons-en-Champagne, je me déplace dans le Grand Est et en Belgique pour vos concerts, festivals et projets d’artistes.</p><p class="contact-note">Les informations transmises sont utilisées pour traiter votre demande. <a class="quiet-link" href="./confidentialite.html">En savoir plus sur vos données personnelles</a>.</p></section><section class="page-cta"><div><h2>Préparons<br><em>votre reportage.</em></h2><p>La date, le lieu et l’usage prévu des images sont les premiers éléments pour établir votre devis.</p></div><a class="button-link" href="./tarifs-devis.html">Tarif &amp; devis <span class="arrow" aria-hidden="true">-&gt;</span></a></section></main>
 <aside class="social-stage" aria-labelledby="social-stage-title"><div class="social-stage-head"><div><p class="social-kicker"><span>Hors cadre</span> / On se retrouve</p><h2 id="social-stage-title">Le live<br><em>continue.</em></h2></div><p class="social-stage-intro">La scène, les images, les rencontres.<br>Venez voir ce qui se passe ailleurs.<br>Ou racontez-moi votre prochain live.</p></div><div class="social-cards"><a class="social-card" href="https://www.instagram.com/spieraw/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Gabin Spieser (nouvel onglet)"><span class="social-card-top"><span class="social-card-icon"><svg class="social-icon-svg" viewBox="0 0 80 80" width="80" height="80" aria-hidden="true" focusable="false"><use href="#social-icon-instagram"/></svg></span><span class="social-card-index" aria-hidden="true">01</span></span><span class="social-card-name">Instagram</span><span class="social-card-hook">Dans la fosse.</span><span class="social-card-handle"><span>@spieraw</span><span class="social-card-arrow" aria-hidden="true">-&gt;</span></span></a><a class="social-card" href="https://www.facebook.com/gabin.photographe/" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Gabin Spieser (nouvel onglet)"><span class="social-card-top"><span class="social-card-icon"><svg class="social-icon-svg" viewBox="0 0 80 80" width="80" height="80" aria-hidden="true" focusable="false"><use href="#social-icon-facebook"/></svg></span><span class="social-card-index" aria-hidden="true">02</span></span><span class="social-card-name">Facebook</span><span class="social-card-hook">On garde le contact.</span><span class="social-card-handle"><span>gabin.photographe</span><span class="social-card-arrow" aria-hidden="true">-&gt;</span></span></a><a class="social-card" href="https://www.behance.net/gabinspieserphoto" target="_blank" rel="noopener noreferrer" aria-label="Behance de Gabin Spieser (nouvel onglet)"><span class="social-card-top"><span class="social-card-icon"><svg class="social-icon-svg" viewBox="0 0 80 80" width="80" height="80" aria-hidden="true" focusable="false"><use href="#social-icon-behance"/></svg></span><span class="social-card-index" aria-hidden="true">03</span></span><span class="social-card-name">Behance</span><span class="social-card-hook">Un autre regard.</span><span class="social-card-handle"><span>gabinspieserphoto</span><span class="social-card-arrow" aria-hidden="true">-&gt;</span></span></a><a class="social-card" href="mailto:contact@gabin-spieser.com" aria-label="Écrire à Gabin Spieser par courriel"><span class="social-card-top"><span class="social-card-icon"><svg class="social-icon-svg" viewBox="0 0 80 80" width="80" height="80" aria-hidden="true" focusable="false"><use href="#social-icon-courriel"/></svg></span><span class="social-card-index" aria-hidden="true">04</span></span><span class="social-card-name">Courriel</span><span class="social-card-hook">Votre scène, on en parle ?</span><span class="social-card-handle"><span>Écrivez-moi</span><span class="social-card-arrow" aria-hidden="true">-&gt;</span></span></a></div><p class="social-stage-note">Les réseaux s’ouvrent dans un nouvel onglet. Le courriel ouvre votre messagerie.</p></aside>
 <footer class="footer"><a class="footer-name" href="./"><img class="brand-logo" src="./assets/brand/gabin-spieser-dark-web-640.png" width="1200" height="326" alt="Gabin Spieser — Photographie de concerts" loading="lazy" decoding="async" srcset="./assets/brand/gabin-spieser-dark-web-320.png 320w, ./assets/brand/gabin-spieser-dark-web-640.png 640w, ./assets/brand/gabin-spieser-dark-web-960.png 960w, ./assets/brand/gabin-spieser-dark-web.png 1200w" sizes="(max-width:650px) 220px, (max-width:1000px) 270px, (max-width:1296px) 27vw, 350px"></a><div class="footer-meta"><span>CHÂLONS-EN-CHAMPAGNE / FRANCE</span><nav class="footer-discover-links" aria-label="Les rencontres et vos avis"><a class="thanks-footer-link" href="./merci.html">Merci · Les rencontres</a><a class="reviews-footer-link" href="./avis.html">Vos mots · Les avis</a></nav><nav class="footer-legal-links" aria-label="Informations légales"><a href="./mentions-legales.html">Mentions légales</a><a href="./confidentialite.html">Confidentialité et cookies</a><a href="./cgv.html">CGV</a></nav><!-- BEGIN COOKIE FOOTER 20261004 --><div class="cookie-footer-control"><button class="cookie-preferences-link" type="button" data-cookie-open aria-haspopup="dialog" aria-controls="cookie-settings" hidden>Gérer les cookies</button></div><!-- END COOKIE FOOTER 20261004 --></div></footer>
@@ -172,7 +126,7 @@
       <h2 id="cookie-banner-title">Cookies &amp; confidentialité</h2>
       <p>Avec votre accord, Google Analytics mesure les visites. Votre choix est conservé six mois. <a href="./confidentialite.html#cookies" data-cookie-policy>Confidentialité et cookies</a></p>
     </div>
-    <div class="cookie-actions" aria-label="Votre choix de cookies">
+    <div class="cookie-actions" role="group" aria-label="Votre choix de cookies">
       <button class="cookie-action" type="button" data-cookie-choice="accept">Accepter</button>
       <button class="cookie-action" type="button" data-cookie-choice="reject">Refuser</button>
       <button class="cookie-action" type="button" data-cookie-personalize aria-haspopup="dialog" aria-controls="cookie-settings">Personnaliser</button>
