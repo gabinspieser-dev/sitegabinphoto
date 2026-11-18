@@ -83,3 +83,13 @@ body { padding-bottom: var(--cookie-banner-space, 0px); }
 .cookie-toggle{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:.875rem;min-height:44px}
 .cookie-toggle input{appearance:auto;width:20px;height:20px;margin:0;accent-color:#FF4D32;cursor:pointer}
 .cookie-toggle input:focus-visible{outline:2px solid #FF9638;outline-offset:4px}
+
+/* Informations sur les avis (Code de la consommation, art. D. 111-10), 2026-11-18. */
+.review-source a,.reviews-section-head>p a,.reviews-notice a{text-decoration:underline;text-underline-offset:.25em}
+.review-source a:hover,.reviews-section-head>p a:hover,.reviews-notice a:hover{color:var(--accent)}
+.reviews-notice{border-top:1px solid var(--line);padding:2rem 0 .5rem;max-width:48rem;scroll-margin-top:2rem}
+.reviews-notice-title{font-family:var(--body);font-size:.72rem;font-weight:500;line-height:1.6;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 1rem}
+.reviews-notice ul{margin:0;padding:0;list-style:none}
+.reviews-notice li{font-size:.85rem;line-height:1.6;color:var(--muted);margin:0 0 .6rem}
+.reviews-notice strong{font-weight:500;color:var(--text)}
+@media print{.reviews-notice-title,.reviews-notice li{color:#333}.reviews-notice strong{color:#111}}
