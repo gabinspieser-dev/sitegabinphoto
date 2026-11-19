@@ -1,0 +1,616 @@
+/* Ambiance éditoriale — couche commune à toutes les pages (refonte du 18/11/2026).
+   Reprend la direction artistique de la maquette « Portraits » :
+   beaucoup d'air, grands textes légers, menu en petites capitales, boutons sobres,
+   numéros de section en contour, apparitions au défilement, parallaxe, décor qui suit la souris,
+   et couleur d'accent tirée de chaque photographie (--tone, posée par ambiance.js).
+   Trois ambiances (Scène, Nuit, Os) et trois niveaux d'animation, réglables par le visiteur. */
+
+@property --amb-glow{syntax:'<color>';inherits:true;initial-value:#08090a}
+
+/* =========================================================
+   1. Réglages et ambiances
+   ========================================================= */
+html.amb{
+  --tone:#ff4d32;--on-tone:#08090a;--motion:1;--mx:0;--my:0;--progress:0;
+  --amb-ease:cubic-bezier(.2,.7,.2,1);
+  --amb-gutter:clamp(20px,6vw,96px);
+  --amb-space:clamp(3.5rem,7vw,6.5rem);
+  /* Échelle de titres : de la finesse plutôt que de la démesure */
+  --amb-h1:clamp(3.25rem,5.6vw,5.5rem);
+  --amb-h1-hero:clamp(3.5rem,6.4vw,6.25rem);
+  --amb-h2:clamp(2.4rem,4vw,3.9rem);
+  --amb-h3:clamp(2rem,3vw,3rem);
+  --line:rgba(246,242,234,.13);
+  --line-strong:rgba(246,242,234,.3);
+}
+/* Nuit : les couleurs fixes de la charte, sans couleurs de photos ni lueur */
+html.amb[data-ambiance="nuit"],html.amb[data-ambiance="nuit"] [style*="--tone"]{--tone:#ff4d32!important}
+html.amb[data-ambiance="nuit"]{--amb-glow:#08090a!important;--amb-tone:#ff4d32!important}
+/* Os : fond clair, rouge de charte pour les petits textes */
+html.amb[data-ambiance="os"]{
+  color-scheme:light;
+  --bg:#f6f2ea;--text:#08090a;--muted:#4d4a44;--accent:#c73524;--amber:#c73524;
+  --line:rgba(8,9,10,.14);--line-strong:rgba(8,9,10,.32);--on-tone:#f6f2ea;
+  --amb-glow:#f6f2ea!important;--amb-tone:#c73524!important;
+}
+html.amb[data-ambiance="os"],html.amb[data-ambiance="os"] [style*="--tone"]{--tone:#c73524!important}
+/* Logo pour fond clair (le script le remplace aussi, pour les navigateurs qui ignorent cette règle) */
+html.amb[data-ambiance="os"] .brand-logo{content:url("../brand/gabin-spieser-compact-light.svg")}
+@media (min-width:901px){html.amb[data-ambiance="os"] body.page-home .site-header .brand-logo{content:normal}}
+
+/* Lueur d'ambiance : prend la couleur de la photo la plus visible */
+html.amb body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(70% 55% at 88% 6%,color-mix(in srgb,var(--amb-glow) 17%,transparent),transparent 72%),radial-gradient(55% 45% at 2% 98%,color-mix(in srgb,var(--amb-glow) 10%,transparent),transparent 70%);transition:--amb-glow 1.6s ease}
+html.amb body{font-size:1.0625rem;line-height:1.6}
+
+/* Barre de lecture */
+.amb-progress{position:fixed;inset:0 0 auto 0;height:2px;z-index:300;pointer-events:none}
+.amb-progress span{display:block;height:100%;background:var(--amb-tone,var(--tone));transform-origin:0 50%;transform:scaleX(var(--progress));transition:background-color 1.2s ease}
+
+/* =========================================================
+   2. En-tête et menu, comme la maquette
+   ========================================================= */
+html.amb .site-header{display:flex;align-items:center;justify-content:space-between;gap:2rem;min-height:0;height:auto;padding:1.1rem var(--amb-gutter);background:transparent;border:0;position:relative;z-index:20;color:var(--text)}
+/* Logo un peu plus discret (la charte demande 250 px minimum : à valider) */
+html.amb .site-header .brand{flex-shrink:0;width:210px;max-width:100%;margin:0}
+html.amb .site-header .main-nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:.2rem 0;font-family:var(--body);font-size:.75rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+html.amb .site-header .main-nav a{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0;color:var(--text);text-decoration:none;white-space:nowrap;box-shadow:none;background:linear-gradient(currentColor,currentColor) 0 calc(50% + .85em)/0 1px no-repeat;transition:background-size .35s var(--amb-ease),opacity .3s ease}
+html.amb .site-header .main-nav a+a{margin-left:1.5rem}
+html.amb .site-header .main-nav a+a::before{content:"/";position:absolute;left:-1rem;opacity:.4;pointer-events:none}
+html.amb .site-header .main-nav a:is(:hover,:focus-visible){color:var(--text);background-size:100% 1px}
+html.amb .site-header .main-nav a[aria-current="page"]{color:var(--text);opacity:.7;box-shadow:none;background-size:100% 1px}
+html.amb .site-header .main-nav .social-jump span{color:var(--tone);font-size:1rem;transition:transform .35s var(--amb-ease)}
+html.amb .site-header .main-nav .social-jump:hover span{transform:translateX(4px)}
+
+/* Page d'accueil : le menu se pose sur la photo */
+@media (min-width:901px){
+  html.amb body.page-home .site-header{position:absolute;top:0;left:0;right:0;--text:#f6f2ea}
+}
+
+/* Bouton Menu sur téléphone : sobre, deux traits qui se croisent à l'ouverture */
+html.amb .site-header.nav-enhanced .nav-toggle{gap:.85rem;min-height:44px;min-width:0;padding:.5rem 0;border:0;background:transparent;color:var(--text);font-family:var(--body);font-size:.75rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;box-shadow:none}
+html.amb .site-header.nav-enhanced .nav-toggle:hover{border:0;color:var(--text)}
+html.amb .site-header.nav-enhanced .nav-toggle:focus-visible{outline:2px solid var(--tone);outline-offset:4px}
+html.amb .nav-toggle-icon{position:relative;display:block;width:24px;height:12px;font-size:0;line-height:0;color:transparent;overflow:visible}
+html.amb .nav-toggle-icon::before,html.amb .nav-toggle-icon::after{content:"";position:absolute;left:0;right:0;height:1px;background:var(--text);transition:transform .35s var(--amb-ease),top .35s var(--amb-ease)}
+html.amb .nav-toggle-icon::before{top:2px}
+html.amb .nav-toggle-icon::after{top:10px}
+html.amb .nav-toggle[aria-expanded="true"] .nav-toggle-icon::before{top:6px;transform:rotate(45deg)}
+html.amb .nav-toggle[aria-expanded="true"] .nav-toggle-icon::after{top:6px;transform:rotate(-45deg)}
+@media (max-width:650px){
+  html.amb .site-header.nav-enhanced{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 1rem;padding:.8rem var(--amb-gutter)}
+  html.amb .site-header.nav-enhanced .brand{width:min(180px,100%)}
+  html.amb .site-header.nav-enhanced .nav-toggle{min-height:48px;padding-inline:.6rem;margin-right:-.6rem}
+  html.amb .site-header.nav-enhanced .main-nav{display:grid;grid-column:1 / -1;grid-template-columns:1fr;gap:0;width:100%;margin-top:1.1rem;padding:.4rem 0 1rem;border-top:1px solid var(--line);font-size:.8rem;letter-spacing:.16em}
+  html.amb .site-header.nav-enhanced .main-nav[hidden]{display:none}
+  html.amb .site-header.nav-enhanced .main-nav a{margin-left:0;min-height:52px;border-bottom:1px solid var(--line);background:none}
+  html.amb .site-header.nav-enhanced .main-nav a::before{content:none}
+  html.amb .site-header.nav-enhanced .main-nav a[aria-current="page"]{opacity:.6}
+}
+
+/* =========================================================
+   3. Boutons sobres : contour fin, remplissage à la couleur de la photo
+   ========================================================= */
+html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.amb-panel-reset){position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.7rem;min-height:50px;padding:.85rem 1.4rem;border:1px solid var(--line-strong);border-radius:0;background:transparent;color:var(--text);font-family:var(--body);font-size:.75rem;font-weight:600;line-height:1.3;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;overflow:hidden;isolation:isolate;cursor:pointer;box-shadow:none;transition:color .35s ease,border-color .35s ease}
+html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.amb-panel-reset)::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--tone);transform:scaleY(0);transform-origin:50% 100%;transition:transform .45s var(--amb-ease)}
+html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.amb-panel-reset):is(:hover,:focus-visible){color:var(--on-tone);border-color:var(--tone);background:transparent}
+html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.amb-panel-reset):is(:hover,:focus-visible)::before{transform:scaleY(1)}
+html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.amb-panel-reset):focus-visible{outline:2px solid var(--tone);outline-offset:4px}
+html.amb .live-hero .live-button{min-height:50px;padding:.85rem 1.4rem;font-size:.75rem}
+/* Boutons de la visionneuse : texte seul, filet au survol */
+html.amb :is(.icon-button,.image-nav){border:0;border-bottom:1px solid var(--line-strong);background:none;color:var(--text);font-size:.75rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;transition:border-color .3s ease,color .3s ease}
+html.amb :is(.icon-button,.image-nav):hover{color:var(--text);border-bottom-color:var(--tone)}
+
+/* Liens soulignés qui se remplissent */
+html.amb .live-site .live-text-link,html.amb :is(.text-link,.quiet-link){border-bottom:1px solid color-mix(in srgb,var(--tone) 70%,transparent);background:linear-gradient(var(--tone),var(--tone)) 0 100%/0 2px no-repeat;text-decoration:none;transition:background-size .45s var(--amb-ease),color .3s ease}
+html.amb .live-site .live-text-link:is(:hover,:focus-visible),html.amb :is(.text-link,.quiet-link):is(:hover,:focus-visible){background-size:100% 2px;color:var(--text)}
+
+/* =========================================================
+   4. Bandeau et fenêtre des cookies
+   ========================================================= */
+html.amb .cookie-banner{--tone:var(--amb-tone,#ff4d32);padding:1.5rem var(--amb-gutter) max(1.5rem,env(safe-area-inset-bottom));border-top:1px solid var(--line-strong);background:color-mix(in srgb,var(--bg) 93%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:none;color:var(--text)}
+html.amb .cookie-banner-inner{max-width:1440px;gap:2rem}
+html.amb :is(.cookie-banner,#cookie-settings) h2{font-family:var(--display);font-weight:400;font-size:1.6rem;letter-spacing:.02em;color:var(--text)}
+html.amb .cookie-banner p{font-weight:300;line-height:1.5;color:var(--text)}
+html.amb :is(.cookie-banner,#cookie-settings,.cookie-feedback) a{color:var(--text)}
+html.amb .cookie-actions{width:auto;gap:10px}
+html.amb #cookie-settings{--tone:var(--amb-tone,#ff4d32);background:var(--bg);color:var(--text);border:1px solid var(--line-strong);box-shadow:none}
+html.amb #cookie-settings::backdrop{background:rgba(8,9,10,.72);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+html.amb #cookie-settings p{font-weight:300;color:var(--text)}
+html.amb #cookie-settings .cookie-category{border-bottom-color:var(--line)}
+html.amb #cookie-settings h3{font-family:var(--display);font-weight:400;font-size:1.3rem;letter-spacing:.02em;color:var(--text)}
+html.amb .cookie-settings-actions{border-top-color:var(--line)}
+html.amb .cookie-category-state{color:var(--text);border-left-color:var(--tone)}
+html.amb .cookie-toggle input{accent-color:var(--tone)}
+html.amb .cookie-feedback{--tone:var(--amb-tone,#ff4d32);background:var(--bg);color:var(--text);border:1px solid var(--line-strong);border-top:2px solid var(--tone)}
+html.amb .cookie-preferences-link:hover{color:var(--tone)}
+@media (max-width:650px){
+  html.amb .cookie-banner{padding-inline:1.2rem}
+  html.amb .cookie-actions{width:100%}
+}
+
+/* =========================================================
+   5. Panneau « Affichage » : ambiance et animations
+   ========================================================= */
+.amb-panel{--tone:var(--amb-tone,#ff4d32);position:fixed;left:16px;bottom:calc(16px + var(--cookie-banner-space,0px));z-index:60;max-width:min(300px,calc(100vw - 32px));background:color-mix(in srgb,var(--bg) 94%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:var(--text);border:1px solid var(--line-strong);font-family:var(--body);font-size:.85rem}
+.amb-panel summary{display:flex;align-items:center;gap:.6rem;min-height:44px;padding:.6rem 1rem;cursor:pointer;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;list-style:none}
+.amb-panel summary::-webkit-details-marker{display:none}
+.amb-panel summary::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--tone);transition:background-color 1s ease}
+.amb-panel summary:focus-visible{outline:2px solid var(--tone);outline-offset:2px}
+.amb-panel fieldset{border:0;border-top:1px solid var(--line);margin:0;padding:.8rem 1rem;display:grid;gap:.25rem}
+.amb-panel legend{float:left;width:100%;padding:0;margin-bottom:.4rem;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;opacity:.75}
+.amb-panel label{display:flex;align-items:center;gap:.6rem;min-height:36px;cursor:pointer}
+.amb-panel label small{opacity:.7;font-size:.75rem}
+.amb-panel input{accent-color:var(--tone);width:18px;height:18px;margin:0}
+.amb-panel .amb-panel-reset{display:none}
+body:has(.cookie-banner:not([hidden])) .amb-panel{display:none}
+@media print{.amb-panel,.amb-progress{display:none!important}}
+
+/* =========================================================
+   6. Mise en page aérée, comme la maquette
+   ========================================================= */
+html.amb .live-section{width:min(1440px,100% - 2 * var(--amb-gutter));max-width:none;padding-block:var(--amb-space)}
+html.amb :is(.live-kicker,.eyebrow,.social-kicker,.reviews-kicker,.thanks-kicker,.toc-label){display:flex;align-items:center;flex-wrap:wrap;gap:.9rem;font-size:.75rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;margin-bottom:clamp(1rem,1.8vw,1.6rem)}
+html.amb :is(.live-kicker,.eyebrow,.social-kicker,.reviews-kicker,.thanks-kicker)::before{content:"";width:40px;height:1px;background:var(--tone);flex-shrink:0}
+html.amb :is(.live-kicker,.eyebrow,.social-kicker)>span{margin-right:0}
+html.amb .live-heading{margin-bottom:clamp(2.25rem,4vw,3.5rem);gap:clamp(2rem,5vw,5rem)}
+html.amb .live-photo figcaption{margin-top:1rem}
+html.amb main :is(p,li){line-height:1.6}
+html.amb .footer{padding:clamp(2.75rem,5vw,4.5rem) var(--amb-gutter);border-top:1px solid var(--line);gap:2.5rem}
+html.amb .social-stage{padding-block:var(--amb-space)}
+
+/* Photos proportionnées sur ordinateur : jamais plus hautes que l'écran, rythme asymétrique */
+@media (min-width:601px){
+  html.amb .home-duet{grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:clamp(1.5rem,5vw,4.5rem);max-width:960px;margin-inline:auto}
+  html.amb .home-duet .live-photo:last-child{margin-top:clamp(2.5rem,7vw,7rem)}
+  html.amb .home-trio{gap:clamp(1.25rem,3vw,3rem);margin-top:clamp(3rem,6vw,5.5rem);max-width:1240px;margin-inline:auto}
+  html.amb .home-trio .live-photo:nth-child(2){margin-top:clamp(1.5rem,3.5vw,3.5rem)}
+  html.amb .home-trio .live-photo:nth-child(3){margin-top:clamp(3rem,7vw,7rem)}
+  html.amb .portfolio-masonry{column-gap:clamp(1.25rem,2.4vw,2.25rem)}
+  html.amb .portfolio-masonry .live-photo{margin-bottom:clamp(1.25rem,2.4vw,2.25rem)}
+}
+html.amb .selection-finale{margin-top:clamp(4rem,8vw,7rem)}
+@media (min-width:901px){
+  html.amb .portfolio-masonry{columns:4}
+  html.amb .editorial-gallery{max-width:920px}
+  html.amb .editorial-gallery-single{max-width:min(100%,500px)}
+}
+@media (min-width:901px) and (max-width:1250px){html.amb .portfolio-masonry{columns:3}}
+
+/* Échelle de titres commune (les règles propres aux pages restent en dessous en cas de souci) */
+html.amb .live-site .live-hero h1{font-size:var(--amb-h1-hero)}
+html.amb :is(.live-site .portfolio-intro h1,.service-hero .service-heading,.story-intro h1,.reviews-intro h1,.page-intro h1,.pricing-intro h1,.thanks-letter h1,.hero-title h1){font-size:var(--amb-h1)}
+html.amb :is(.live-site .live-heading h2,.live-site .home-story h2,.live-site .live-contact h2,.live-site .portfolio-outro h2,.social-stage h2,.about h2,.pricing-tailored h2){font-size:var(--amb-h2)}
+html.amb :is(.editorial-copy>h2,.editorial-panel>h2,.editorial-faq>h2,.editorial-cta>h2,.page-block>h2,.page-cta h2,.story h2,.offer-heading h2,.reviews-closing>p:last-child){font-size:var(--amb-h3)}
+html.amb :is(.editorial-copy>h3,.editorial-panel>h3){font-size:clamp(1.6rem,2.3vw,2.2rem)}
+html.amb .editorial-links :is(h2,h3,.editorial-link-title){font-size:clamp(1.7rem,2.5vw,2.4rem)}
+html.amb .legal-content h1{font-size:clamp(2.6rem,4.4vw,4rem)}
+html.amb .story .story-finale{font-size:clamp(2.1rem,3.2vw,3rem)}
+html.amb .offer-price strong{font-size:clamp(3.4rem,4.6vw,4.6rem)}
+html.amb .selection-finale blockquote{font-size:clamp(2.6rem,6vw,3.4rem)}
+
+/* Titres : le mot en couleur suit la photo de la section */
+html.amb main :is(h1,h2,.amb-heading) em,html.amb .social-stage :is(h2,.amb-heading) em,html.amb .selection-finale blockquote em{color:var(--tone);transition:color 1s ease}
+html.amb :is(.live-kicker,.eyebrow,.social-kicker)>span{color:var(--tone)}
+
+/* Grands textes en graisse légère, comme un magazine */
+html.amb :is(.live-hero-intro,.live-heading>p,.selection-finale>p,.social-stage-intro,.service-lead,.portfolio-intro>p,.intro-copy,.pricing-lead,.reviews-letter-lead,.thanks-letter-lead){font-weight:300;font-size:clamp(1.1rem,1.6vw,1.4rem);line-height:1.45;color:var(--text)}
+html.amb .editorial-copy>h2+p{max-width:42ch;font-weight:300;font-size:clamp(1.2rem,1.8vw,1.6rem);line-height:1.42;color:var(--text)}
+html.amb .home-story-copy .story-lead{font-weight:300;font-size:clamp(1.45rem,2.4vw,2.1rem);line-height:1.35}
+html.amb .live-contact>div>p{font-weight:300;font-size:clamp(1.1rem,1.6vw,1.4rem);line-height:1.45;color:var(--text)}
+
+/* Numéros de section géants, en contour */
+html.amb .amb-has-index{position:relative}
+/* Le numéro reste dans la marge du contenu : jamais collé ni coupé au bord de l'écran */
+html.amb .amb-has-index:not(.live-section)>.amb-index{right:var(--amb-gutter)}
+.amb-index{position:absolute;top:clamp(.5rem,2vw,1.5rem);right:0;margin:0;font-family:var(--display);font-size:clamp(3rem,6vw,5rem);line-height:.8;color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--tone) 45%,transparent);pointer-events:none;user-select:none;z-index:0}
+
+/* =========================================================
+   7. Ouverture immersive (page d'accueil)
+   ========================================================= */
+html.amb .hero-artline .amb-line{display:block}
+@keyframes amb-rise{from{opacity:0;transform:translate3d(0,28px,0)}to{opacity:1;transform:none}}
+html.amb .live-hero-copy>.live-kicker,html.amb .live-hero .hero-seo-line,html.amb .live-hero .amb-line,html.amb .live-hero-intro,html.amb .live-hero-copy>.live-button{animation:amb-rise 1s var(--amb-ease) both}
+html.amb .live-hero .hero-seo-line{animation-delay:.08s}
+html.amb .live-hero .amb-line{animation-duration:1.1s;animation-delay:.16s}
+html.amb .live-hero .amb-line--offset{animation-delay:.3s}
+html.amb .live-hero-intro{animation-delay:.45s}
+html.amb .live-hero-copy>.live-button{animation-delay:.58s}
+@media (min-width:901px){
+  html.amb .live-hero{--text:#f6f2ea;--muted:rgba(246,242,234,.78);--line-strong:rgba(246,242,234,.4);--on-tone:#08090a;margin:0;min-height:100svh;overflow:hidden;color:var(--text);background:#08090a}
+  html.amb[data-ambiance="os"] .live-hero{--tone:#ff4d32!important}
+  html.amb .live-hero-picture{position:absolute;inset:0;z-index:0;display:block;overflow:hidden}
+  html.amb .live-hero-image{position:absolute;inset:0;width:100%;height:100%;min-height:0;object-fit:cover;object-position:50% 42%}
+  html.amb .live-hero::after{background:linear-gradient(to top,rgba(8,9,10,.86),rgba(8,9,10,.4) 40%,rgba(8,9,10,0) 72%),linear-gradient(90deg,rgba(8,9,10,.62),rgba(8,9,10,0) 62%),linear-gradient(to bottom,rgba(8,9,10,.55),rgba(8,9,10,0) 22%)}
+  html.amb .live-hero-copy{position:relative;z-index:1;align-self:end;max-width:none;padding:8rem var(--amb-gutter) clamp(4.5rem,11vh,7.5rem)}
+  html.amb .hero-artline .amb-line--offset{margin-left:clamp(1.5rem,8vw,9rem)}
+}
+.amb-deco{position:absolute;z-index:1;pointer-events:none;transform:translate3d(calc(var(--mx) * var(--depth,12) * var(--motion) * 1px),calc(var(--my) * var(--depth,12) * var(--motion) * 1px),0);transition:transform .7s var(--amb-ease)}
+.amb-deco--ring{top:16%;right:15%;width:clamp(160px,22vw,340px);aspect-ratio:1;border:1px solid var(--tone);border-radius:50%;opacity:.55}
+.amb-deco--line{top:33%;right:37%;width:clamp(80px,12vw,180px);height:1px;background:#f6f2ea;opacity:.35}
+.amb-scroll{position:absolute;right:var(--amb-gutter);bottom:1.8rem;z-index:2;display:flex;align-items:center;gap:.8rem;min-height:44px;color:#f6f2ea;text-decoration:none;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase}
+/* L'invitation à défiler se dessine trois fois puis reste immobile (pas d'animation permanente) */
+.amb-scroll::after{content:"";width:1px;height:42px;background:currentColor;transform-origin:50% 0;animation:amb-cue 2.4s var(--amb-ease) 1.2s 3 backwards}
+@keyframes amb-cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:.35}}
+
+/* Image d'ouverture vivante.
+   Souris : profondeur (l'image glisse à l'opposé du curseur), zoom mesuré, lumière qui suit, décor qui répond.
+   Doigt : la photo s'installe en douceur à l'affichage, puis une lumière s'allume là où l'on touche. */
+html.amb .live-hero{--hx:0;--hy:0}
+@keyframes amb-settle{from{transform:scale(1.07);filter:brightness(.72) saturate(.85)}}
+html.amb .live-hero-image{--hs:1.02;transform:translate3d(calc(var(--hx) * -14px * var(--motion)),calc(var(--hy) * -9px * var(--motion)),0) scale(var(--hs));transition:transform 1.3s var(--amb-ease),filter .9s var(--amb-ease);animation:amb-settle 2.2s var(--amb-ease) backwards}
+html.amb .live-hero.is-engaged .live-hero-image{--hs:1.06;filter:brightness(1.08) contrast(1.05) saturate(1.06)}
+.amb-hero-light{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;background:radial-gradient(circle at calc(50% + var(--hx) * 50%) calc(50% + var(--hy) * 50%),color-mix(in srgb,var(--tone) 34%,transparent),transparent 42%);mix-blend-mode:screen;transition:opacity .9s var(--amb-ease)}
+html.amb .live-hero.is-engaged .amb-hero-light{opacity:.7}
+html.amb .live-hero .amb-deco{transition:transform .7s var(--amb-ease),opacity .8s ease,scale 1s var(--amb-ease)}
+html.amb .live-hero.is-engaged .amb-deco--ring{opacity:.9;scale:1.08}
+html.amb .live-hero.is-engaged .amb-deco--line{opacity:.65;scale:1.35 1}
+@keyframes amb-touch{0%{opacity:0}22%{opacity:.9}100%{opacity:0}}
+@keyframes amb-press{0%{transform:scale(var(--hs))}28%{transform:scale(calc(var(--hs) + .035))}100%{transform:scale(var(--hs))}}
+html.amb .live-hero.is-touched .amb-hero-light{background:radial-gradient(circle at var(--tx,50%) var(--ty,50%),color-mix(in srgb,var(--tone) 45%,transparent),transparent 48%);animation:amb-touch 1.1s var(--amb-ease) both}
+html.amb .live-hero.is-touched .live-hero-image{animation:amb-press 1.1s var(--amb-ease)}
+@media (max-width:900px){
+  html.amb .live-hero-picture{position:relative;overflow:hidden}
+  html.amb .live-hero-image{--hs:1}
+}
+
+/* =========================================================
+   8. Photos : zoom, lumière, filet de couleur, légende
+   ========================================================= */
+html.amb .photo-open{overflow:hidden}
+html.amb .photo-open img{transition:transform 1.1s var(--amb-ease),filter .8s var(--amb-ease),opacity .2s}
+html.amb .photo-open::after{content:"";position:absolute;left:0;right:0;bottom:0;z-index:2;height:2px;background:var(--tone);transform:scaleX(0);transform-origin:0 50%;transition:transform .7s var(--amb-ease)}
+html.amb .photo-open:focus-visible::after{transform:scaleX(1)}
+html.amb .live-photo .photo-number{color:var(--tone)}
+html.amb .artist-name{transition:color .4s ease}
+
+/* Cartes et liens éditoriaux */
+html.amb .editorial-links{gap:clamp(1.5rem,4vw,4rem);margin-top:clamp(3rem,5vw,4.5rem)}
+html.amb .editorial-links>a{position:relative;overflow:hidden;isolation:isolate;padding:clamp(1.6rem,3vw,2.4rem) 0;border-color:var(--line);transition:border-color .35s ease,color .35s ease,padding .45s var(--amb-ease)}
+html.amb .editorial-links>a::before{content:"";position:absolute;inset:0;z-index:-1;background:color-mix(in srgb,var(--tone) 9%,transparent);transform:scaleY(0);transform-origin:50% 100%;transition:transform .5s var(--amb-ease)}
+html.amb .editorial-links>a:is(:hover,:focus-visible){border-color:var(--tone);padding-inline:1.2rem}
+html.amb .editorial-links>a:is(:hover,:focus-visible)::before{transform:scaleY(1)}
+html.amb .editorial-link-action>span{display:inline-block;transition:transform .35s var(--amb-ease)}
+html.amb .editorial-links>a:is(:hover,:focus-visible) .editorial-link-action>span{transform:translateX(6px)}
+/* Réseaux « Hors cadre » : pastilles avec icône au trait, comme « Écouter, suivre » de la maquette */
+html.amb .social-cards{display:flex;flex-wrap:wrap;gap:12px}
+html.amb .social-card{position:relative;flex-direction:row;align-items:center;gap:.75rem;min-width:0;min-height:52px;height:auto;padding:.85rem 1.2rem;border:1px solid var(--line-strong);border-top:1px solid var(--line-strong);background:none;color:var(--text);text-decoration:none;overflow:hidden;isolation:isolate;transition:color .35s ease,border-color .35s ease}
+html.amb .social-card::after{content:none}
+html.amb .social-card::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--tone);transform:scaleY(0);transform-origin:50% 100%;transition:transform .45s var(--amb-ease)}
+html.amb .social-card-top{display:contents}
+html.amb :is(.social-card-index,.social-card-hook,.social-card-handle){display:none}
+html.amb .social-card-icon{width:22px;height:22px;flex-shrink:0;color:currentColor;transition:transform .45s var(--amb-ease)}
+html.amb .social-card-icon .social-icon-svg{display:block;width:100%;height:100%}
+html.amb .social-card-name{font-family:var(--body);font-size:.95rem;font-weight:400;letter-spacing:0;text-transform:none;line-height:1.2}
+html.amb .social-card:is(:hover,:focus-visible){color:var(--on-tone);border-color:var(--tone);background:none}
+html.amb .social-card:is(:hover,:focus-visible)::before{transform:scaleY(1)}
+html.amb .social-card:is(:hover,:focus-visible) .social-card-icon{transform:translateY(-2px) rotate(-8deg) scale(1.08)}
+html.amb .social-card:focus-visible{outline:2px solid var(--tone);outline-offset:4px}
+
+/* Survols : seulement avec une souris */
+@media (hover:hover) and (pointer:fine){
+  /* La photo glisse un peu dans son cadre, à l'opposé du curseur (--px/--py posés par ambiance.js) */
+  html.amb .photo-open:hover img{opacity:1;transform:translate3d(calc(var(--px,0) * -10px * var(--motion)),calc(var(--py,0) * -10px * var(--motion)),0) scale(1.06);filter:brightness(1.1) saturate(1.06)}
+  html.amb .photo-open:hover::after{transform:scaleX(1)}
+  html.amb .live-photo:hover .artist-name{color:var(--tone)}
+}
+
+/* =========================================================
+   8 bis. Motifs de la maquette repris sur le site
+   ========================================================= */
+/* a. Chronologie : grands numéros en couleur sous un filet (sommaires, formules) */
+html.amb :is(.formula-nav,.portfolio-contents){display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:clamp(16px,2.5vw,40px);border:0;padding:0;margin-block:clamp(2.5rem,5vw,4rem)}
+html.amb :is(.formula-nav,.portfolio-contents)>a,html.amb .story-toc li>a{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:.7rem;padding:1.3rem 0 .4rem;border:0;border-top:1px solid var(--line);color:var(--text);text-decoration:none;font-size:.95rem;background:none}
+html.amb :is(.formula-nav,.portfolio-contents)>a::before,html.amb .story-toc li>a::before{content:"";position:absolute;left:0;top:-1px;width:100%;height:1px;background:var(--tone);transform:scaleX(0);transform-origin:0 50%;transition:transform .6s var(--amb-ease)}
+html.amb :is(.formula-nav,.portfolio-contents)>a>span,html.amb .story-toc li>a>span{display:block;margin:0;font-family:var(--display);font-size:clamp(2.4rem,3.6vw,3.4rem);line-height:1;letter-spacing:.01em;color:var(--tone);transition:transform .5s var(--amb-ease)}
+html.amb :is(.formula-nav,.portfolio-contents)>a:is(:hover,:focus-visible)::before,html.amb .story-toc li>a:is(:hover,:focus-visible)::before{transform:scaleX(1)}
+html.amb :is(.formula-nav,.portfolio-contents)>a:is(:hover,:focus-visible)>span,html.amb .story-toc li>a:is(:hover,:focus-visible)>span{transform:translateY(-5px)}
+html.amb .story-toc ol{gap:0}
+html.amb .story-toc li>a{padding-block:1.1rem .6rem}
+html.amb .story-toc li>a>span{font-size:2rem}
+
+/* b. Fiche d'informations : intitulé en petites capitales, grande valeur en couleur */
+html.amb .service-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:clamp(16px,2.5vw,40px);margin-block:clamp(3rem,6vw,5rem)}
+html.amb .service-metrics>div{border:0;border-top:1px solid var(--line);padding:1.2rem 0 0;background:none}
+html.amb .service-metrics dt{margin:0 0 .6rem;font-size:.7rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+html.amb .service-metrics dd{margin:0;font-family:var(--display);font-size:clamp(2.4rem,3.6vw,3.4rem);line-height:1;color:var(--tone)}
+
+/* c. Liste de crédits : pages légales */
+html.amb dl.identity{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0 clamp(16px,2.5vw,40px)}
+html.amb dl.identity>div{display:block;padding:1rem 0 1.15rem;border:0;border-top:1px solid var(--line);background:none}
+html.amb dl.identity dt{margin:0 0 .35rem;font-size:.7rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+html.amb dl.identity dd{margin:0;font-size:1rem;line-height:1.55}
+
+/* d. Pastilles : liens de fin de page */
+html.amb .related-services{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(2.5rem,5vw,4rem);border:0;padding:0}
+html.amb .related-services>a{position:relative;display:inline-flex;align-items:center;gap:.6rem;min-height:50px;padding:.8rem 1.2rem;border:1px solid var(--line-strong);color:var(--text);text-decoration:none;font-size:.9rem;overflow:hidden;isolation:isolate;background:none;transition:color .35s ease,border-color .35s ease}
+html.amb .related-services>a::after{content:"→";transition:transform .35s var(--amb-ease)}
+html.amb .related-services>a::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--tone);transform:scaleY(0);transform-origin:50% 100%;transition:transform .45s var(--amb-ease)}
+html.amb .related-services>a:is(:hover,:focus-visible){color:var(--on-tone);border-color:var(--tone)}
+html.amb .related-services>a:is(:hover,:focus-visible)::before{transform:scaleY(1)}
+html.amb .related-services>a:is(:hover,:focus-visible)::after{transform:translateX(4px)}
+
+/* e. Citation en panneau qui chevauche la photo (accueil) */
+@media (min-width:901px){
+  html.amb .selection-finale{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);text-align:left}
+  html.amb .selection-finale>p{grid-column:1 / -1;margin:0 0 2rem}
+  html.amb .selection-finale>blockquote{grid-column:1 / 8;position:relative;z-index:3;margin:0 0 -4rem;padding:clamp(1.6rem,2.8vw,2.6rem) clamp(1.8rem,3vw,2.8rem);background:color-mix(in srgb,var(--bg),var(--text) 6%);border-left:2px solid var(--tone);font-size:clamp(3rem,4.4vw,4.5rem)}
+  html.amb .selection-finale>.live-photo{grid-column:4 / -2}
+  html.amb .selection-finale>.live-text-link{grid-column:4 / -2;justify-self:start}
+}
+
+/* =========================================================
+   9. Apparitions au défilement (posées par ambiance.js)
+   ========================================================= */
+html.amb-js .amb-reveal{opacity:0;transform:translate3d(0,calc(30px * var(--motion)),0);transition:opacity .9s ease var(--delay,0s),transform 1.1s var(--amb-ease) var(--delay,0s)}
+html.amb-js .amb-reveal.is-visible{opacity:1;transform:none}
+
+/* =========================================================
+   10. Tablette et téléphone
+   ========================================================= */
+/* Tablette et téléphone : pas de numéros géants par-dessus les titres (moins de surcouches) */
+@media (max-width:900px){
+  .amb-deco,.amb-scroll,.amb-index{display:none}
+}
+@media (max-width:650px){
+  html.amb{
+    --amb-space:clamp(2.75rem,11vw,3.5rem);
+    --amb-h1:clamp(2.75rem,12.5vw,3.4rem);
+    --amb-h1-hero:clamp(2.85rem,14vw,3.75rem);
+    --amb-h2:clamp(2.2rem,9.5vw,2.6rem);
+    --amb-h3:clamp(1.8rem,8vw,2.2rem);
+  }
+  .amb-panel{left:12px;bottom:calc(12px + var(--cookie-banner-space,0px))}
+}
+
+/* =========================================================
+   10 bis. Téléphone d'abord : galeries au doigt, vrai retour tactile
+   ========================================================= */
+/* Galeries en bande : la photo suit le doigt, la suivante dépasse pour inviter au geste */
+@media (max-width:600px){
+  html.amb :is(.home-duet,.home-trio,.editorial-gallery:not(.editorial-gallery-single)){display:flex;align-items:flex-start;gap:12px;columns:auto;margin-inline:calc(-1 * var(--amb-gutter));padding:0 var(--amb-gutter) 2px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:var(--amb-gutter);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  html.amb :is(.home-duet,.home-trio,.editorial-gallery)::-webkit-scrollbar{display:none}
+  html.amb :is(.home-duet,.home-trio,.editorial-gallery:not(.editorial-gallery-single))>.live-photo{flex:0 0 82%;margin:0!important;scroll-snap-align:start}
+  html.amb .home-trio{margin-top:12px}
+  /* Filet de progression sous chaque bande (posé par ambiance.js) */
+  .amb-strip-progress{position:relative;height:1px;margin:1rem 0 0;background:var(--line);overflow:hidden}
+  .amb-strip-progress span{position:absolute;inset:0;background:var(--tone);transform-origin:0 50%;transform:scaleX(var(--strip,.2));transition:transform .25s linear,background-color 1s ease}
+  html.amb .portfolio-opener .live-photo{margin-bottom:0}
+  html.amb .portfolio-chapter{padding-top:var(--amb-space);padding-bottom:var(--amb-space)}
+}
+
+/* Portfolio sur smartphone : une galerie éditoriale verticale, chaque photo à sa place.
+   Formats alternés posés par ambiance.js : a = grande à gauche, b = moyenne à droite,
+   c + d = paire décalée, e = en retrait ; w / wr = paysage en pleine largeur ou à droite.
+   De l'air régulier entre les photos ; aucun effet au défilement. */
+@media (max-width:600px){
+  html.amb .portfolio-masonry{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:flex-start;gap:2.75rem 1.5rem;columns:auto;margin-top:2rem}
+  html.amb .portfolio-masonry>.live-photo{flex:0 0 auto;width:100%;margin:0}
+  html.amb .portfolio-masonry>.amb-g-a{width:82%}
+  html.amb .portfolio-masonry>.amb-g-b{width:64%;margin-left:auto}
+  html.amb .portfolio-masonry>:is(.amb-g-c,.amb-g-d){width:calc(50% - .75rem)}
+  html.amb .portfolio-masonry>.amb-g-d{margin-top:2.75rem}
+  html.amb .portfolio-masonry>.amb-g-e{width:74%;margin-left:12%}
+  html.amb .portfolio-masonry>.amb-g-wr{width:88%;margin-left:auto}
+  /* Légendes plus petites dans les paires, pour ne pas couvrir la photo */
+  html.amb .portfolio-masonry>:is(.amb-g-c,.amb-g-d) .photo-caption{padding:2rem .7rem .6rem}
+  html.amb .portfolio-masonry>:is(.amb-g-c,.amb-g-d) .artist-name{font-size:1.05rem;line-height:1.15}
+  html.amb .portfolio-masonry>:is(.amb-g-c,.amb-g-d) .artist-event{font-size:.7rem}
+  html.amb .portfolio-masonry>:is(.amb-g-c,.amb-g-d) .photo-caption-actions{flex-wrap:wrap;gap:0}
+  html.amb .portfolio-masonry>:is(.amb-g-c,.amb-g-d) .artist-links{flex-wrap:wrap;max-width:100%}
+  /* « Agrandir » garde son nom accessible (aria-label) ; seule l'icône reste visible ici */
+  html.amb .portfolio-masonry>:is(.amb-g-c,.amb-g-d) .photo-expand span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+}
+@media (min-width:601px){.amb-strip-progress{display:none}}
+
+/* Toucher : un appui se voit, mais rien ne reste « survolé » après le doigt */
+@media (hover:none){
+  html.amb :is(a,button,summary,label){-webkit-tap-highlight-color:transparent}
+  html.amb .photo-open img{transition:transform .5s var(--amb-ease),filter .5s var(--amb-ease),opacity .2s}
+  html.amb .photo-open:active img{transform:scale(.985);filter:brightness(1.08)}
+  html.amb .interactive-photo.is-caption-open .photo-open img{transform:scale(1.035);filter:brightness(1.08) saturate(1.05)}
+  html.amb .interactive-photo.is-caption-open .photo-open::after{transform:scaleX(1)}
+  html.amb .interactive-photo.is-caption-open .artist-name{color:var(--tone)}
+
+  html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.amb-panel-reset,.social-card,.related-services>a):hover:not(:focus-visible):not(:active){color:var(--text);border-color:var(--line-strong)}
+  html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.amb-panel-reset,.social-card,.related-services>a):hover:not(:focus-visible):not(:active)::before{transform:scaleY(0)}
+  html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.amb-panel-reset,.social-card,.related-services>a):active::before{transition-duration:.18s}
+  html.amb .social-card:hover:not(:focus-visible):not(:active) .social-card-icon,html.amb .related-services>a:hover:not(:focus-visible):not(:active)::after{transform:none}
+  html.amb .editorial-links>a:hover:not(:focus-visible):not(:active){border-color:var(--line);padding-inline:0}
+  html.amb .editorial-links>a:hover:not(:focus-visible):not(:active)::before{transform:scaleY(0)}
+  html.amb .editorial-links>a:hover:not(:focus-visible):not(:active) .editorial-link-action>span{transform:none}
+  html.amb :is(.formula-nav,.portfolio-contents)>a:hover:not(:focus-visible):not(:active)::before,html.amb .story-toc li>a:hover:not(:focus-visible):not(:active)::before{transform:scaleX(0)}
+  html.amb :is(.formula-nav,.portfolio-contents)>a:hover:not(:focus-visible):not(:active)>span,html.amb .story-toc li>a:hover:not(:focus-visible):not(:active)>span{transform:none}
+  html.amb .live-site .live-text-link:hover:not(:focus-visible):not(:active),html.amb :is(.text-link,.quiet-link):hover:not(:focus-visible):not(:active){background-size:0 2px}
+  html.amb .site-header .main-nav a:not([aria-current]):hover:not(:focus-visible):not(:active){background-size:0 1px}
+  html.amb .site-header .main-nav a:active{background-color:color-mix(in srgb,var(--tone) 10%,transparent)}
+  html.amb :is(.icon-button,.image-nav):hover:not(:focus-visible):not(:active){border-bottom-color:var(--line-strong)}
+  html.amb :is(.icon-button,.image-nav):active{border-bottom-color:var(--tone)}
+}
+/* Cibles tactiles confortables pour une main */
+@media (pointer:coarse),(max-width:900px){
+  html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button){min-height:52px}
+  html.amb :is(.icon-button,.image-nav){min-height:48px;min-width:48px}
+  html.amb :is(.footer-legal-links,.footer-discover-links)>a,html.amb .cookie-preferences-link{display:inline-flex;align-items:center;min-height:44px}
+}
+
+/* =========================================================
+   12. Page contact (refaite le 19/11/2026, mêmes informations)
+   ========================================================= */
+html.amb .contact-page :is(.contact-hero,.contact-details,.page-cta){width:min(1440px,100% - 2 * var(--amb-gutter));margin-inline:auto}
+html.amb .contact-hero{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);column-gap:clamp(2rem,6vw,6rem);align-items:end;padding-block:clamp(2rem,4.5vw,4rem) var(--amb-space)}
+html.amb .contact-hero h1{margin:0;font-family:var(--display);font-size:var(--amb-h1);font-weight:400;line-height:.95;letter-spacing:.01em;text-transform:uppercase}
+html.amb .contact-hero .intro-copy{max-width:40ch;margin:1.3rem 0 0}
+/* E-mail et téléphone : deux grandes lignes faciles à toucher */
+html.amb .contact-ways{max-width:660px;margin:clamp(1.8rem,3.5vw,2.8rem) 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
+html.amb .contact-ways li{margin:0}
+html.amb .contact-way{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:.3rem 1.2rem;min-height:76px;padding:1rem 0;border-bottom:1px solid var(--line);color:var(--text);text-decoration:none;isolation:isolate;transition:padding .45s var(--amb-ease),border-color .35s ease}
+html.amb .contact-way::before{content:"";position:absolute;inset:0;z-index:-1;background:color-mix(in srgb,var(--tone) 13%,transparent);transform:scaleY(0);transform-origin:50% 100%;transition:transform .45s var(--amb-ease)}
+html.amb .contact-way-label{grid-column:1;font-size:.7rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+html.amb .contact-way-value{grid-column:1;font-size:clamp(1.2rem,2.3vw,1.95rem);font-weight:300;line-height:1.2;letter-spacing:-.01em;overflow-wrap:anywhere}
+html.amb .contact-way-arrow{grid-column:2;grid-row:1 / span 2;color:var(--tone);font-size:1rem;letter-spacing:.05em;transition:transform .4s var(--amb-ease)}
+html.amb .contact-way:focus-visible{outline:2px solid var(--tone);outline-offset:4px}
+html.amb .contact-way:is(:focus-visible,:active){border-bottom-color:var(--tone)}
+html.amb .contact-way:is(:focus-visible,:active)::before{transform:scaleY(1)}
+html.amb .contact-way:active::before{transition-duration:.15s}
+@media (hover:hover) and (pointer:fine){
+  html.amb .contact-way:hover{padding-inline:1.1rem;border-bottom-color:var(--tone)}
+  html.amb .contact-way:hover::before{transform:scaleY(1)}
+  html.amb .contact-way:hover .contact-way-arrow{transform:translateX(6px)}
+}
+html.amb .contact-page .contact-note{max-width:58ch;margin:1.2rem 0 0;font-size:.875rem;line-height:1.6;color:var(--muted)}
+/* Photo : la main tendue, qui s'installe à l'affichage et réagit au curseur ou au doigt */
+html.amb .contact-photo{justify-self:end;width:min(100%,400px);margin:0}
+html.amb .amb-depth{position:relative;overflow:hidden;background:#08090a}
+html.amb .amb-depth img{display:block;width:100%;height:auto;transition:transform 1.1s var(--amb-ease),filter .8s var(--amb-ease);animation:amb-settle 2.2s var(--amb-ease) backwards}
+html.amb .amb-depth::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--tone);transform:scaleX(0);transform-origin:0 50%;transition:transform .7s var(--amb-ease)}
+html.amb .amb-depth:active img{transform:scale(1.03);filter:brightness(1.1)}
+html.amb .amb-depth:active::after{transform:scaleX(1)}
+@media (hover:hover) and (pointer:fine){
+  html.amb .amb-depth:hover img{transform:translate3d(calc(var(--px,0) * -10px * var(--motion)),calc(var(--py,0) * -10px * var(--motion)),0) scale(1.06);filter:brightness(1.12) contrast(1.04)}
+  html.amb .amb-depth:hover::after{transform:scaleX(1)}
+}
+html.amb .contact-photo figcaption{display:flex;align-items:center;gap:.8rem;margin-top:.9rem;font-size:.7rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+html.amb .contact-photo figcaption::before{content:"";width:28px;height:1px;background:var(--tone)}
+/* Adresse : liste de crédits, et la zone d'intervention en phrase d'accroche */
+html.amb .contact-details{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);column-gap:clamp(2rem,6vw,6rem);align-items:start;padding-bottom:var(--amb-space)}
+html.amb .contact-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(16px,2.5vw,40px);margin:0}
+html.amb .contact-facts>div{padding:1.1rem 0 1.2rem;border-top:1px solid var(--line)}
+html.amb .contact-facts dt{margin:0 0 .5rem;font-size:.7rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+html.amb .contact-facts dd{margin:0;font-size:1.05rem;line-height:1.55}
+html.amb .contact-zone{margin:0;padding-top:1.1rem;border-top:1px solid var(--tone);font-size:clamp(1.1rem,1.6vw,1.35rem);font-weight:300;line-height:1.45;color:var(--text)}
+html.amb .contact-details>.contact-note{grid-column:1 / -1;margin-top:2rem;font-size:.8125rem}
+/* Dernier appel : un panneau sobre, filet à la couleur de la photo */
+html.amb .contact-page .page-cta{margin-bottom:var(--amb-space);padding:clamp(1.6rem,3.2vw,2.8rem) clamp(1.4rem,3.2vw,2.8rem);border:0;border-left:2px solid var(--tone);background:color-mix(in srgb,var(--bg),var(--text) 5%)}
+html.amb .contact-page .page-cta p{margin:.9rem 0 0;font-weight:300}
+@media (max-width:900px){
+  html.amb .contact-hero,html.amb .contact-details{grid-template-columns:minmax(0,1fr);row-gap:2.2rem}
+  html.amb .contact-photo{width:min(62%,340px)}
+}
+@media (max-width:600px){
+  html.amb .contact-hero{padding-top:1.6rem}
+  html.amb .contact-facts{grid-template-columns:minmax(0,1fr)}
+  html.amb .contact-way{min-height:72px}
+  html.amb .contact-way-value{font-size:clamp(1.05rem,5.2vw,1.3rem)}
+  html.amb .contact-page .page-cta{display:block}
+  html.amb .contact-page .page-cta .button-link{margin-top:1.4rem}
+}
+/* Page contact sur smartphone : la photo s'insère entre l'accroche et les coordonnées,
+   recadrée en 4:3 sur son sujet (sans déformation) et légèrement décalée vers le bord droit.
+   Le point focal se règle avec --focus ci-dessous (horizontal vertical, en %). */
+@media (max-width:600px){
+  html.amb .contact-hero{row-gap:0}
+  html.amb .contact-hero-copy{display:contents}
+  html.amb .contact-hero-copy>.eyebrow{order:1}
+  html.amb .contact-hero-copy>h1{order:2}
+  html.amb .contact-hero-copy>.intro-copy{order:3}
+  html.amb .contact-photo{order:4;justify-self:stretch;width:auto;margin:1.8rem calc(-1 * var(--amb-gutter)) 0 1.5rem}
+  html.amb .contact-photo .amb-depth{aspect-ratio:4 / 3}
+  html.amb .contact-photo{--focus:48% 49%}
+  html.amb .contact-photo .amb-depth img{height:100%;object-fit:cover;object-position:var(--focus)}
+  html.amb .contact-photo figcaption{margin-top:.7rem}
+  html.amb .contact-hero-copy>.contact-ways{order:5;margin-top:1.8rem}
+  html.amb .contact-hero-copy>.contact-note{order:6}
+}
+
+/* =========================================================
+   13. Accueil sur smartphone : ouverture composée comme une page de magazine (19/11/2026)
+   Concerne seulement l'ouverture (.live-hero) et sa légende, jusqu'à 600 px.
+   Le titre chevauche le haut de la photo ; la photo, décalée, déborde à droite ;
+   un filet vertical l'accompagne ; texte et bouton s'alignent sur le bord de la photo.
+   Le point focal de la photo se règle avec --hero-focus (par défaut, le bord gauche est gardé
+   pour que la signature de la photo reste visible).
+   ========================================================= */
+@media (max-width:600px){
+  html.amb .live-hero{--hero-col:2.25rem;display:grid;grid-template-columns:var(--amb-gutter) var(--hero-col) minmax(0,1fr) var(--amb-gutter);align-items:start;margin:0;padding-top:1.4rem;background:transparent}
+  html.amb .live-hero-copy{display:contents}
+  html.amb .live-hero-copy>.live-kicker{grid-column:2 / 4;grid-row:1;margin:0 0 1rem}
+  html.amb .live-site .live-hero h1{grid-column:2 / 4;grid-row:2;position:relative;z-index:2;margin:0 0 -.5em;font-size:clamp(2.6rem,12.5vw,3.2rem);text-shadow:0 2px 22px rgba(8,9,10,.55)}
+  html.amb .live-hero .hero-seo-line{margin-bottom:.9rem;font-size:.62rem;letter-spacing:.12em;line-height:1.7;text-shadow:none}
+  html.amb .live-hero .amb-line--offset{margin-left:var(--hero-col)}
+  html.amb .live-hero-picture{grid-column:3 / -1;grid-row:3;position:relative;overflow:hidden;aspect-ratio:4 / 3;width:auto;min-width:0}
+  html.amb .live-hero-image{width:100%;height:100%;margin:0;object-fit:cover;object-position:var(--hero-focus,6% 50%)}
+  /* Filet vertical à gauche de la photo */
+  html.amb .live-hero::after{content:"";display:block;grid-column:2;grid-row:3;justify-self:start;width:1px;height:100%;margin:0;background:var(--tone);opacity:.6;pointer-events:none}
+  html.amb .live-hero-intro{grid-column:3 / 4;grid-row:4;max-width:34ch;margin:1.3rem 0 0;font-size:.97rem;font-weight:300;line-height:1.55}
+  html.amb .live-hero-copy>.live-button{grid-column:3 / 4;grid-row:5;justify-self:start;margin-top:1.25rem}
+  /* Légende en « folio » de magazine, sous un filet qui se dessine */
+  html.amb .live-hero-caption{position:relative;display:grid;gap:.3rem;margin:1.7rem var(--amb-gutter) 0;padding:.95rem 0 0 var(--hero-col,2.25rem);line-height:1.45}
+  html.amb .live-hero-caption::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--line-strong);transform-origin:0 50%}
+  html.amb .live-hero-caption span:first-child{font-size:.82rem;font-weight:300;color:var(--text)}
+  html.amb .live-hero-caption span:last-child{margin:0;font-size:.62rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  /* Apparition : la photo s'ouvre, le filet se trace, les textes montent l'un après l'autre */
+  @keyframes amb-unveil{from{clip-path:inset(0 0 0 24%)}to{clip-path:inset(0)}}
+  @keyframes amb-draw-y{from{transform:scaleY(0)}}
+  @keyframes amb-draw-x{from{transform:scaleX(0)}}
+  html.amb .live-hero-picture{animation:amb-unveil 1.3s var(--amb-ease) .12s backwards}
+  html.amb .live-hero::after{transform-origin:50% 0;animation:amb-draw-y 1.2s var(--amb-ease) .45s backwards}
+  html.amb .live-hero-caption::before{animation:amb-draw-x 1.1s var(--amb-ease) .75s backwards}
+  html.amb .live-hero-caption>span{animation:amb-rise .9s var(--amb-ease) .85s backwards}
+  html.amb .live-hero-caption>span+span{animation-delay:.95s}
+}
+/* =========================================================
+   14. Teintes des pages sans photographie principale (19/11/2026)
+   Une page sans photo choisit sa teinte avec un seul réglage sur <body> :
+     data-teinte="ambre | signal | ivoire | corail | encre | graphite"
+   Chaque teinte donne : un fond (--page-bg), une couleur secondaire en léger dégradé (--page-2),
+   une couleur d'accent (--page-accent) et l'angle de ses faisceaux (--beam-from).
+   Toutes viennent de la charte : nuit #08090A, os #F6F2EA, signal #FF4D32, ambre #FF9638, encre #111214.
+   Réglage libre possible : style="--page-accent:#…" sur <body> (contraste à vérifier : 4,5:1 minimum).
+   Dans le futur tableau de bord (Kirby), ce sera un champ « Teinte de la page » sur chaque page.
+   Les teintes ne s'appliquent qu'avec l'ambiance Scène (Nuit = couleurs fixes, Os = fond clair).
+   Une page qui a une photographie principale garde la couleur de sa photo : ne pas lui mettre de teinte.
+   ========================================================= */
+body[data-teinte="ambre"]{--page-bg:#0d0a07;--page-2:#1d150c;--page-accent:#ff9638;--beam-from:204deg}
+body[data-teinte="signal"]{--page-bg:#0e0908;--page-2:#1e100c;--page-accent:#ff4d32;--beam-from:214deg}
+body[data-teinte="ivoire"]{--page-bg:#0b0a09;--page-2:#1a1814;--page-accent:#e9dfcf;--beam-from:198deg}
+body[data-teinte="corail"]{--page-bg:#0e0a08;--page-2:#1f130e;--page-accent:#ff7444;--beam-from:209deg}
+body[data-teinte="encre"]{--page-bg:#111214;--page-2:#1b1d21;--page-accent:#ff4d32;--beam-from:220deg}
+body[data-teinte="graphite"]{--page-bg:#0b0c0d;--page-2:#16181b;--page-accent:#d9d2c7;--beam-from:200deg}
+html.amb:not([data-ambiance="nuit"]):not([data-ambiance="os"]) body[data-teinte]{
+  --bg:var(--page-bg);--tone:var(--page-accent);--amb-tone:var(--page-accent);--amb-glow:var(--page-accent);
+  background-color:var(--page-bg);
+  background-image:linear-gradient(180deg,var(--page-2) 0,var(--page-bg) min(70vh,640px));
+  background-repeat:no-repeat
+}
+/* Motif discret : trois faisceaux de lumière qui partent du coin, comme ceux du logo */
+@keyframes amb-beams-in{from{opacity:0}}
+html.amb:not([data-ambiance="nuit"]):not([data-ambiance="os"]) body[data-teinte]::after{
+  content:"";position:absolute;top:0;right:0;z-index:-1;width:min(72vw,780px);height:min(100svh,900px);pointer-events:none;opacity:.55;
+  background:conic-gradient(from var(--beam-from,206deg) at 100% 0,transparent 0deg,
+    color-mix(in srgb,var(--page-accent) 34%,transparent) .2deg,transparent .45deg 7deg,
+    color-mix(in srgb,var(--page-accent) 24%,transparent) 7.2deg,transparent 7.45deg 15deg,
+    color-mix(in srgb,var(--page-accent) 16%,transparent) 15.2deg,transparent 15.45deg);
+  -webkit-mask-image:radial-gradient(circle at 100% 0,#000 0,rgba(0,0,0,.6) 35%,transparent 78%);
+  mask-image:radial-gradient(circle at 100% 0,#000 0,rgba(0,0,0,.6) 35%,transparent 78%);
+  animation:amb-beams-in 1.6s ease .2s backwards
+}
+@media print{body[data-teinte]::after{display:none}}
+
+/* En quittant l'ouverture, le grand titre s'efface doucement (textes seulement, jamais la photo) */
+@supports (animation-timeline:view()){
+  @media (max-width:600px){
+    @keyframes amb-title-exit{to{transform:translate3d(0,-14px,0);opacity:.4}}
+    html.amb .live-hero .hero-artline{animation:amb-title-exit linear both;animation-timeline:view();animation-range:exit 10% exit 90%}
+  }
+}
+
+/* Visionneuse : la photo suit le doigt pour passer à la suivante */
+html.amb #lightbox-image{touch-action:pan-y pinch-zoom}
+html.amb #lightbox-image.is-dragging{transition:none}
+html.amb #lightbox-image.is-settling{transition:transform .35s var(--amb-ease),opacity .35s ease}
+@keyframes amb-photo-in{from{opacity:0;transform:translate3d(calc(var(--from,0) * 40px),0,0)}to{opacity:1;transform:none}}
+html.amb #lightbox-image.is-arriving{animation:amb-photo-in .45s var(--amb-ease) both}
+
+/* =========================================================
+   11. Moins d'animations : préférence système ou réglage « Aucune »
+   ========================================================= */
+html.amb[data-motion="none"] *,html.amb[data-motion="none"] *::before,html.amb[data-motion="none"] *::after{animation:none!important;transition-duration:0s!important;transition-delay:0s!important}
+html.amb[data-motion="none"] .amb-reveal{opacity:1;transform:none}
+html.amb[data-motion="none"] .amb-deco,html.amb[data-motion="none"] .amb-hero-light{display:none}
+html.amb[data-motion="none"] .live-hero-image{transform:none;filter:none}
+@media (prefers-reduced-motion:reduce){
+  html.amb *,html.amb *::before,html.amb *::after{animation:none!important}
+  html.amb-js .amb-reveal{opacity:1;transform:none;transition:none}
+  .amb-deco,.amb-hero-light{display:none}
+  html.amb .live-hero-image{transform:none;filter:none}
+}
