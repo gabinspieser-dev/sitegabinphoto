@@ -83,3 +83,7 @@ body { padding-bottom: var(--cookie-banner-space, 0px); }
 .cookie-toggle{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:.875rem;min-height:44px}
 .cookie-toggle input{appearance:auto;width:20px;height:20px;margin:0;accent-color:#FF4D32;cursor:pointer}
 .cookie-toggle input:focus-visible{outline:2px solid #FF9638;outline-offset:4px}
+
+/* 23/11/2026 : remplace les anciens attributs style= (compatibles avec une politique de sécurité stricte) */
+.legal-espace{margin-top:1.25rem!important}
+.legal-espace--note{font-size:.875rem!important}

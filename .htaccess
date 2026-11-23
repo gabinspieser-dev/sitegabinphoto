@@ -58,13 +58,14 @@ ErrorDocument 404 /404.html
  AddType font/woff2 .woff2
 </IfModule>
 <IfModule mod_headers.c>
- # Security headers. The CSP is in Report-Only mode: it reports problems, it does not block anything yet.
+ # Security headers. The CSP is enforced since 23/11/2026: anything not listed here is blocked by the browser.
  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
  Header always set X-Content-Type-Options "nosniff"
  Header always set Referrer-Policy "strict-origin-when-cross-origin"
  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
  Header always set X-Frame-Options "SAMEORIGIN"
- Header always set Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; style-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+ Header always set Cross-Origin-Opener-Policy "same-origin"
+ Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.google.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; style-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
  <FilesMatch "\.(html|xml|txt)$">
   Header set Cache-Control "no-cache"
  </FilesMatch>
