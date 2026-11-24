@@ -51,6 +51,8 @@ ErrorDocument 404 /404.html
 </IfModule>
 <IfModule mod_mime.c>
  AddType font/woff2 .woff2
+  AddType application/pdf .pdf
+  AddType application/vnd.openxmlformats-officedocument.wordprocessingml.document .docx
 </IfModule>
 <IfModule mod_headers.c>
  # Security headers. The CSP is enforced since 23/11/2026: anything not listed here is blocked by the browser.
@@ -73,4 +75,9 @@ ErrorDocument 404 /404.html
  <FilesMatch "\.(webp|png|jpg|jpeg|svg|ico)$">
   Header set Cache-Control "public, max-age=2592000"
  </FilesMatch>
+  # Documents téléchargeables (CGV, formulaire) : utiles aux visiteurs, mais pas dans les résultats de recherche (la page CGV y est déjà)
+  <FilesMatch "\.(pdf|docx)$">
+    Header set X-Robots-Tag "noindex"
+    Header set Cache-Control "public, max-age=86400"
+  </FilesMatch>
 </IfModule>

@@ -25,7 +25,13 @@ foreach ($dir in Get-ChildItem (Join-Path $Site 'series') -Directory) {
   if (-not $old.ContainsKey($loc)) { $pages.Add([pscustomobject]@{ loc = $loc; file = "series/$($dir.Name)/index.html" }) }
 }
 if (-not ($pages | Where-Object { $_.loc -eq "$BASE/series/" })) { $pages.Add([pscustomobject]@{ loc = "$BASE/series/"; file = 'series/index.html' }) }
-$changed = @('index.html', 'contact.html', 'series/index.html', 'portrait-artiste.html', 'photographe-concert-festival.html', 'foire-en-scene-chalons-en-champagne.html', 'electro-symphony-reims-arena.html')
+# Date de modification : une page reçoit la date du jour si elle diffère de la version publiée (dossier GitHub), sinon elle garde sa date
+$publie = 'C:\Users\gabin.spieser\Documents\GitHub\sitegabinphoto'
+function Modifiee([string]$file) {
+  $ici = Join-Path $Site ($file -replace '/', '\'); $la = Join-Path $publie ($file -replace '/', '\')
+  if (-not (Test-Path $la)) { return $true }
+  (Get-FileHash $ici).Hash -ne (Get-FileHash $la).Hash
+}
 $sb = New-Object Text.StringBuilder
 [void]$sb.AppendLine("<?xml version='1.0' encoding='utf-8'?>")
 [void]$sb.AppendLine('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">')
@@ -37,7 +43,7 @@ foreach ($p in ($pages | Sort-Object { if ($_.loc -eq "$BASE/") { '' } else { $_
   $main = [regex]::Replace([regex]::Match($html, '(?s)<main.*?</main>').Value, '(?s)<nav class="serie-suite".*?</nav>', '')   # la vignette « série suivante » appartient à une autre série
   $bases = [regex]::Matches($main, 'assets/portfolio/[a-z0-9-]+/[a-z0-9-]+?-\d{2}(?=-\d+\.webp)') | ForEach-Object Value | Select-Object -Unique
   $isNew = -not $old.ContainsKey($p.loc)
-  $last = if ($isNew -or $changed -contains $p.file -or $p.file -like 'series/*') { $Today } else { $old[$p.loc] }
+  $last = if ($isNew -or (Modifiee $p.file)) { $Today } else { $old[$p.loc] }
   [void]$sb.AppendLine('  <url>')
   [void]$sb.AppendLine("    <loc>$($p.loc)</loc>")
   [void]$sb.AppendLine("    <lastmod>$last</lastmod>")

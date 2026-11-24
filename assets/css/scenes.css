@@ -254,4 +254,3 @@ html.serie-js:not(.serie-calme) .serie-seq-cadre>.sc-photo.is-actif{opacity:1;vi
   .sc-note{margin-top:1.4rem}
 }
 @media (prefers-reduced-motion:reduce){.sc *,.sc-fond{transition:none!important;animation:none!important}}
-html[data-motion="none"] .sc *,html[data-motion="none"] .sc-fond{transition:none!important;animation:none!important}

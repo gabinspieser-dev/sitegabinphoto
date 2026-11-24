@@ -15,8 +15,8 @@
 .inst-lede{max-width:46ch;margin:1.4rem 0 0;font-size:clamp(1.05rem,1.35vw,1.25rem);line-height:1.6;color:var(--sc-ink)}
 
 /* Pile de tirages posés sur la table (décor, répète la première image de chaque artiste) */
-.inst-pile{grid-column:2;grid-row:2;position:relative;height:min(64 * var(--u),560px);min-height:300px}
-.inst-pile-tirage{position:absolute;width:44%;padding:7px 7px 30px;background:var(--inst-papier);box-shadow:0 22px 44px -18px rgba(0,0,0,.8),0 2px 5px rgba(0,0,0,.35);transition:rotate .6s cubic-bezier(.2,.7,.2,1),translate .6s cubic-bezier(.2,.7,.2,1)}
+.inst-pile{grid-column:2;grid-row:2;position:relative;height:min(64 * var(--u),560px);min-height:300px;container-type:size}
+.inst-pile-tirage{position:absolute;width:min(44cqw,calc(48cqh - 16px));padding:7px 7px 30px;background:var(--inst-papier);box-shadow:0 22px 44px -18px rgba(0,0,0,.8),0 2px 5px rgba(0,0,0,.35);transition:rotate .6s cubic-bezier(.2,.7,.2,1),translate .6s cubic-bezier(.2,.7,.2,1)}
 .inst-pile-tirage img{display:block;width:100%;height:auto;aspect-ratio:4 / 5;object-fit:cover}
 .inst-pile-tirage:nth-child(1){left:3%;top:4%;rotate:-9deg}
 .inst-pile-tirage:nth-child(2){left:44%;top:0;rotate:7deg}
@@ -46,8 +46,8 @@ html.sc-js:not(.serie-calme) .inst-flash{animation:inst-flash 1.25s cubic-bezier
 
 /* ---------- Un artiste : le pass + les tirages ---------- */
 .serie--instantanes .inst-artiste{display:grid;grid-template-columns:minmax(0,1fr);row-gap:clamp(2.4rem,6vh,4rem);padding-block:clamp(5rem,14vh,9rem);overflow:hidden}
-.serie--instantanes .inst-artiste[data-n="1"]{grid-template-columns:minmax(17rem,27rem) minmax(0,1fr);align-items:center;column-gap:clamp(2rem,6vw,6rem)}
-.serie--instantanes .inst-mot{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;color:rgba(255,211,107,.06);letter-spacing:.02em}
+.serie--instantanes .inst-artiste[data-n="1"]{grid-template-columns:minmax(17rem,27rem) minmax(0,max-content);justify-content:center;align-items:center;column-gap:clamp(2rem,5vw,5rem)}
+.serie--instantanes .inst-mot{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;color:rgba(255,211,107,.05);letter-spacing:.02em;left:auto;right:-1vw}
 
 .inst-pass{position:relative;z-index:2;max-width:34rem;padding:2.7rem 1.6rem 1.5rem;border:1px solid rgba(243,238,230,.16);border-radius:16px;background:linear-gradient(180deg,var(--inst-acc,#ffd36b) 0 12px,rgba(243,238,230,.06) 12px);box-shadow:0 34px 70px -34px rgba(0,0,0,.85);rotate:-.6deg}
 .inst-artiste:nth-of-type(odd) .inst-pass{rotate:.5deg}
@@ -64,7 +64,7 @@ html.sc-js:not(.serie-calme) .inst-flash{animation:inst-flash 1.25s cubic-bezier
 .serie--instantanes .inst-tirage{--hk:60;--pad:clamp(9px,.9vw,14px);flex:0 1 auto;width:calc(var(--hk) * var(--u) * var(--r) + 2 * var(--pad));max-width:100%;box-sizing:border-box;padding:var(--pad) var(--pad) 0;background:var(--inst-papier);box-shadow:0 28px 50px -22px rgba(0,0,0,.8),0 2px 6px rgba(0,0,0,.3);rotate:-1.8deg;transition:rotate .45s ease,translate .45s ease,box-shadow .45s ease}
 .serie--instantanes .inst-tirage:nth-child(2){rotate:1.4deg;translate:0 2.2rem}
 .serie--instantanes .inst-tirage:nth-child(3){rotate:-.7deg;translate:0 1rem}
-.serie--instantanes .inst-tirages[data-n="1"] .inst-tirage{--hk:72;rotate:1.2deg}
+.serie--instantanes .inst-tirages[data-n="1"] .inst-tirage{--hk:62;max-width:min(100%,780px);rotate:1.2deg}
 .serie--instantanes .inst-tirage img{display:block;width:100%;height:auto}
 .inst-tirage::before{content:"";position:absolute;z-index:3;top:-13px;left:50%;width:min(38%,8.5rem);height:28px;translate:-50% 0;rotate:-4deg;background:rgba(236,226,198,.62);box-shadow:0 1px 3px rgba(0,0,0,.2);pointer-events:none}
 .inst-tirage:nth-child(2)::before{left:32%;rotate:5deg}

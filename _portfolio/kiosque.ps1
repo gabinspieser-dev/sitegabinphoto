@@ -46,7 +46,7 @@ function Build-Kiosque {
     else { $a = $bySlug[$e]; $nom = $a.nom; $tit = $a.titre_serie; $c = Count-Photos $a }
     $som.Add("<li><a href=""./$e/""><span class=""kq-som-num"">$('{0:00}' -f $num)</span><span class=""kq-som-nom"">$(Enc $nom)</span><span class=""kq-som-titre"">$(Enc $tit)</span><span class=""kq-som-n"">$c <span class=""caption-sr-only"">photographies</span></span></a></li>")
   }
-  [void]$sb.Append("<section class=""kq-entete"" aria-labelledby=""portfolio-title""><div class=""kq-entete-titre""><p class=""live-kicker"">Séries · $totalPhotos photographies</p><h1 id=""portfolio-title"">Ça se voit.<br><em>Ça se ressent.</em></h1></div><p class=""kq-lede"">Je veux raconter votre sueur.<br>Votre beauté. Votre rage. Votre scène.<br>Le reste, je vous laisse le regarder.</p>")
+  [void]$sb.Append("<section class=""kq-entete"" aria-labelledby=""portfolio-title""><div class=""kq-entete-titre""><p class=""live-kicker"">Séries · $totalPhotos photographies</p><h1 id=""portfolio-title""><span class=""caption-sr-only"">Séries photographiques de concerts de Gabin Spieser : </span>Ça se voit.<br><em>Ça se ressent.</em></h1></div><p class=""kq-lede"">Je veux raconter votre sueur.<br>Votre beauté. Votre rage. Votre scène.<br>Le reste, je vous laisse le regarder.</p>")
   # Sommaire repliable (élément natif details/summary : clavier, lecteurs d'écran, fonctionne sans JavaScript)
   [void]$sb.Append("<details class=""kq-sommaire""><summary><span class=""kq-som-h"">Au sommaire</span><span class=""kq-som-meta"">$($covers.Count) séries</span><span class=""kq-som-icone"" aria-hidden=""true""></span></summary><nav class=""kq-sommaire-liste"" aria-label=""Sommaire des séries""><ol>$($som -join '')</ol></nav></details></section>")
   [void]$sb.Append("<section class=""kq-kiosque"" aria-labelledby=""kq-kiosque-titre""><h2 id=""kq-kiosque-titre"" class=""caption-sr-only"">Les couvertures des séries</h2>")
@@ -143,7 +143,7 @@ function Build-Kiosque {
     [ordered]@{ '@type' = 'BreadcrumbList'; itemListElement = @([ordered]@{ '@type' = 'ListItem'; position = 1; name = 'Accueil'; item = "$BASE/" }, [ordered]@{ '@type' = 'ListItem'; position = 2; name = 'Séries'; item = $url }) }) + @(Common-Graph)
   $share = Make-Share 'GAB06757' 'series-1200x630.jpg'
   $seo = Seo $url $title $desc $share $bySlug['ina-forsman'].photos.GAB06757.alt $graph
-  $cssLinks = (& $CSS_SERIE $P) + "<link rel=""stylesheet"" href=""${P}assets/css/kiosque.css?v=$(ShortHash 'assets\css\kiosque.css')""><link rel=""stylesheet"" href=""${P}assets/css/kiosque-couleurs.css?v=$(ShortHash 'assets\css\kiosque-couleurs.css')"">"
+  $cssLinks = "<link rel=""stylesheet"" href=""${P}assets/css/series.css?v=$(ShortHash 'assets\css\series.css')"">" + "<link rel=""stylesheet"" href=""${P}assets/css/kiosque.css?v=$(ShortHash 'assets\css\kiosque.css')""><link rel=""stylesheet"" href=""${P}assets/css/kiosque-couleurs.css?v=$(ShortHash 'assets\css\kiosque-couleurs.css')"">"
   $js = "<script src=""${P}kiosque.js?v=$(ShortHash 'kiosque.js')"" defer></script>"
   $html = Page $P $title $desc 'live-site page-portfolio page-series-index page-kiosque' $seo $sb.ToString() $cssLinks $js
   if (-not $html.StartsWith('<!doctype html>') -or $html -match '\{\{[A-Z_]+\}\}') { throw 'Page des séries mal assemblée' }

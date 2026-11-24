@@ -2,7 +2,7 @@
    Séries photographiques — portfolio refondu le 24/11/2026
    Pages générées par _portfolio/generer-pages.ps1 à partir de _portfolio/donnees.json.
    Ce fichier = le moteur commun (mises en page, légendes, séquences, page d'entrée).
-   Le caractère propre à chaque artiste est dans series-themes.css.
+   Le caractère propre à chaque artiste est dans assets/css/series/<artiste>.css.
    Règles : les photos ne sont jamais recadrées dans les séries ; aucun texte posé sur une photo ;
    aucune règle de style dans le HTML (politique de sécurité stricte du site).
    ========================================================= */
@@ -285,4 +285,13 @@ html.serie-js:not(.serie-calme) .serie-photo.est-vu{opacity:1;transition:opacity
 @media (prefers-reduced-motion:reduce){
   .serie *,.ina-carte *,.serie-entree *{transition:none!important;animation:none!important}
 }
-html[data-motion="none"] .serie *,html[data-motion="none"] .ina-carte *,html[data-motion="none"] .serie-entree *{transition:none!important;animation:none!important}
+
+/* Fin de série (25/11/2026) : présentation factuelle et maillage vers les autres séries et les reportages */
+.serie-verso-intro{max-width:62ch;margin:0 0 2.4rem;font-size:clamp(1rem,1.3vw,1.15rem);line-height:1.6;color:var(--sc-ink,var(--ink-base,#f6f2ea))}
+.serie-voir-aussi{margin-top:2.6rem;padding-top:1.6rem;border-top:1px solid var(--rule,rgba(246,242,234,.18))}
+.serie-voir-aussi h2{margin:0 0 1rem;font-size:.74rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--sc-ink2,var(--ink-2,rgba(246,242,234,.7)))}
+.serie-voir-aussi ul{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;margin:0;padding:0;list-style:none}
+.serie-voir-aussi a{color:var(--sc-ink,var(--ink-base,#f6f2ea));text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s ease}
+.serie-voir-aussi a:is(:hover,:focus-visible){border-bottom-color:currentColor}
+.serie-voir-reportages{margin-bottom:.9rem!important}
+.serie-voir-reportages a{font-weight:600}

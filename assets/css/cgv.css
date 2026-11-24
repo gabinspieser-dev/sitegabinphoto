@@ -87,3 +87,6 @@ body { padding-bottom: var(--cookie-banner-space, 0px); }
 /* 23/11/2026 : remplace les anciens attributs style= (compatibles avec une politique de sécurité stricte) */
 .legal-espace{margin-top:1.25rem!important}
 .legal-espace--note{font-size:.875rem!important}
+
+/* Formulaire de rétractation (25/11/2026) : lignes à remplir, téléchargements */
+.champ{display:flex;align-items:flex-end;gap:.6rem}.champ-ligne{display:block;flex:1;min-width:3rem;height:1.3em;border-bottom:1px dotted currentColor;opacity:.55}.champ-signature .champ-ligne{height:3.4em}.form-downloads{margin:1rem 0 1.4rem}@media print{.form-downloads{display:none!important}}

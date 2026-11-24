@@ -2,7 +2,6 @@
    Sans bibliothèque. Ne s'active que si la balise <html> porte la classe « amb ».
    - couleur d'accent de chaque photo (calculée d'avance, contraste d'au moins 6:1 sur le fond nuit) ;
    - lueur d'ambiance qui prend la couleur de la photo la plus visible ;
-   - panneau « Affichage » : ambiance (Scène, Nuit, Os) et animations (marquées, discrètes, aucune) ;
    - barre de lecture, numéros de section, décor de l'ouverture ;
    - image d'ouverture qui réagit à la souris (profondeur, zoom, lumière) et au doigt ;
    - photos qui glissent légèrement dans leur cadre sous le curseur (jamais au défilement) ;
@@ -18,12 +17,9 @@
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
   const wide = window.matchMedia('(min-width: 901px)');
-  const MOTION = { marquee: 1, discrete: 0.5, none: 0 };
-  const motion = () => {
-    if (reduce.matches) return 0;
-    const m = MOTION[root.dataset.motion];
-    return m === undefined ? 1 : m;
-  };
+  const motion = () => (reduce.matches ? 0 : 1);
+  // Le panneau « Affichage » a été retiré le 25/11/2026 : on efface le réglage qu'il avait pu enregistrer.
+  try { window.localStorage.removeItem('gs-affichage'); } catch (e) { /* stockage indisponible */ }
   const applyMotion = () => root.style.setProperty('--motion', String(motion()));
   applyMotion();
   if (reduce.addEventListener) reduce.addEventListener('change', applyMotion);
@@ -133,21 +129,6 @@
     toned.forEach((el) => glow.observe(el));
   }
 
-  /* 4. Logo adapté au fond clair de l'ambiance « Os » */
-  const LOGO_DARK = 'gabin-spieser-compact-dark.svg';
-  const LOGO_LIGHT = 'gabin-spieser-compact-light.svg';
-  function applyLogo() {
-    const os = root.dataset.ambiance === 'os';
-    document.querySelectorAll('img.brand-logo').forEach((img) => {
-      const overPhoto = wide.matches && document.body.classList.contains('page-home') && img.closest('.site-header');
-      const want = os && !overPhoto ? LOGO_LIGHT : LOGO_DARK;
-      const src = img.getAttribute('src') || '';
-      if (src.indexOf(want) === -1) img.setAttribute('src', src.replace(/gabin-spieser-compact-(dark|light)\.svg/, want));
-    });
-  }
-  applyLogo();
-  if (wide.addEventListener) wide.addEventListener('change', applyLogo);
-
   /* 5. Barre de lecture */
   const bar = document.createElement('div');
   bar.className = 'amb-progress';
@@ -235,6 +216,8 @@
   /* 8. Apparitions au défilement : seulement ce qui est encore sous la ligne de flottaison */
   const revealed = [];
   const revealAll = () => revealed.forEach((el) => el.classList.add('is-visible', 'is-done'));
+  // À l'impression, tout le texte doit être là, même ce qui n'a pas encore défilé à l'écran.
+  window.addEventListener('beforeprint', revealAll);
   if ('IntersectionObserver' in window && motion()) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -444,54 +427,4 @@
     });
     shot.addEventListener('animationend', () => shot.classList.remove('is-arriving'));
   }
-
-  /* 11. Panneau « Affichage » : ambiance et animations, gardées six mois dans ce navigateur */
-  const save = () => {
-    try {
-      window.localStorage.setItem('gs-affichage', JSON.stringify({ a: root.dataset.ambiance || 'scene', m: root.dataset.motion || 'marquee', t: Date.now() }));
-    } catch (e) { /* stockage indisponible : le choix vaut pour cette page */ }
-  };
-  const panel = document.createElement('details');
-  panel.className = 'amb-panel';
-  const summary = document.createElement('summary');
-  summary.textContent = 'Affichage';
-  panel.appendChild(summary);
-  const group = (legendText, name, options, current) => {
-    const fieldset = document.createElement('fieldset');
-    const legend = document.createElement('legend');
-    legend.textContent = legendText;
-    fieldset.appendChild(legend);
-    options.forEach(([value, text, hint]) => {
-      const label = document.createElement('label');
-      const input = document.createElement('input');
-      input.type = 'radio';
-      input.name = name;
-      input.value = value;
-      input.checked = value === current;
-      label.appendChild(input);
-      label.appendChild(document.createTextNode(' ' + text));
-      if (hint) {
-        const small = document.createElement('small');
-        small.textContent = hint;
-        label.appendChild(small);
-      }
-      fieldset.appendChild(label);
-    });
-    return fieldset;
-  };
-  panel.appendChild(group('Ambiance', 'amb-ambiance', [['scene', 'Scène', 'couleurs des photos'], ['nuit', 'Nuit', 'couleurs du site'], ['os', 'Os', 'fond clair']], root.dataset.ambiance || 'scene'));
-  panel.appendChild(group('Animations', 'amb-motion', [['marquee', 'Marquées'], ['discrete', 'Discrètes'], ['none', 'Aucune']], root.dataset.motion || 'marquee'));
-  panel.addEventListener('change', (e) => {
-    const input = e.target;
-    if (!(input instanceof HTMLInputElement)) return;
-    if (input.name === 'amb-ambiance') { root.dataset.ambiance = input.value; applyLogo(); }
-    if (input.name === 'amb-motion') {
-      root.dataset.motion = input.value;
-      applyMotion();
-      if (!motion()) revealAll();
-      request();
-    }
-    save();
-  });
-  document.body.appendChild(panel);
 })();

@@ -23,20 +23,6 @@ html.amb{
   --line:rgba(246,242,234,.13);
   --line-strong:rgba(246,242,234,.3);
 }
-/* Nuit : les couleurs fixes de la charte, sans couleurs de photos ni lueur */
-html.amb[data-ambiance="nuit"],html.amb[data-ambiance="nuit"] [style*="--tone"]{--tone:#ff4d32!important}
-html.amb[data-ambiance="nuit"]{--amb-glow:#08090a!important;--amb-tone:#ff4d32!important}
-/* Os : fond clair, rouge de charte pour les petits textes */
-html.amb[data-ambiance="os"]{
-  color-scheme:light;
-  --bg:#f6f2ea;--text:#08090a;--muted:#4d4a44;--accent:#c73524;--amber:#c73524;
-  --line:rgba(8,9,10,.14);--line-strong:rgba(8,9,10,.32);--on-tone:#f6f2ea;
-  --amb-glow:#f6f2ea!important;--amb-tone:#c73524!important;
-}
-html.amb[data-ambiance="os"],html.amb[data-ambiance="os"] [style*="--tone"]{--tone:#c73524!important}
-/* Logo pour fond clair (le script le remplace aussi, pour les navigateurs qui ignorent cette règle) */
-html.amb[data-ambiance="os"] .brand-logo{content:url("../brand/gabin-spieser-compact-light.svg")}
-@media (min-width:901px){html.amb[data-ambiance="os"] body.page-home .site-header .brand-logo{content:normal}}
 
 /* Lueur d'ambiance : prend la couleur de la photo la plus visible */
 html.amb body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(70% 55% at 88% 6%,color-mix(in srgb,var(--amb-glow) 17%,transparent),transparent 72%),radial-gradient(55% 45% at 2% 98%,color-mix(in srgb,var(--amb-glow) 10%,transparent),transparent 70%);transition:--amb-glow 1.6s ease}
@@ -104,11 +90,11 @@ html.amb .site-header .main-nav{flex-wrap:nowrap}
 /* =========================================================
    3. Boutons sobres : contour fin, remplissage à la couleur de la photo
    ========================================================= */
-html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.amb-panel-reset){position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.7rem;min-height:50px;padding:.85rem 1.4rem;border:1px solid var(--line-strong);border-radius:0;background:transparent;color:var(--text);font-family:var(--body);font-size:.75rem;font-weight:600;line-height:1.3;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;overflow:hidden;isolation:isolate;cursor:pointer;box-shadow:none;transition:color .35s ease,border-color .35s ease}
-html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.amb-panel-reset)::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--tone);transform:scaleY(0);transform-origin:50% 100%;transition:transform .45s var(--amb-ease)}
-html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.amb-panel-reset):is(:hover,:focus-visible){color:var(--on-tone);border-color:var(--tone);background:transparent}
-html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.amb-panel-reset):is(:hover,:focus-visible)::before{transform:scaleY(1)}
-html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.amb-panel-reset):focus-visible{outline:2px solid var(--tone);outline-offset:4px}
+html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button){position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.7rem;min-height:50px;padding:.85rem 1.4rem;border:1px solid var(--line-strong);border-radius:0;background:transparent;color:var(--text);font-family:var(--body);font-size:.75rem;font-weight:600;line-height:1.3;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;overflow:hidden;isolation:isolate;cursor:pointer;box-shadow:none;transition:color .35s ease,border-color .35s ease}
+html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button)::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--tone);transform:scaleY(0);transform-origin:50% 100%;transition:transform .45s var(--amb-ease)}
+html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button):is(:hover,:focus-visible){color:var(--on-tone);border-color:var(--tone);background:transparent}
+html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button):is(:hover,:focus-visible)::before{transform:scaleY(1)}
+html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button):focus-visible{outline:2px solid var(--tone);outline-offset:4px}
 html.amb .live-hero .live-button{min-height:50px;padding:.85rem 1.4rem;font-size:.75rem}
 /* Boutons de la visionneuse : texte seul, filet au survol */
 html.amb :is(.icon-button,.image-nav){border:0;border-bottom:1px solid var(--line-strong);background:none;color:var(--text);font-size:.75rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;transition:border-color .3s ease,color .3s ease}
@@ -141,23 +127,13 @@ html.amb .cookie-preferences-link:hover{color:var(--tone)}
   html.amb .cookie-banner{padding-inline:1.2rem}
   html.amb .cookie-actions{width:100%}
 }
+/* Petits téléphones : « Personnaliser » ne tient pas à côté des deux autres boutons, il passe dessous en pleine largeur */
+@media (max-width:480px){
+  html.amb .cookie-actions{display:grid;grid-template-columns:1fr 1fr}
+  html.amb .cookie-actions [data-cookie-personalize]{grid-column:1 / -1}
+  html.amb .cookie-action{min-width:0;padding-inline:.8rem}
+}
 
-/* =========================================================
-   5. Panneau « Affichage » : ambiance et animations
-   ========================================================= */
-.amb-panel{--tone:var(--amb-tone,#ff4d32);position:fixed;left:16px;bottom:calc(16px + var(--cookie-banner-space,0px));z-index:60;max-width:min(300px,calc(100vw - 32px));background:color-mix(in srgb,var(--bg) 94%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:var(--text);border:1px solid var(--line-strong);font-family:var(--body);font-size:.85rem}
-.amb-panel summary{display:flex;align-items:center;gap:.6rem;min-height:44px;padding:.6rem 1rem;cursor:pointer;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;list-style:none}
-.amb-panel summary::-webkit-details-marker{display:none}
-.amb-panel summary::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--tone);transition:background-color 1s ease}
-.amb-panel summary:focus-visible{outline:2px solid var(--tone);outline-offset:2px}
-.amb-panel fieldset{border:0;border-top:1px solid var(--line);margin:0;padding:.8rem 1rem;display:grid;gap:.25rem}
-.amb-panel legend{float:left;width:100%;padding:0;margin-bottom:.4rem;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;opacity:.75}
-.amb-panel label{display:flex;align-items:center;gap:.6rem;min-height:36px;cursor:pointer}
-.amb-panel label small{opacity:.7;font-size:.75rem}
-.amb-panel input{accent-color:var(--tone);width:18px;height:18px;margin:0}
-.amb-panel .amb-panel-reset{display:none}
-body:has(.cookie-banner:not([hidden])) .amb-panel{display:none}
-@media print{.amb-panel,.amb-progress{display:none!important}}
 
 /* =========================================================
    6. Mise en page aérée, comme la maquette
@@ -242,7 +218,6 @@ html.amb .live-hero-intro{animation-delay:.45s}
 html.amb .live-hero-copy>.live-button{animation-delay:.58s}
 @media (min-width:901px){
   html.amb .live-hero{--text:#f6f2ea;--muted:rgba(246,242,234,.78);--line-strong:rgba(246,242,234,.4);--on-tone:#08090a;margin:0;min-height:100svh;overflow:hidden;color:var(--text);background:#08090a}
-  html.amb[data-ambiance="os"] .live-hero{--tone:#ff4d32!important}
   html.amb .live-hero-picture{position:absolute;inset:0;z-index:0;display:block;overflow:hidden}
   html.amb .live-hero-image{position:absolute;inset:0;width:100%;height:100%;min-height:0;object-fit:cover;object-position:50% 42%}
   html.amb .live-hero::after{background:linear-gradient(to top,rgba(8,9,10,.86),rgba(8,9,10,.4) 40%,rgba(8,9,10,0) 72%),linear-gradient(90deg,rgba(8,9,10,.62),rgba(8,9,10,0) 62%),linear-gradient(to bottom,rgba(8,9,10,.55),rgba(8,9,10,0) 22%)}
@@ -384,7 +359,6 @@ html.amb-js .amb-reveal.is-visible{opacity:1;transform:none}
     --amb-h2:clamp(2.2rem,9.5vw,2.6rem);
     --amb-h3:clamp(1.8rem,8vw,2.2rem);
   }
-  .amb-panel{left:12px;bottom:calc(12px + var(--cookie-banner-space,0px))}
 }
 
 /* =========================================================
@@ -435,9 +409,9 @@ html.amb-js .amb-reveal.is-visible{opacity:1;transform:none}
   html.amb .interactive-photo.is-caption-open .photo-open::after{transform:scaleX(1)}
   html.amb .interactive-photo.is-caption-open .artist-name{color:var(--tone)}
 
-  html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.amb-panel-reset,.social-card,.related-services>a):hover:not(:focus-visible):not(:active){color:var(--text);border-color:var(--line-strong)}
-  html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.amb-panel-reset,.social-card,.related-services>a):hover:not(:focus-visible):not(:active)::before{transform:scaleY(0)}
-  html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.amb-panel-reset,.social-card,.related-services>a):active::before{transition-duration:.18s}
+  html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.social-card,.related-services>a):hover:not(:focus-visible):not(:active){color:var(--text);border-color:var(--line-strong)}
+  html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.social-card,.related-services>a):hover:not(:focus-visible):not(:active)::before{transform:scaleY(0)}
+  html.amb :is(.live-button,.button-link,.cookie-action,.cookie-close,.document-actions button,.social-card,.related-services>a):active::before{transition-duration:.18s}
   html.amb .social-card:hover:not(:focus-visible):not(:active) .social-card-icon,html.amb .related-services>a:hover:not(:focus-visible):not(:active)::after{transform:none}
   html.amb .editorial-links>a:hover:not(:focus-visible):not(:active){border-color:var(--line);padding-inline:0}
   html.amb .editorial-links>a:hover:not(:focus-visible):not(:active)::before{transform:scaleY(0)}
@@ -616,7 +590,7 @@ body[data-teinte="ivoire"]{--page-bg:#0b0a09;--page-2:#1a1814;--page-accent:#e9d
 body[data-teinte="corail"]{--page-bg:#0e0a08;--page-2:#1f130e;--page-accent:#ff7444;--beam-from:209deg}
 body[data-teinte="encre"]{--page-bg:#111214;--page-2:#1b1d21;--page-accent:#ff4d32;--beam-from:220deg}
 body[data-teinte="graphite"]{--page-bg:#0b0c0d;--page-2:#16181b;--page-accent:#d9d2c7;--beam-from:200deg}
-html.amb:not([data-ambiance="nuit"]):not([data-ambiance="os"]) body[data-teinte]{
+html.amb body[data-teinte]{
   --bg:var(--page-bg);--tone:var(--page-accent);--amb-tone:var(--page-accent);--amb-glow:var(--page-accent);
   background-color:var(--page-bg);
   background-image:linear-gradient(180deg,var(--page-2) 0,var(--page-bg) min(70vh,640px));
@@ -624,7 +598,7 @@ html.amb:not([data-ambiance="nuit"]):not([data-ambiance="os"]) body[data-teinte]
 }
 /* Motif discret : trois faisceaux de lumière qui partent du coin, comme ceux du logo */
 @keyframes amb-beams-in{from{opacity:0}}
-html.amb:not([data-ambiance="nuit"]):not([data-ambiance="os"]) body[data-teinte]::after{
+html.amb body[data-teinte]::after{
   content:"";position:absolute;top:0;right:0;z-index:-1;width:min(72vw,780px);height:min(100svh,900px);pointer-events:none;opacity:.55;
   background:conic-gradient(from var(--beam-from,206deg) at 100% 0,transparent 0deg,
     color-mix(in srgb,var(--page-accent) 34%,transparent) .2deg,transparent .45deg 7deg,
@@ -652,12 +626,9 @@ html.amb #lightbox-image.is-settling{transition:transform .35s var(--amb-ease),o
 html.amb #lightbox-image.is-arriving{animation:amb-photo-in .45s var(--amb-ease) both}
 
 /* =========================================================
-   11. Moins d'animations : préférence système ou réglage « Aucune »
+   11. Moins d'animations : préférence du système
    ========================================================= */
-html.amb[data-motion="none"] *,html.amb[data-motion="none"] *::before,html.amb[data-motion="none"] *::after{animation:none!important;transition-duration:0s!important;transition-delay:0s!important}
-html.amb[data-motion="none"] .amb-reveal{opacity:1;transform:none}
-html.amb[data-motion="none"] .amb-deco,html.amb[data-motion="none"] .amb-hero-light{display:none}
-html.amb[data-motion="none"] .live-hero-image{transform:none;filter:none}
+@media print{.amb-progress,.amb-index,.amb-deco,.amb-hero-light{display:none!important}html.amb-js .amb-reveal,html.amb .amb-reveal{opacity:1!important;transform:none!important;transition:none!important}}
 @media (prefers-reduced-motion:reduce){
   html.amb *,html.amb *::before,html.amb *::after{animation:none!important}
   html.amb-js .amb-reveal{opacity:1;transform:none;transition:none}

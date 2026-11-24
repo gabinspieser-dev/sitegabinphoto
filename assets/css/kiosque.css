@@ -138,8 +138,8 @@
 .kq--instantanes .kq-lien{background:#0d0b09}
 .kq--instantanes .kq-tete span:first-child{color:#ffd36b}
 .kq--instantanes .kq-titre{font-family:"Courier New",ui-monospace,monospace;color:#ffd36b}
-.kq-pile{position:relative;height:min(60vh,520px);min-height:280px}
-.kq-tirage{position:absolute;width:44%;padding:7px 7px 28px;background:#f4f1ea;box-shadow:0 22px 44px -18px rgba(0,0,0,.85);transition:rotate .6s cubic-bezier(.2,.7,.2,1),translate .6s cubic-bezier(.2,.7,.2,1)}
+.kq-pile{position:relative;height:min(60vh,520px);min-height:280px;container-type:size}
+.kq-tirage{position:absolute;width:min(44cqw,calc(48cqh - 16px));padding:7px 7px 28px;background:#f4f1ea;box-shadow:0 22px 44px -18px rgba(0,0,0,.85);transition:rotate .6s cubic-bezier(.2,.7,.2,1),translate .6s cubic-bezier(.2,.7,.2,1)}
 .kq-tirage img{display:block;width:100%;height:auto;aspect-ratio:4 / 5;object-fit:cover}
 .kq-tirage:nth-child(1){left:4%;top:5%;rotate:-9deg}
 .kq-tirage:nth-child(2){left:46%;top:0;rotate:7deg}
@@ -176,9 +176,6 @@
 
 /* ---------- Moins d'animations ---------- */
 @media (prefers-reduced-motion:reduce){.kq-sommaire[open] .kq-sommaire-liste{animation:none}.kq-lien,.kq-img,.kq-tirage,.kq-fond{transition:none}.kq-couv:is(:hover,:focus-within) .kq-img{transform:none}}
-html[data-motion="none"] :is(.kq-lien,.kq-img,.kq-tirage,.kq-fond){transition:none}
-html[data-motion="none"] .kq-sommaire[open] .kq-sommaire-liste{animation:none}
-html[data-motion="none"] .kq-couv:is(:hover,:focus-within) .kq-img{transform:none}
 
 /* ---------- Tablette ---------- */
 @media (max-width:1000px){

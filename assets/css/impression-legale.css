@@ -1,0 +1,57 @@
+/* =========================================================
+   Impression des pages légales (CGV, mentions légales, confidentialité) — 25/11/2026
+   A4, marges régulières, pied de page numéroté, typographie de la charte (DM Sans, Bebas Neue).
+   Rien ne déborde : les longues adresses et les liens se coupent, les blocs ne se scindent pas.
+   Chargé après les autres feuilles : les règles l'emportent volontairement (!important) à l'impression.
+   ========================================================= */
+@media print{
+  @page{
+    size:A4;margin:19mm 17mm 21mm;
+    @bottom-left{content:"Gabin Spieser Photography · gabin-spieser.com";font:7.5pt/1 'DM Sans',Arial,sans-serif;color:#6b6b6b}
+    @bottom-right{content:"Page " counter(page) " / " counter(pages);font:7.5pt/1 'DM Sans',Arial,sans-serif;color:#6b6b6b}
+  }
+  html,html.amb,html.amb body,body{background:#fff!important;color:#141414!important;color-scheme:light}
+  html.amb body{font:9.4pt/1.55 'DM Sans',Arial,sans-serif!important;padding:0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html.amb body::before,html.amb body::after{display:none!important}
+  :is(.skip,.skip-link,.site-header,.legal-nav,.legal-footer,.footer,.document-actions,.cookie-banner,#cookie-settings,.cookie-feedback,.social-stage,.amb-progress,.amb-index,.lightbox,dialog){display:none!important}
+  html.amb *{animation:none!important;transition:none!important;box-shadow:none!important;text-shadow:none!important}
+  html.amb .legal-layout{display:block!important;max-width:none!important;margin:0!important;padding:0!important}
+  html.amb .legal-content{max-width:none!important;margin:0!important;padding:0!important;font-size:9.4pt!important;line-height:1.55!important;color:#141414!important}
+
+  /* En-tête du document */
+  html.amb .legal-content .eyebrow{margin:0 0 3mm!important;font:600 7.4pt/1.4 'DM Sans',Arial,sans-serif!important;letter-spacing:.2em!important;text-transform:uppercase;color:#b23a26!important}
+  html.amb .legal-content h1{margin:0 0 3mm!important;font:400 31pt/.94 'Bebas Neue',Impact,sans-serif!important;letter-spacing:.01em!important;text-transform:uppercase;color:#0a0a0a!important}
+  html.amb .legal-content .updated{margin:0 0 7mm!important;padding:0 0 4.5mm!important;border-bottom:1.3pt solid #0a0a0a!important;font-size:8.4pt!important;color:#555!important}
+
+  /* Sections */
+  html.amb .legal-content section{margin:0!important;padding:5.5mm 0 0!important;border:0!important;break-inside:auto}
+  html.amb .legal-content section+section{margin-top:4.5mm!important;border-top:.6pt solid #cfcfcf!important}
+  html.amb .legal-content h2{margin:0 0 2.8mm!important;font:700 10.4pt/1.3 'DM Sans',Arial,sans-serif!important;letter-spacing:.06em!important;text-transform:uppercase;color:#0a0a0a!important;break-after:avoid;page-break-after:avoid}
+  html.amb .legal-content h3{margin:4mm 0 1.6mm!important;font:700 9.6pt/1.35 'DM Sans',Arial,sans-serif!important;color:#0a0a0a!important;break-after:avoid;page-break-after:avoid}
+  html.amb .legal-content :is(p,li){margin:0 0 2.2mm!important;font-size:9.4pt!important;line-height:1.55!important;color:#141414!important;text-align:justify;hyphens:auto;-webkit-hyphens:auto;orphans:3;widows:3;overflow-wrap:break-word}
+  html.amb .legal-content ul{margin:0 0 2.5mm!important;padding-left:5mm!important}
+  html.amb .legal-content strong{color:#0a0a0a!important;font-weight:700}
+  html.amb .legal-content a{color:#0a0a0a!important;text-decoration:none!important;background:none!important}
+  html.amb .legal-content a::before,html.amb .legal-content a::after{display:none!important}
+
+  /* Fiche d'identification : deux colonnes nettes */
+  html.amb .legal-content .identity{display:grid!important;grid-template-columns:1fr 1fr;column-gap:9mm;margin:3mm 0 2mm!important}
+  html.amb .legal-content .identity>div{display:block!important;padding:2.2mm 0!important;border-bottom:.5pt solid #dcdcdc!important;break-inside:avoid}
+  html.amb .legal-content .identity dt{margin:0 0 .8mm!important;font:600 6.8pt/1.3 'DM Sans',Arial,sans-serif!important;letter-spacing:.14em;text-transform:uppercase;color:#6b6b6b!important}
+  html.amb .legal-content .identity dd{margin:0!important;font-size:9pt!important;line-height:1.45!important;overflow-wrap:anywhere}
+
+  /* Encadrés */
+  html.amb .legal-content :is(.contact-card,.notice){margin:3mm 0!important;padding:4mm 5mm!important;border:.7pt solid #8f8f8f!important;background:#fff!important;break-inside:avoid}
+  html.amb .legal-content :is(.muted,.pending){color:#555!important}
+
+  /* Références : l'adresse des textes est imprimée, en petit, et se coupe proprement */
+  html.amb .legal-content .sources li{text-align:left}
+  html.amb .legal-content .sources a::after{display:inline!important;content:" — " attr(href)!important;color:#6b6b6b!important;font-size:7.4pt;overflow-wrap:anywhere;word-break:break-all}
+
+  /* Formulaire de rétractation : sur sa propre page, lignes à remplir larges */
+  html.amb .legal-content .withdrawal-form{break-before:page;page-break-before:always;border-top:0!important;margin-top:0!important;padding-top:0!important}
+  html.amb .legal-content .withdrawal-form h2{font-size:12pt!important}
+  html.amb .legal-content .champ{display:flex!important;align-items:flex-end;gap:2.5mm;margin:0 0 4.5mm!important;text-align:left}
+  html.amb .legal-content .champ-ligne{display:block;flex:1;min-width:30mm;height:5mm;border-bottom:.7pt dotted #444}
+  html.amb .legal-content .champ-signature .champ-ligne{height:18mm}
+}

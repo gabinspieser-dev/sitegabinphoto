@@ -64,7 +64,7 @@
       "accroche": "Le blanc qui brûle, le jaune qui chante.",
       "presentation": "Un costume blanc taillé pour attraper la lumière, et il l’attrape toute. Face à la foule, d’abord. Puis le piano jaune, et la voix qui change de poids. À la fin, une serviette autour du cou : la preuve qu’il n’a rien gardé pour lui.",
       "contexte": { "evenement": "Foire en Scène", "lieu": "Châlons-en-Champagne", "date": "2026" },
-      "seo": { "title": "Julien Doré à Foire en Scène 2026 : photos | Gabin Spieser", "description": "18 photographies de Julien Doré à Foire en Scène, Châlons-en-Champagne, 2026 : le costume blanc, le piano jaune et les derniers instants du concert, par Gabin Spieser." },
+      "seo": { "title": "Julien Doré à Foire en Scène 2026 : photos | Gabin Spieser", "description": "18 photos de Julien Doré à Foire en Scène 2026, Châlons-en-Champagne : le costume blanc, le piano jaune et la fin du concert, par Gabin Spieser." },
       "liens": [
         { "type": "site", "url": "https://www.juliendoreofficiel.com/", "source": "Wikidata" },
         { "type": "instagram", "url": "https://www.instagram.com/jdoreofficiel", "source": "site officiel et Wikidata" },
@@ -201,7 +201,7 @@
       "accroche": "La fumée, la braise, et le doigt vers le ciel.",
       "presentation": "Du noir, de la fumée, une lumière orange comme une braise qui refuse de s’éteindre. Stomy Bugsy commence seul, partage la scène, puis la reprend pour lui. À la fin, le doigt pointé vers le ciel. Rien à ajouter.",
       "contexte": { "evenement": "", "lieu": "", "date": "" },
-      "seo": { "title": "Stomy Bugsy en concert : photos | Gabin Spieser", "description": "10 photographies de Stomy Bugsy sur scène par Gabin Spieser : la fumée, la lumière orangée, du solo au duo." },
+      "seo": { "title": "Stomy Bugsy en concert : photos | Gabin Spieser", "description": "10 photographies de Stomy Bugsy sur scène par Gabin Spieser : la fumée, la lumière orangée, le passage du solo au duo et le doigt pointé vers le ciel." },
       "liens": [
         { "type": "site", "url": "https://stomybugsy.com/", "source": "ancien lien du site, vérifié" },
         { "type": "instagram", "url": "https://www.instagram.com/stomybugsyofficiel", "source": "site officiel" },
@@ -241,7 +241,7 @@
       "accroche": "Un orchestre entier contre la nuit.",
       "presentation": "Reims Arena, 12 avril 2026. Des archets, des voix, des lasers qui découpent la nuit : un orchestre entier qui fait vibrer une arène comme un club. On part de la scène entière, on s’approche des chanteurs jusqu’à sentir leur souffle, puis on finit avec ceux qui tiennent tout : les musiciens.",
       "contexte": { "evenement": "Electro Symphony", "lieu": "Reims Arena", "date": "12 avril 2026", "date_iso": "2026-04-12" },
-      "seo": { "title": "Electro Symphony à Reims Arena : photos | Gabin Spieser", "description": "9 photographies d’Electro Symphony à Reims Arena, le 12 avril 2026 : l’orchestre, les voix et les musiciens, par Gabin Spieser." },
+      "seo": { "title": "Electro Symphony à Reims Arena : la série photo | Gabin Spieser", "description": "9 photographies d’Electro Symphony à Reims Arena, le 12 avril 2026 : l’orchestre, les voix et les musiciens, par Gabin Spieser." },
       "liens": [
         { "type": "site", "url": "https://electrosymphony.eu/", "source": "ancien lien du site ; le site refuse les vérifications automatiques (403)" }
       ],
@@ -273,7 +273,7 @@
       "accroche": "Un soir de bal sous les ampoules.",
       "presentation": "Des guirlandes d’ampoules comme un soir de bal. Christophe Maé passe de la guitare à l’harmonica, danse, laisse la lumière à un trompettiste. Puis la chemise verte du final, et ce doigt pointé droit sur vous. Impossible de rester assis.",
       "contexte": { "evenement": "", "lieu": "", "date": "" },
-      "seo": { "title": "Christophe Maé en concert : photos | Gabin Spieser", "description": "8 photographies de Christophe Maé sur scène par Gabin Spieser : guitare, harmonica, danse et guirlandes d’ampoules." },
+      "seo": { "title": "Christophe Maé en concert : photos | Gabin Spieser", "description": "8 photographies de Christophe Maé sur scène par Gabin Spieser : la guitare, l’harmonica, la danse, un trompettiste et les guirlandes d’ampoules." },
       "liens": [
         { "type": "site", "url": "https://www.christophe-mae.fr/", "source": "Wikidata, page vérifiée" },
         { "type": "instagram", "url": "https://www.instagram.com/instamaeoff/", "source": "Wikidata" },
@@ -340,7 +340,7 @@
       "accroche": "Une veste blanche contre un mur de lumières.",
       "presentation": "Une veste blanche, un mur de lumières, et un homme qui a fait de la scène son terrain de jeu. M. Pokora pointe la foule, partage un duo dans le violet, puis s’en va, de dos, en noir et blanc. Les plus belles sorties ne se retournent pas.",
       "contexte": { "evenement": "", "lieu": "", "date": "" },
-      "seo": { "title": "M. Pokora en concert : photos | Gabin Spieser", "description": "6 photographies de M. Pokora sur scène par Gabin Spieser : veste blanche, mur de lumières et duo." },
+      "seo": { "title": "M. Pokora en concert : photos | Gabin Spieser", "description": "6 photographies de M. Pokora sur scène par Gabin Spieser : la veste blanche, le mur de lumières, un duo sous la lumière violette et une sortie en noir et blanc." },
       "liens": [
         { "type": "site", "url": "https://www.mpokoramusic.fr/", "source": "Wikidata ; le site refuse les vérifications automatiques (403)" },
         { "type": "instagram", "url": "https://www.instagram.com/mattpokora/", "source": "Wikidata" },
@@ -372,7 +372,7 @@
       "accroche": "Du dedans au dehors, dans un bleu presque marin.",
       "presentation": "Un bleu profond, presque marin. Silda chante les yeux fermés, comme si la salle n’existait pas encore. Puis le rire arrive, la main sur le cœur. Et le bras se lève. Sept images pour passer du dedans au dehors.",
       "contexte": { "evenement": "", "lieu": "", "date": "" },
-      "seo": { "title": "Silda en concert : photos | Gabin Spieser", "description": "7 photographies de Silda sur scène par Gabin Spieser, sur un fond bleu profond : du recueillement à la joie." },
+      "seo": { "title": "Silda, pop-folk rémoise, en concert : photos | Gabin Spieser", "description": "7 photographies de Silda, autrice-compositrice pop-folk née à Reims, sur scène par Gabin Spieser : un fond bleu profond, du recueillement à la joie." },
       "liens": [
         { "type": "site", "url": "https://www.sildaofficiel.com/", "source": "lien déjà présent sur la page Merci, vérifié" },
         { "type": "instagram", "url": "https://www.instagram.com/sildamusique/", "source": "site officiel" },
@@ -409,7 +409,7 @@
       "accroche": "L’archet comme une épée, le tulle comme une danse.",
       "presentation": "Des cheveux bleus, un violon électrique blanc, une jupe de tulle qui refuse de tenir en place. Madelaine ne choisit pas entre la danse et la musique : elle fait les deux, et l’archet devient un bras de plus.",
       "contexte": { "evenement": "", "lieu": "", "date": "" },
-      "seo": { "title": "Madelaine en concert : photos | Gabin Spieser", "description": "4 photographies de Madelaine sur scène, violon électrique et cheveux bleus, par Gabin Spieser." },
+      "seo": { "title": "Madelaine en concert : photos | Gabin Spieser", "description": "4 photographies de Madelaine sur scène par Gabin Spieser : cheveux bleus, violon électrique blanc et jupe de tulle, entre la danse et la musique." },
       "liens": [],
       "scenes": [
         { "type": "ouverture", "variante": "paysage", "photo": "GAB02071" },
@@ -431,7 +431,7 @@
     "titre_serie": "Quelques images. Pas une de trop.",
     "presentation": "Pas le temps d’une série. Juste le temps d’un geste, d’un cri, d’un rire. Ici, chaque artiste tient en trois images, parfois une seule : des instants attrapés au vol, gardés comme on garde un ticket de concert au fond d’une poche.",
     "fin": "Dès la quatrième image, l’instantané devient une série.",
-    "seo": { "title": "Instantanés de concerts : Lokyto, Styleto, Virginie Rohart | Gabin Spieser", "description": "Photographies de concert de Lokyto, Styleto, Virginie Rohart et Milla Leika par Gabin Spieser." },
+    "seo": { "title": "Instantanés : Lokyto, Styleto, Virginie Rohart | Gabin Spieser", "description": "Instantanés de concert par Gabin Spieser : Lokyto, Styleto, Virginie Rohart et Milla Leika, en quelques images chacun. 10 photographies au total." },
     "artistes": [
       { "slug": "lokyto", "nom": "Lokyto", "dossier": "Lokyto", "contexte_fichier": "concert", "presentation": "Veste de cuir rouge, lunettes teintées. Un genou à terre, un doigt pointé, puis ce sourire derrière les verres. Trois images, trois façons de prendre la scène.",
         "liens": [ { "type": "spotify", "url": "https://open.spotify.com/artist/7uBrRphwTEWFcuJwkEY4kC", "source": "Spotify (nom vérifié)" } ],

@@ -2,16 +2,15 @@
    1. Le fond de page prend les couleurs de la couverture survolée, touchée ou au centre de l'écran.
    2. Souris : la couverture s'incline légèrement vers le pointeur.
    3. Téléphone : la couverture au centre de l'écran montre sa seconde image.
-   Rien ne bouge si le visiteur a demandé moins d'animations (système ou réglage « Aucune »).
+   Rien ne bouge si le visiteur a demandé moins d'animations dans son système.
    Sans ce script, chaque couverture reste un simple lien et la seconde image apparaît au survol (CSS). */
 (() => {
   'use strict';
-  const root = document.documentElement;
   const layer = document.querySelector('.kq-fond');
   const covers = Array.from(document.querySelectorAll('.kq-couv'));
   if (!layer || !covers.length) return;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const calm = () => reduce.matches || root.dataset.motion === 'none';
+  const calm = () => reduce.matches;
   const touch = window.matchMedia('(hover: none)');
 
   /* 1. Couleurs du fond */

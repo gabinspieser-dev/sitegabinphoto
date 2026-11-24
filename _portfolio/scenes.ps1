@@ -57,6 +57,20 @@ function ScFig($a, $id, [string]$sizesKey, [string]$P, [bool]$eager = $false, [b
   "<figure class=""sc-photo"" id=""photo-$num"" data-r=""$(RatioCode $x)""><a class=""photo-open"" href=""$P$(Largest $x)"" data-photo=""$($x.n)"" data-title=""$(Enc $title)"">$(ImgTag $id $meta.alt $SC_SIZES[$sizesKey] $P $eager)</a><figcaption class=""sc-legende""><span class=""serie-num"">$num</span><span>$(Enc $meta.legende)</span>$vueTxt</figcaption></figure>"
 }
 
+# Maillage interne (25/11/2026) : en fin de série, le reportage de l'événement s'il existe, puis toutes les autres séries
+function Voir-Aussi([string]$courant, [string]$P, $a) {
+  $rep = New-Object System.Collections.Generic.List[string]
+  if ($a -and $a.contexte -and "$($a.contexte.evenement)" -like 'Foire en Sc*') { $rep.Add("<li><a href=""${P}foire-en-scene-chalons-en-champagne.html"">Le reportage Foire en Scène 2026</a></li>") }
+  if ($courant -eq 'electro-symphony') { $rep.Add("<li><a href=""${P}electro-symphony-reims-arena.html"">Le reportage à Reims Arena</a></li>") }
+  $autres = foreach ($s in $seriesOrder) {
+    if ($s -eq $courant) { continue }
+    $nom = if ($s -eq 'instantanes') { 'Instantanés' } else { $bySlug[$s].nom }
+    "<li><a href=""${P}series/$s/"">$(Enc $nom)</a></li>"
+  }
+  $ev = if ($rep.Count) { "<ul class=""serie-voir-reportages"">$($rep -join '')</ul>" } else { '' }
+  "<nav class=""serie-voir-aussi"" aria-labelledby=""voir-aussi-titre""><h2 id=""voir-aussi-titre"">Les autres séries</h2>$ev<ul class=""serie-autres"">$($autres -join '')</ul></nav>"
+}
+
 function Build-ScenePage($a) {
   $P = '../../'; $url = "$BASE/series/$($a.slug)/"
   $ids = PhotoIds $a; $total = $ids.Count
@@ -81,7 +95,7 @@ function Build-ScenePage($a) {
     $acc = if ($sc.accent) { ";--sc-acc:$($sc.accent)" } else { '' }
     [void]$css.AppendLine(".serie--$($a.theme) [data-sc=""$k""]{--g:$cG;--d:$cD;--h:$cH$acc}")
     $enc = if ($encre) { " data-encre=""$encre""" } else { '' }
-    $base = "id=""sc-$k"" data-sc=""$k""$enc"
+    $attrSc = "id=""sc-$k"" data-sc=""$k""$enc"
     $head = ''; $lab = ''
     if ($sc.chapitre -and $sc.type -ne 'carton') { $head = "<header class=""sc-chapitre""><span class=""sc-chapitre-num"" aria-hidden=""true"">$($romans[$chap])</span><h2 id=""sc-titre-$k"">$(Enc $sc.chapitre)</h2></header>"; $chap++; $lab = " aria-labelledby=""sc-titre-$k""" }
     $mot = if ($sc.mot) { "<p class=""sc-mot"" data-cote=""$(if ($sc.mot_cote) { $sc.mot_cote } else { 'gauche' })"" aria-hidden=""true"">$(Enc $sc.mot)</p>" } else { '' }
@@ -92,7 +106,7 @@ function Build-ScenePage($a) {
         $var = if ($sc.variante) { $sc.variante } else { 'portrait' }
         $ctxHtml = if ($ctx) { "<p class=""sc-contexte"">$(Enc $ctx)</p>" } else { '' }
         $key = if ($var -eq 'paysage') { 'ouverture-paysage' } else { 'ouverture' }
-        [void]$sb.Append("<section class=""sc sc--ouverture sc--ouv-$var"" $base data-cote=""$cote"" aria-label=""Ouverture de la série"">")
+        [void]$sb.Append("<section class=""sc sc--ouverture sc--ouv-$var"" $attrSc data-cote=""$cote"" aria-label=""Ouverture de la série"">")
         [void]$sb.Append("<nav class=""serie-fil"" aria-label=""Fil d’Ariane""><a href=""${P}"">Accueil</a> / <a href=""${P}series/"">Séries</a> / <span aria-current=""page"">$(Enc $a.nom)</span></nav>")
         [void]$sb.Append("<div class=""sc-ouverture-texte""><p class=""sc-kicker"">Série · $total photographies</p><h1 class=""sc-nom"">$(Enc $a.nom)</h1><p class=""sc-titre"">$(Enc $a.titre_serie)</p>$ctxHtml<a class=""sc-cue"" href=""#sc-$($k + 1)"">Entrer dans la série</a></div>")
         [void]$sb.Append((ScFig $a $sc.photo $key $P $true))
@@ -100,38 +114,38 @@ function Build-ScenePage($a) {
       }
       'texte' {
         $t = if ($sc.texte) { $sc.texte } else { $a.presentation }
-        [void]$sb.Append("<section class=""sc sc--texte"" $base aria-label=""Présentation de la série""><p class=""sc-lede"">$(Enc $t)</p></section>")
+        [void]$sb.Append("<section class=""sc sc--texte"" $attrSc aria-label=""Présentation de la série""><p class=""sc-lede"">$(Enc $t)</p></section>")
       }
       'carton' {
         $num = $romans[$chap]; $chap++
         $kick = if ($sc.kicker) { $sc.kicker } else { $num }
         $sous = if ($sc.sous_titre) { "<p class=""sc-carton-sous"">$(Enc $sc.sous_titre)</p>" } else { '' }
-        [void]$sb.Append("<section class=""sc sc--carton"" $base aria-labelledby=""sc-titre-$k""><p class=""sc-carton-kicker"" aria-hidden=""true"">$(Enc $kick)</p><h2 class=""sc-carton-titre"" id=""sc-titre-$k"">$(Enc $sc.chapitre)</h2>$sous</section>")
+        [void]$sb.Append("<section class=""sc sc--carton"" $attrSc aria-labelledby=""sc-titre-$k""><p class=""sc-carton-kicker"" aria-hidden=""true"">$(Enc $kick)</p><h2 class=""sc-carton-titre"" id=""sc-titre-$k"">$(Enc $sc.chapitre)</h2>$sous</section>")
       }
       'monumental' {
         $x = Img $sc.photo; $o = if (IsLandscape $x) { 'paysage' } else { 'portrait' }
         $pleine = ($sc.variante -eq 'pleine') -and ($o -eq 'paysage')
         $cls = if ($pleine) { ' sc--pleine' } else { '' }; $key = if ($pleine) { 'monumental-pleine' } else { "monumental-$o" }
-        [void]$sb.Append("<section class=""sc sc--monumental$cls"" $base data-orient=""$o""$lab>$head$mot$(ScFig $a $sc.photo $key $P)$txt</section>")
+        [void]$sb.Append("<section class=""sc sc--monumental$cls"" $attrSc data-orient=""$o""$lab>$head$mot$(ScFig $a $sc.photo $key $P)$txt</section>")
       }
       'duo' {
         $cls = if ($sc.variante -eq 'partage') { ' sc--partage' } else { '' }; $key = if ($sc.variante -eq 'partage') { 'partage' } else { 'duo' }
-        [void]$sb.Append("<section class=""sc sc--duo$cls"" $base$lab>$head$mot<div class=""sc-duo"">$(($sc.photos | ForEach-Object { ScFig $a $_ $key $P }) -join '')</div>$txt</section>")
+        [void]$sb.Append("<section class=""sc sc--duo$cls"" $attrSc$lab>$head$mot<div class=""sc-duo"">$(($sc.photos | ForEach-Object { ScFig $a $_ $key $P }) -join '')</div>$txt</section>")
       }
-      'trio' { [void]$sb.Append("<section class=""sc sc--trio"" $base$lab>$head$mot<div class=""sc-trio"" role=""group"" aria-label=""Trois photographies"">$(($sc.photos | ForEach-Object { ScFig $a $_ 'trio' $P }) -join '')</div>$txt</section>") }
-      'planche' { [void]$sb.Append("<section class=""sc sc--planche"" $base$lab>$head$mot<div class=""sc-planche"" role=""group"" aria-label=""Planche-contact"">$(($sc.photos | ForEach-Object { ScFig $a $_ 'planche' $P $false $true }) -join '')</div>$txt</section>") }
+      'trio' { [void]$sb.Append("<section class=""sc sc--trio"" $attrSc$lab>$head$mot<div class=""sc-trio"" role=""group"" aria-label=""Trois photographies"">$(($sc.photos | ForEach-Object { ScFig $a $_ 'trio' $P }) -join '')</div>$txt</section>") }
+      'planche' { [void]$sb.Append("<section class=""sc sc--planche"" $attrSc$lab>$head$mot<div class=""sc-planche"" role=""group"" aria-label=""Planche-contact"">$(($sc.photos | ForEach-Object { ScFig $a $_ 'planche' $P $false $true }) -join '')</div>$txt</section>") }
       'sequence' {
         $n = $photos.Count; $marks = (1..$n | ForEach-Object { '<li></li>' }) -join ''
-        [void]$sb.Append("<section class=""sc sc--sequence serie-plan--sequence"" $base data-n=""$n""$lab>$head<div class=""serie-seq-cadre"">$(($sc.photos | ForEach-Object { ScFig $a $_ 'sequence' $P }) -join '')<ol class=""serie-seq-reperes"" aria-hidden=""true"">$marks</ol></div></section>")
+        [void]$sb.Append("<section class=""sc sc--sequence serie-plan--sequence"" $attrSc data-n=""$n""$lab>$head<div class=""serie-seq-cadre"">$(($sc.photos | ForEach-Object { ScFig $a $_ 'sequence' $P }) -join '')<ol class=""serie-seq-reperes"" aria-hidden=""true"">$marks</ol></div></section>")
       }
       'asymetrique' {
         $cote = if ($sc.cote) { $sc.cote } else { 'gauche' }
-        [void]$sb.Append("<section class=""sc sc--asym"" $base data-cote=""$cote""$lab>$(ScFig $a $sc.photo 'asymetrique' $P)<div class=""sc-asym-texte"">$head<p>$(Enc $sc.texte)</p></div></section>")
+        [void]$sb.Append("<section class=""sc sc--asym"" $attrSc data-cote=""$cote""$lab>$(ScFig $a $sc.photo 'asymetrique' $P)<div class=""sc-asym-texte"">$head<p>$(Enc $sc.texte)</p></div></section>")
       }
-      'respiration' { [void]$sb.Append("<section class=""sc sc--respiration"" $base$lab>$head$(ScFig $a $sc.photo 'respiration' $P)$txt</section>") }
+      'respiration' { [void]$sb.Append("<section class=""sc sc--respiration"" $attrSc$lab>$head$(ScFig $a $sc.photo 'respiration' $P)$txt</section>") }
       'final' {
         $x = Img $sc.photo; $key = if (IsLandscape $x) { 'final-paysage' } else { 'final' }
-        [void]$sb.Append("<section class=""sc sc--final"" $base data-orient=""$(if (IsLandscape $x) { 'paysage' } else { 'portrait' })""$lab>$head$mot$(ScFig $a $sc.photo $key $P)$txt</section>")
+        [void]$sb.Append("<section class=""sc sc--final"" $attrSc data-orient=""$(if (IsLandscape $x) { 'paysage' } else { 'portrait' })""$lab>$head$mot$(ScFig $a $sc.photo $key $P)$txt</section>")
       }
       default { throw "Type de scène inconnu : $($sc.type) ($($a.slug))" }
     }
@@ -152,7 +166,7 @@ function Build-ScenePage($a) {
   $kk = [array]::IndexOf($seriesOrder, $a.slug); $nextSlug = $seriesOrder[($kk + 1) % $seriesOrder.Count]
   if ($nextSlug -eq 'instantanes') { $nextName = 'Instantanés'; $nextCover = 'GAB09552-2' } else { $na = $bySlug[$nextSlug]; $nextName = $na.nom; $nextCover = CoverId $na }
   $nx = Img $nextCover
-  [void]$sb.Append("<section class=""serie-verso sc sc--verso"" data-sc=""verso"" aria-labelledby=""verso-titre""><div class=""serie-verso-grille""><div><h2 id=""verso-titre"">Crédits</h2><dl class=""serie-credits"">$cred</dl><p class=""serie-liens-vide"">Publier une image ? Précisez la photographie et le support envisagés. Les droits d’utilisation et le crédit du photographe se définissent ensemble avant publication. <a href=""${P}contact.html"">Parlons de votre projet</a>.</p></div>$linksBlock</div>")
+  [void]$sb.Append("<section class=""serie-verso sc sc--verso"" data-sc=""verso"" aria-labelledby=""verso-titre""><p class=""serie-verso-intro"">$(Enc $a.seo.description)</p><div class=""serie-verso-grille""><div><h2 id=""verso-titre"">Crédits</h2><dl class=""serie-credits"">$cred</dl><p class=""serie-liens-vide"">Publier une image ? Précisez la photographie et le support envisagés. Les droits d’utilisation et le crédit du photographe se définissent ensemble avant publication. <a href=""${P}contact.html"">Parlons de votre projet</a>.</p></div>$linksBlock</div>$(Voir-Aussi $a.slug $P $a)")
   [void]$sb.Append("<nav class=""serie-suite"" aria-label=""Autres séries""><a class=""serie-retour"" href=""${P}series/""><span><span class=""serie-kicker"">← Retour</span><strong>Toutes les séries</strong></span></a><a href=""${P}series/$nextSlug/""><img src=""$P$($nx.base)-640.webp"" width=""96"" height=""120"" alt="""" loading=""lazy"" decoding=""async""><span><span class=""serie-kicker"">Série suivante →</span><strong>$(Enc $nextName)</strong></span></a></nav></section>")
   [void]$sb.Append("<nav class=""sc-rail"" aria-label=""Photographies de la série""><ol>$($rail -join '')</ol></nav>")
   [void]$sb.Append("<p class=""serie-compteur"" aria-hidden=""true"">01 / $('{0:00}' -f $total)</p></main>")

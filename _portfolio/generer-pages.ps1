@@ -98,7 +98,7 @@ $ld
 function Common-Graph() {
   @(
     [ordered]@{ '@type' = 'WebSite'; '@id' = "$BASE/#site"; url = "$BASE/"; name = 'Gabin Spieser'; inLanguage = 'fr'; publisher = @{ '@id' = $BUSINESS } },
-    [ordered]@{ '@type' = 'Person'; '@id' = $PERSON; name = 'Gabin Spieser'; url = "$BASE/a-propos.html"; jobTitle = "Photographe de concerts et d’artistes"; sameAs = @('https://www.instagram.com/spieraw/', 'https://www.facebook.com/gabin.photographe/', 'https://www.behance.net/gabinspieserphoto') }
+    [ordered]@{ '@type' = 'Person'; '@id' = $PERSON; name = 'Gabin Spieser'; url = "$BASE/a-propos.html"; jobTitle = "Photographe de concerts et d’artistes"; sameAs = @('https://www.instagram.com/spieraw/', 'https://www.facebook.com/spieraw/', 'https://www.behance.net/gabinspieserphoto') }
   )
 }
 function ImageNode($id, $pageUrl, $num, $name, $caption, $alt, $place) {
@@ -118,7 +118,7 @@ function Page([string]$P, [string]$title, [string]$desc, [string]$body, [string]
   $h = $h.Replace('{{MAIN}}', $main)
   $h.Replace('{{P}}', $P)
 }
-$CSS_SERIE = { param($P) "<link rel=""stylesheet"" href=""${P}assets/css/series.css?v=$(ShortHash 'assets\css\series.css')""><link rel=""stylesheet"" href=""${P}assets/css/series-themes.css?v=$(ShortHash 'assets\css\series-themes.css')"">" }
+$CSS_SERIE = { param($P) "<link rel=""stylesheet"" href=""${P}assets/css/series.css?v=$(ShortHash 'assets\css\series.css')"">" }
 $JS_SERIE = { param($P) "<script src=""${P}series.js?v=$(ShortHash 'series.js')"" defer></script>" }
 
 # --- Une photo de série ---

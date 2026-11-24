@@ -4,13 +4,13 @@
    3. compteur « 07 / 19 » et rail de progression qui suivent la photo la plus visible ;
    4. scènes : le fond de page prend en douceur les couleurs de la scène en cours (préparées d'avance,
       aucun calcul de couleur pendant le défilement).
-   Rien ne bouge si le visiteur a demandé moins d'animations (système ou réglage « Aucune »).
+   Rien ne bouge si le visiteur a demandé moins d'animations dans son système.
    Sans ce script, tout reste visible et chaque scène garde son propre fond. */
 (() => {
   'use strict';
   const root = document.documentElement;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const calm = () => reduce.matches || root.dataset.motion === 'none';
+  const calm = () => reduce.matches;
   root.classList.add('serie-js');
   root.classList.toggle('serie-calme', calm());
   if (reduce.addEventListener) reduce.addEventListener('change', () => root.classList.toggle('serie-calme', calm()));
