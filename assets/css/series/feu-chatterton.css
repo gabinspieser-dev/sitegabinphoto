@@ -1,0 +1,12 @@
+/* =========================================================
+   Feu! Chatterton — « De la couleur au noir et blanc » : la bascule (25/11/2026)
+   Vert acide (#04c435, 21 % de l'image) et jaune vif (#e3c902, 29 %), puis noir et blanc
+   aux bords gris clair (#c0c0c0) : la page passe d'aplats de couleur francs à un gris de galerie.
+   ========================================================= */
+.serie--feu{--sc-ink:#f2f2ee;--sc-ink2:rgba(242,242,238,.66);--sc-acc:#46e05c;--acc-sombre:#1e1e1e;--rule:rgba(242,242,238,.18);--ink-base:#f2f2ee;--ink-2:rgba(242,242,238,.62);--acc:#d8d8d8;background:#050805}
+.serie--feu .sc-nom{text-transform:uppercase;color:#46e05c;font-size:clamp(3.5rem,10vw,10rem)}
+.serie--feu .sc-titre{background:linear-gradient(90deg,#46e05c,#f5d90a 45%,#d8d8d8 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.serie--feu .sc-chapitre h2{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-size:clamp(2rem,3.6vw,3.4rem);letter-spacing:.05em}
+.serie--feu .sc-mot{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;text-transform:uppercase}
+.serie--feu .sc[data-encre="sombre"] .sc-chapitre-num{color:#1e1e1e}
+.serie--feu .sc-lede{color:#e9ffe9}

@@ -1,0 +1,11 @@
+/* =========================================================
+   Madelaine — « L'archet et le tulle » : un ballet (25/11/2026)
+   Tulle crème (#f6e5cb) sur fond noir, cheveux bleus, violon électrique blanc.
+   Beaucoup d'air, des compositions centrées comme une scène de danse, le bleu de ses cheveux en accent.
+   ========================================================= */
+.serie--madelaine{--sc-ink:#f3f8f8;--sc-ink2:rgba(243,248,248,.66);--sc-acc:#4fd6df;--rule:rgba(79,214,223,.22);--ink-base:#f3f8f8;--ink-2:rgba(243,248,248,.64);--acc:#4fd6df;background:#030606}
+.serie--madelaine .sc-nom{font-family:var(--body,'DM Sans'),sans-serif;text-transform:lowercase;letter-spacing:-.06em;color:#4fd6df}
+.serie--madelaine .sc-mot{color:rgba(246,229,203,.09);letter-spacing:-.06em}
+.serie--madelaine .sc{padding-block:clamp(5rem,14vh,10rem)}
+.serie--madelaine .sc-legende{justify-content:center}
+.serie--madelaine .sc-lede{text-align:center;font-size:clamp(1.4rem,2.6vw,2.4rem)}

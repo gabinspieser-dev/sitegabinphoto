@@ -1,0 +1,21 @@
+/* =========================================================
+   Ina Forsman — « Noir, blanc, noir » : une épreuve argentique, presque muséale (25/11/2026)
+   19 vues noir et blanc, bords noir absolu (#010101), éclats ronds de lumière, cheveux en mouvement.
+   Aucune couleur, pas même le rouge du logo. Le nom et les grands mots en contour, comme sur une épreuve.
+   La photo d'ouverture sort du noir (révélateur) ; le trio défile comme une bande de négatif ;
+   la planche-contact passe sur papier blanc avec les vrais numéros de vue ; le mouvement en séquence.
+   ========================================================= */
+.serie--ina{--sc-ink:#f4f2ee;--sc-ink2:rgba(244,242,238,.62);--sc-acc:#f4f2ee;--acc-sombre:#111;--rule:rgba(244,242,238,.16);--ink-base:#f4f2ee;--ink-2:rgba(244,242,238,.62);--acc:#f4f2ee;background:#020202}
+.serie--ina .brand-logo{filter:grayscale(1) brightness(1.6)}
+.serie--ina .sc-nom{color:transparent;-webkit-text-stroke:1.2px var(--sc-ink);text-transform:uppercase;letter-spacing:.02em;font-size:clamp(4rem,9.5vw,9.5rem)}
+.serie--ina .sc-titre{font-size:.8rem;letter-spacing:.32em;text-transform:uppercase;color:var(--sc-ink2)}
+.serie--ina .sc-chapitre h2{letter-spacing:.55em}
+.serie--ina .sc-legende .serie-num{color:var(--sc-ink)}
+.serie--ina .sc-mot{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;text-transform:uppercase;letter-spacing:.01em;color:transparent;-webkit-text-stroke:1px rgba(244,242,238,.17)}
+.serie--ina .sc[data-encre="sombre"] .sc-mot{-webkit-text-stroke-color:rgba(20,20,20,.2)}
+.serie--ina .sc[data-encre="sombre"] .sc-chapitre h2{color:#111}
+.serie--ina .sc-lede{font-size:clamp(1.4rem,2.6vw,2.4rem);letter-spacing:0}
+/* La bande de négatif : perforations au-dessus et au-dessous du trio */
+.serie--ina .sc-trio{padding-block:2.2rem;background:repeating-linear-gradient(90deg,rgba(244,242,238,.22) 0 10px,transparent 10px 26px) 0 0/100% 7px no-repeat,repeating-linear-gradient(90deg,rgba(244,242,238,.22) 0 10px,transparent 10px 26px) 0 100%/100% 7px no-repeat}
+.serie--ina .sc-rail a[aria-current="true"]::after{background:#f4f2ee}
+.serie--ina .serie-compteur{background:rgba(2,2,2,.75)}

@@ -1,0 +1,476 @@
+{
+  "site": "https://gabin-spieser.com",
+  "source": "C:\\Users\\gabin.spieser\\Documents\\Maintenance\\Photos",
+  "maj": "2026-11-24",
+  "accueil": { "artiste": "ina-forsman", "photo": "GAB06891" },
+  "ordre_index": ["mika", "julien-dore", "@ina", "anna-winkin", "@respiration:IMG_3834", "stomy-bugsy", "electro-symphony", "christophe-mae", "@respiration:IMG_3836", "feu-chatterton", "m-pokora", "silda", "madelaine", "instantanes", "@fermeture:IMG_3838"],
+  "artistes": [
+    {
+      "slug": "ina-forsman", "nom": "Ina Forsman", "dossier": "Ina Forsman (il lui faut sa propre compile avec un design personalisé en adequation avec les photos)",
+      "theme": "ina", "titre_serie": "Noir, blanc, noir", "contexte_fichier": "noir-et-blanc",
+      "accroche": "Une voix, deux ronds de lumière, et pas une seule couleur.",
+      "presentation": "Pas une couleur. Une voix venue de Finlande, une robe qui accroche chaque éclat, deux ronds de lumière qui crèvent le noir. Le temps d’une soirée, tout se joue entre l’ombre de la scène et le blanc du papier. Des cheveux qui fouettent l’air, un rire qui part sans prévenir. Puis le noir reprend ses droits.",
+      "contexte": { "evenement": "", "lieu": "", "date": "" },
+      "carte": "GAB06757",
+      "seo": { "title": "Ina Forsman en noir et blanc : photos de concert | Gabin Spieser", "description": "19 photographies d’Ina Forsman en noir et blanc par Gabin Spieser : une série de concert construite comme un récit, de l’entrée en scène au dernier geste." },
+      "liens": [
+        { "type": "site", "url": "https://www.inaforsman.com/", "source": "site officiel" },
+        { "type": "instagram", "url": "https://www.instagram.com/inaforsman", "source": "site officiel" },
+        { "type": "facebook", "url": "https://www.facebook.com/InaForsman", "source": "site officiel et Wikidata" },
+        { "type": "tiktok", "url": "https://www.tiktok.com/@inaforsman", "source": "site officiel" },
+        { "type": "youtube", "url": "https://www.youtube.com/channel/UCJYMKACfOplJhGEBri3NBCg", "source": "site officiel" },
+        { "type": "spotify", "url": "https://open.spotify.com/artist/6YVaWx92qxstwulKJXqN2b", "source": "site officiel, Wikidata et Spotify" },
+        { "type": "apple", "url": "https://music.apple.com/de/artist/ina-forsman/512387502", "source": "site officiel" },
+        { "type": "deezer", "url": "https://www.deezer.com/artist/1675307", "source": "Wikidata" }
+      ],
+      "scenes": [
+        { "type": "ouverture", "variante": "revelateur", "photo": "GAB06538", "cote": "droite" },
+        { "type": "texte" },
+        { "type": "monumental", "chapitre": "Noir", "photo": "GAB06541", "mot": "noir" },
+        { "type": "asymetrique", "photo": "GAB06723", "cote": "droite", "texte": "Une étoile de lumière dans le dos, une main sur la nuque. Autour, plus rien. Le noir a tout avalé." },
+        { "type": "trio", "chapitre": "Lumière", "photos": ["GAB06740", "GAB06741", "GAB06783"], "mot": "lumière", "mot_cote": "droite" },
+        { "type": "monumental", "variante": "pleine", "chapitre": "Au piano", "photo": "GAB06639" },
+        { "type": "planche", "chapitre": "Blanc", "photos": ["GAB06739", "GAB06898", "GAB06831", "GAB06934"], "fond": "#f1efea", "halo": "#f1efea", "mot": "blanc" },
+        { "type": "sequence", "chapitre": "Mouvement", "photos": ["GAB06757", "GAB06826", "GAB06891", "GAB06835"] },
+        { "type": "duo", "chapitre": "Contre-jour", "photos": ["GAB06873", "GAB06875"] },
+        { "type": "monumental", "photo": "GAB06838", "mot": "rire", "mot_cote": "droite" },
+        { "type": "final", "chapitre": "Le dernier geste", "photo": "GAB06939" }
+      ],
+      "photos": {
+        "GAB06538": { "alt": "Ina Forsman chante les yeux fermés, une main ouverte vers le public, devant des taches de lumière.", "legende": "Les yeux fermés" },
+        "GAB06541": { "alt": "Ina Forsman lève les deux mains de part et d’autre de son visage, face au micro, sous les projecteurs.", "legende": "Les mains levées" },
+        "GAB06723": { "alt": "Ina Forsman, une main sur la nuque, près de son pied de micro, avec un projecteur en étoile derrière elle.", "legende": "L’éclat" },
+        "GAB06740": { "alt": "Ina Forsman incline la tête, le micro contre la poitrine, devant deux ronds de lumière.", "legende": "La tête inclinée" },
+        "GAB06741": { "alt": "Ina Forsman, les sourcils froncés, regarde au loin, son bras tatoué tenant le micro.", "legende": "Le regard" },
+        "GAB06783": { "alt": "Ina Forsman sourit en chantant, le micro dans une main, sous des ronds de lumière.", "legende": "Le sourire" },
+        "GAB06639": { "alt": "Un pianiste joue sur un piano à queue pendant le concert d’Ina Forsman, dans un halo de lumière.", "legende": "Au piano" },
+        "GAB06739": { "alt": "Gros plan sur Ina Forsman, le bras replié derrière la tête et les yeux fermés, son micro à la main.", "legende": "De près" },
+        "GAB06898": { "alt": "Ina Forsman chante les yeux fermés, le micro contre les lèvres, en gros plan.", "legende": "Le micro contre les lèvres" },
+        "GAB06831": { "alt": "Ina Forsman chante doucement dans l’ombre, éclairée par une lumière douce de face.", "legende": "Dans l’ombre" },
+        "GAB06934": { "alt": "Ina Forsman, penchée sur son micro, se découpe devant une lumière carrée et un projecteur.", "legende": "Penchée" },
+        "GAB06757": { "alt": "Ina Forsman chante, les cheveux projetés sur le côté par un mouvement de tête.", "legende": "Le mouvement" },
+        "GAB06826": { "alt": "Ina Forsman se retourne d’un coup de tête, les cheveux en l’air, le micro levé.", "legende": "Le coup de tête" },
+        "GAB06891": { "alt": "Ina Forsman chante à pleine voix, les cheveux fouettés par le mouvement, sur fond noir.", "legende": "À pleine voix" },
+        "GAB06835": { "alt": "Ina Forsman se penche en arrière en chantant, le bras tatoué serré contre elle.", "legende": "Penchée en arrière" },
+        "GAB06873": { "alt": "Ina Forsman de profil, un bras tendu, chante devant des faisceaux de lumière en contre-jour.", "legende": "Contre-jour, un" },
+        "GAB06875": { "alt": "Ina Forsman de profil chante au micro, la lumière des projecteurs derrière elle.", "legende": "Contre-jour, deux" },
+        "GAB06838": { "alt": "Ina Forsman rit, un bras levé vers le haut, le micro dans l’autre main.", "legende": "Le rire" },
+        "GAB06939": { "alt": "Ina Forsman tend un bras très haut vers le ciel, le micro dans l’autre main.", "legende": "Le dernier geste" }
+      }
+    },
+    {
+      "slug": "julien-dore", "nom": "Julien Doré", "dossier": "Julien Doré",
+      "theme": "julien", "titre_serie": "Costume blanc, piano jaune", "contexte_fichier": "foire-en-scene-2026",
+      "accroche": "Le blanc qui brûle, le jaune qui chante.",
+      "presentation": "Un costume blanc taillé pour attraper la lumière, et il l’attrape toute. Face à la foule, d’abord. Puis le piano jaune, et la voix qui change de poids. À la fin, une serviette autour du cou : la preuve qu’il n’a rien gardé pour lui.",
+      "contexte": { "evenement": "Foire en Scène", "lieu": "Châlons-en-Champagne", "date": "2026" },
+      "seo": { "title": "Julien Doré à Foire en Scène 2026 : photos | Gabin Spieser", "description": "18 photographies de Julien Doré à Foire en Scène, Châlons-en-Champagne, 2026 : le costume blanc, le piano jaune et les derniers instants du concert, par Gabin Spieser." },
+      "liens": [
+        { "type": "site", "url": "https://www.juliendoreofficiel.com/", "source": "Wikidata" },
+        { "type": "instagram", "url": "https://www.instagram.com/jdoreofficiel", "source": "site officiel et Wikidata" },
+        { "type": "facebook", "url": "https://www.facebook.com/juliendoreofficiel", "source": "site officiel" },
+        { "type": "tiktok", "url": "https://www.tiktok.com/@jdoreofficiel", "source": "site officiel" },
+        { "type": "youtube", "url": "https://www.youtube.com/channel/UC_HN4UwLGkimyAzgfDhap9w", "source": "site officiel et Wikidata" },
+        { "type": "spotify", "url": "https://open.spotify.com/artist/6jStlKLflTMUN6BajxrNlj", "source": "Wikidata et Spotify" },
+        { "type": "deezer", "url": "https://www.deezer.com/artist/15887", "source": "Wikidata" }
+      ],
+      "scenes": [
+        { "type": "ouverture", "variante": "paysage", "photo": "GAB02630" },
+        { "type": "texte" },
+        { "type": "duo", "chapitre": "Costume blanc", "photos": ["GAB02425", "GAB02465"] },
+        { "type": "duo", "photos": ["GAB02524", "GAB02571"] },
+        { "type": "asymetrique", "photo": "GAB02620", "cote": "droite", "texte": "Cambré en arrière, le micro à bout de bras. Sous les projecteurs, le blanc du costume brûle." },
+        { "type": "monumental", "photo": "GAB02542", "mot": "blanc", "mot_cote": "droite" },
+        { "type": "monumental", "variante": "pleine", "chapitre": "Au piano", "photo": "GAB02728-2", "halo": "#daab26" },
+        { "type": "trio", "photos": ["GAB02723", "GAB02729", "GAB02732"], "halo": "#daab26" },
+        { "type": "monumental", "variante": "pleine", "photo": "GAB02741", "mot": "piano" },
+        { "type": "asymetrique", "photo": "GAB02753", "cote": "gauche", "texte": "La bouche grande ouverte au-dessus des touches jaunes. L’image est muette, et pourtant on l’entend." },
+        { "type": "respiration", "chapitre": "De près", "photo": "GAB02651-2", "texte": "De dos, courbé sur les touches, face à l’écran géant. Le monde entier tient dans ce piano." },
+        { "type": "duo", "photos": ["GAB02818", "GAB02674"] },
+        { "type": "monumental", "chapitre": "Les flammes", "photo": "GAB02827" },
+        { "type": "final", "chapitre": "Final", "photo": "GAB02851" }
+      ],
+      "photos": {
+        "GAB02630": { "alt": "Julien Doré, en costume blanc, crie bras grands ouverts, un pied posé en avant, à côté de son guitariste.", "legende": "Bras ouverts" },
+        "GAB02425": { "alt": "Julien Doré, en costume blanc et débardeur noir, sourit en regardant vers le haut.", "legende": "Le sourire" },
+        "GAB02465": { "alt": "Julien Doré pointe du doigt vers le public en levant un sourcil.", "legende": "Le doigt pointé" },
+        "GAB02524": { "alt": "Julien Doré tend la main vers le public, paume ouverte, devant un écran rose, son guitariste derrière lui.", "legende": "La main tendue" },
+        "GAB02571": { "alt": "Julien Doré lève son micro au-dessus de sa bouche, la tête renversée en arrière.", "legende": "Micro levé" },
+        "GAB02620": { "alt": "Julien Doré se cambre en arrière, un bras tendu, le micro dans l’autre main.", "legende": "Cambré" },
+        "GAB02542": { "alt": "Julien Doré chante en souriant, une main sur son pied de micro incliné.", "legende": "Au pied de micro" },
+        "GAB02728-2": { "alt": "Julien Doré, tout petit au piano jaune, sous un écran géant en noir et blanc qui montre un pianiste.", "legende": "Le piano jaune" },
+        "GAB02723": { "alt": "Julien Doré joue du piano jaune, ses cheveux bouclés lui cachant le visage, devant un écran gris.", "legende": "Les cheveux" },
+        "GAB02729": { "alt": "Julien Doré au piano jaune, la tête renversée en arrière, les yeux vers le ciel.", "legende": "La tête en arrière" },
+        "GAB02732": { "alt": "Julien Doré, debout derrière le piano jaune, lève une main devant un écran blanc.", "legende": "La main levée" },
+        "GAB02741": { "alt": "Julien Doré au piano jaune, la tête rejetée en arrière et les cheveux projetés par le mouvement.", "legende": "Les cheveux au vent" },
+        "GAB02753": { "alt": "Julien Doré chante la bouche grande ouverte au piano jaune, une croix tatouée sur le bras.", "legende": "À pleine voix" },
+        "GAB02651-2": { "alt": "Julien Doré, de dos, penché au piano devant un écran géant.", "legende": "De dos" },
+        "GAB02818": { "alt": "Julien Doré, de dos, en débardeur noir et pantalon blanc, la croix tatouée sur l’épaule, presque en noir et blanc.", "legende": "La croix" },
+        "GAB02674": { "alt": "Julien Doré en débardeur noir sourit, une main sur la hanche, l’autre sur le pied de micro.", "legende": "Débardeur noir" },
+        "GAB02827": { "alt": "Un musicien en casquette blanche joue de la basse devant une immense flamme sur la scène de Julien Doré.", "legende": "Les flammes" },
+        "GAB02851": { "alt": "Julien Doré assis, une serviette blanche autour du cou, regarde vers le haut.", "legende": "La serviette" }
+      }
+    },
+    {
+      "slug": "mika", "nom": "Mika", "dossier": "Mika",
+      "theme": "mika", "titre_serie": "Trois costumes", "contexte_fichier": "foire-en-scene-2026",
+      "accroche": "Trois costumes. Trois mondes. Pas un temps mort.",
+      "presentation": "Mika ne change pas de tenue, il change de monde. Bleu canard, jaune brodé de fleurs, bleu nuit pailleté : trois costumes, trois actes, et une énergie qui ne retombe jamais. Entre les deux premiers, un mégaphone géant renverse le décor.",
+      "contexte": { "evenement": "Foire en Scène", "lieu": "Châlons-en-Champagne", "date": "2026" },
+      "seo": { "title": "Mika à Foire en Scène 2026 : photos de concert | Gabin Spieser", "description": "8 photographies de Mika à Foire en Scène, Châlons-en-Champagne, 2026 : le spectacle raconté par ses trois costumes, par Gabin Spieser." },
+      "liens": [
+        { "type": "site", "url": "https://www.yomika.com/", "source": "ancien lien du site, vérifié" },
+        { "type": "instagram", "url": "https://www.instagram.com/mikainstagram/", "source": "site officiel" },
+        { "type": "facebook", "url": "https://www.facebook.com/mikasounds", "source": "site officiel" },
+        { "type": "tiktok", "url": "https://www.tiktok.com/@mikatiktok", "source": "site officiel" },
+        { "type": "youtube", "url": "https://www.youtube.com/channel/UCALjQbQhtEeUFi5tSIDFY4Q", "source": "site officiel" },
+        { "type": "spotify", "url": "https://open.spotify.com/artist/5MmVJVhhYKQ86izuGHzJYA", "source": "site officiel et Spotify" },
+        { "type": "apple", "url": "https://music.apple.com/us/artist/mika/184932871", "source": "site officiel" }
+      ],
+      "scenes": [
+        { "type": "ouverture", "photo": "GAB02232", "cote": "droite" },
+        { "type": "texte" },
+        { "type": "carton", "chapitre": "Le costume bleu", "kicker": "Acte I", "sous_titre": "Bleu canard. Le sourire avant la tempête.", "fond": "#04191c", "halo": "#0393a3", "accent": "#33c2c4" },
+        { "type": "asymetrique", "photo": "GAB02131", "cote": "gauche", "texte": "Il traverse la scène en souriant, comme on rentre chez soi. Le premier tableau est posé.", "accent": "#33c2c4" },
+        { "type": "duo", "photos": ["GAB02177", "GAB02150"], "accent": "#33c2c4" },
+        { "type": "monumental", "chapitre": "Entracte", "photo": "GAB02287", "accent": "#f2946f" },
+        { "type": "carton", "chapitre": "Le costume brodé", "kicker": "Acte II", "sous_titre": "Jaune, brodé de fleurs. Et le ciel qui crache des étincelles.", "fond": "#1a1406", "halo": "#e5b651", "accent": "#f0bf3a" },
+        { "type": "duo", "photos": ["GAB02330", "GAB02346"], "accent": "#f0bf3a" },
+        { "type": "carton", "chapitre": "Le costume pailleté", "kicker": "Acte III", "sous_titre": "Bleu nuit, paupières closes. Plus rien n’existe autour.", "fond": "#080b1d", "halo": "#93a8ff", "accent": "#93a8ff" },
+        { "type": "final", "photo": "GAB02365", "accent": "#93a8ff" }
+      ],
+      "photos": {
+        "GAB02232": { "alt": "Mika, en débardeur blanc et pantalon bleu, pointe le ciel en chantant devant une gerbe d’étincelles.", "legende": "La gerbe" },
+        "GAB02131": { "alt": "Mika, en costume bleu canard, sourit en traversant la scène.", "legende": "Le costume bleu" },
+        "GAB02177": { "alt": "Mika lève un bras au-dessus de lui en chantant, en costume bleu brillant.", "legende": "Bras levé" },
+        "GAB02150": { "alt": "Mika, de dos dans la fumée, lève un bras vers un projecteur.", "legende": "Dans la fumée" },
+        "GAB02287": { "alt": "Un immense mégaphone orange et bleu occupe la scène pendant le concert de Mika.", "legende": "Le mégaphone" },
+        "GAB02330": { "alt": "Mika, de dos, en costume jaune brodé de fleurs, pointe le bras vers le public.", "legende": "Le costume brodé" },
+        "GAB02346": { "alt": "Mika chante en costume jaune brodé sous une haute gerbe d’étincelles blanches.", "legende": "Sous les étincelles" },
+        "GAB02365": { "alt": "Mika, en costume bleu nuit pailleté, chante les yeux fermés, une main levée.", "legende": "Le costume pailleté" }
+      }
+    },
+    {
+      "slug": "anna-winkin", "nom": "Anna Winkin", "dossier": "Anna Winkin",
+      "theme": "anna", "titre_serie": "Autour de la scène", "contexte_fichier": "wavre-2026",
+      "accroche": "Tout ce qu’on ne montre jamais d’un concert.",
+      "presentation": "Wavre, Place aux Artistes, 21 août 2026. Le seul vrai reportage du portfolio : la scène, oui, mais surtout tout ce qu’on ne montre jamais. Les coulisses en noir et blanc, une accolade, la rue et ses roses rouges. Et cette photo de groupe, à la fin, où tout le monde a enfin le droit de souffler.",
+      "contexte": { "evenement": "Place aux Artistes", "lieu": "Wavre", "date": "21 août 2026", "date_iso": "2026-08-21" },
+      "seo": { "title": "Anna Winkin à Wavre : reportage photo | Gabin Spieser", "description": "14 photographies d’Anna Winkin à Wavre, Place aux Artistes, le 21 août 2026 : la scène, les coulisses et la rue, en reportage par Gabin Spieser." },
+      "liens": [
+        { "type": "site", "url": "https://www.annawinkin.com/", "source": "ancien lien du site, vérifié" },
+        { "type": "instagram", "url": "https://www.instagram.com/annawinkin", "source": "site officiel" },
+        { "type": "facebook", "url": "https://www.facebook.com/annawinkin", "source": "site officiel" },
+        { "type": "tiktok", "url": "https://www.tiktok.com/@annawinkin", "source": "site officiel" },
+        { "type": "youtube", "url": "https://www.youtube.com/@AnnaWinkin", "source": "site officiel" },
+        { "type": "spotify", "url": "https://open.spotify.com/artist/19wbJkKeRqpnf1ibyz1tVI", "source": "Spotify (nom vérifié)" }
+      ],
+      "scenes": [
+        { "type": "ouverture", "photo": "GAB08440", "cote": "droite" },
+        { "type": "texte" },
+        { "type": "monumental", "chapitre": "Coulisses", "photo": "GAB08370", "mot": "coulisses" },
+        { "type": "duo", "photos": ["GAB08376", "GAB08384"], "texte": "Une accolade dans le couloir. Une porte ouverte sur une salle encore vide. Le calme, juste avant que tout bascule." },
+        { "type": "duo", "chapitre": "Dehors", "photos": ["GAB08389", "GAB08390"], "mot": "dehors", "mot_cote": "droite" },
+        { "type": "duo", "chapitre": "Sur scène", "photos": ["GAB08446", "GAB08447"] },
+        { "type": "asymetrique", "photo": "GAB08555", "cote": "gauche", "texte": "Une lumière verte, des feuilles floues devant l’objectif. On regarde la scène à travers le décor, comme on surprend un secret." },
+        { "type": "duo", "chapitre": "Le même instant", "photos": ["GAB08678", "GAB08680-2"], "texte": "Le même instant, deux fois. En couleur, il brûle. En noir et blanc, il reste." },
+        { "type": "monumental", "chapitre": "La choriste", "photo": "GAB08536" },
+        { "type": "monumental", "photo": "GAB08503", "mot": "rose" },
+        { "type": "final", "chapitre": "Ensemble", "photo": "GAB08378" }
+      ],
+      "photos": {
+        "GAB08440": { "alt": "Anna Winkin chante les yeux fermés derrière son clavier, des roses rouges au premier plan.", "legende": "Les roses" },
+        "GAB08370": { "alt": "En coulisses, en noir et blanc, deux femmes regardent par une fenêtre ; l’une tend le bras pour montrer quelque chose.", "legende": "À la fenêtre" },
+        "GAB08376": { "alt": "En coulisses, en noir et blanc, Anna Winkin serre une femme dans ses bras en souriant.", "legende": "L’accolade" },
+        "GAB08384": { "alt": "En noir et blanc, une silhouette se tient au fond d’une salle aux tables vides, vue par une porte ouverte.", "legende": "La porte" },
+        "GAB08389": { "alt": "Anna Winkin sourit dehors, un verre à la main, devant un stand de festival.", "legende": "Dehors" },
+        "GAB08390": { "alt": "Une femme de dos tient deux roses rouges dans une rue animée.", "legende": "Les roses rouges" },
+        "GAB08446": { "alt": "Anna Winkin rit derrière son clavier, en haut rouge, sous un projecteur.", "legende": "Le rire" },
+        "GAB08447": { "alt": "Anna Winkin, de profil, rit en jouant, la lumière d’un projecteur derrière elle.", "legende": "La suite" },
+        "GAB08555": { "alt": "Anna Winkin chante au clavier, baignée d’une lumière verte, des feuilles floues au premier plan.", "legende": "Lumière verte" },
+        "GAB08678": { "alt": "Anna Winkin joue du clavier les yeux baissés, éclairée d’une lumière violette.", "legende": "Lumière violette" },
+        "GAB08680-2": { "alt": "En noir et blanc, Anna Winkin joue du clavier sous un faisceau de lumière.", "legende": "Le même instant, en noir et blanc" },
+        "GAB08536": { "alt": "En noir et blanc, une choriste d’Anna Winkin chante au micro, le visage couvert de motifs lumineux.", "legende": "La choriste" },
+        "GAB08503": { "alt": "Une rose rouge au premier plan, devant un faisceau de lumière et Anna Winkin floue en arrière-plan.", "legende": "La rose dans le faisceau" },
+        "GAB08378": { "alt": "Anna Winkin, en robe rouge, pose en souriant entre deux femmes, dans une pièce aux murs orangés.", "legende": "Ensemble" }
+      }
+    },
+    {
+      "slug": "stomy-bugsy", "nom": "Stomy Bugsy", "dossier": "Stomy Bugsy",
+      "theme": "stomy", "titre_serie": "Seul, puis à deux", "contexte_fichier": "concert",
+      "accroche": "La fumée, la braise, et le doigt vers le ciel.",
+      "presentation": "Du noir, de la fumée, une lumière orange comme une braise qui refuse de s’éteindre. Stomy Bugsy commence seul, partage la scène, puis la reprend pour lui. À la fin, le doigt pointé vers le ciel. Rien à ajouter.",
+      "contexte": { "evenement": "", "lieu": "", "date": "" },
+      "seo": { "title": "Stomy Bugsy en concert : photos | Gabin Spieser", "description": "10 photographies de Stomy Bugsy sur scène par Gabin Spieser : la fumée, la lumière orangée, du solo au duo." },
+      "liens": [
+        { "type": "site", "url": "https://stomybugsy.com/", "source": "ancien lien du site, vérifié" },
+        { "type": "instagram", "url": "https://www.instagram.com/stomybugsyofficiel", "source": "site officiel" },
+        { "type": "facebook", "url": "https://www.facebook.com/profile.php?id=61572341772967", "source": "site officiel" },
+        { "type": "tiktok", "url": "https://www.tiktok.com/@stomybugsyofficiel", "source": "site officiel" },
+        { "type": "youtube", "url": "https://www.youtube.com/@stomybugsytv", "source": "site officiel" },
+        { "type": "spotify", "url": "https://open.spotify.com/artist/6vDYFCXQbWPqlUEyBaVbMW", "source": "site officiel, Wikidata et Spotify" },
+        { "type": "deezer", "url": "https://www.deezer.com/artist/10867", "source": "Wikidata" }
+      ],
+      "scenes": [
+        { "type": "ouverture", "variante": "paysage", "photo": "GAB01479" },
+        { "type": "texte" },
+        { "type": "duo", "chapitre": "Seul", "photos": ["GAB01463", "GAB01475"] },
+        { "type": "monumental", "variante": "pleine", "chapitre": "À deux", "photo": "GAB01523-2" },
+        { "type": "duo", "variante": "partage", "photos": ["GAB01519", "GAB01531"] },
+        { "type": "asymetrique", "photo": "GAB01487", "cote": "droite", "texte": "Derrière lui, un autre rappeur lève la main. La même lumière orange les soude l’un à l’autre." },
+        { "type": "monumental", "chapitre": "Dans le noir", "photo": "GAB01539", "mot": "noir" },
+        { "type": "respiration", "photo": "GAB01548-2", "texte": "Dans son dos, des lettres blanches sur l’écran. Le décor parle fort ; lui, encore plus." },
+        { "type": "final", "chapitre": "Vers le ciel", "photo": "GAB01559-2" }
+      ],
+      "photos": {
+        "GAB01479": { "alt": "Stomy Bugsy, bras grands ouverts en croix, un micro dans une main, se découpe sur un fond noir.", "legende": "Bras en croix" },
+        "GAB01463": { "alt": "Stomy Bugsy rappe dans la fumée, une main ouverte vers le public.", "legende": "Dans la fumée" },
+        "GAB01475": { "alt": "Gros plan sur Stomy Bugsy qui rappe, des chaînes au cou, la main en mouvement.", "legende": "Gros plan" },
+        "GAB01523-2": { "alt": "Stomy Bugsy, un genou levé sur un retour de scène, rappe à côté d’un autre rappeur en casquette.", "legende": "À deux" },
+        "GAB01519": { "alt": "Stomy Bugsy pose le pied sur un retour de scène dans la fumée rose ; un autre rappeur chante derrière lui.", "legende": "Le pied sur le retour" },
+        "GAB01531": { "alt": "Stomy Bugsy et un autre rappeur en casquette, côte à côte dans la fumée bleutée.", "legende": "Côte à côte" },
+        "GAB01487": { "alt": "Stomy Bugsy lève la main en rappant, un autre rappeur derrière lui, dans une lumière orangée.", "legende": "La main levée" },
+        "GAB01539": { "alt": "Stomy Bugsy rappe dans la pénombre, une main tendue vers le public.", "legende": "Dans la pénombre" },
+        "GAB01548-2": { "alt": "Stomy Bugsy rappe de profil devant un écran où s’affichent de grandes lettres blanches.", "legende": "Les mots" },
+        "GAB01559-2": { "alt": "Stomy Bugsy pointe le ciel, un projecteur bleu derrière lui.", "legende": "Vers le ciel" }
+      }
+    },
+    {
+      "slug": "electro-symphony", "nom": "Electro Symphony", "dossier": "Electro symphony",
+      "theme": "electro", "titre_serie": "L’orchestre et la nuit", "contexte_fichier": "reims-arena-2026",
+      "accroche": "Un orchestre entier contre la nuit.",
+      "presentation": "Reims Arena, 12 avril 2026. Des archets, des voix, des lasers qui découpent la nuit : un orchestre entier qui fait vibrer une arène comme un club. On part de la scène entière, on s’approche des chanteurs jusqu’à sentir leur souffle, puis on finit avec ceux qui tiennent tout : les musiciens.",
+      "contexte": { "evenement": "Electro Symphony", "lieu": "Reims Arena", "date": "12 avril 2026", "date_iso": "2026-04-12" },
+      "seo": { "title": "Electro Symphony à Reims Arena : photos | Gabin Spieser", "description": "9 photographies d’Electro Symphony à Reims Arena, le 12 avril 2026 : l’orchestre, les voix et les musiciens, par Gabin Spieser." },
+      "liens": [
+        { "type": "site", "url": "https://electrosymphony.eu/", "source": "ancien lien du site ; le site refuse les vérifications automatiques (403)" }
+      ],
+      "scenes": [
+        { "type": "ouverture", "variante": "paysage", "photo": "GAB00267" },
+        { "type": "texte" },
+        { "type": "duo", "chapitre": "Les voix", "photos": ["GAB00294", "IMG_5478"] },
+        { "type": "sequence", "chapitre": "Les cœurs", "photos": ["IMG_5474", "IMG_5506"], "halo": "#880c19" },
+        { "type": "monumental", "photo": "IMG_5495", "mot": "lasers", "mot_cote": "droite" },
+        { "type": "asymetrique", "chapitre": "Les musiciens", "photo": "IMG_5504", "cote": "gauche", "texte": "Le chef d’orchestre tient tout d’une seule main. L’autre, levée, retient encore la vague." },
+        { "type": "asymetrique", "photo": "IMG_5502", "cote": "droite", "texte": "Un saxophone doré fend le bleu. Une note, et toute la lumière se range derrière lui." },
+        { "type": "final", "photo": "IMG_5512", "mot": "violon" }
+      ],
+      "photos": {
+        "GAB00267": { "alt": "La scène d’Electro Symphony à Reims Arena : un orchestre sous des faisceaux blancs et un grand dessin lumineux.", "legende": "L’orchestre" },
+        "GAB00294": { "alt": "Une chanteuse en robe vert fluo et lunettes blanches chante devant un projecteur, une violoniste à côté d’elle.", "legende": "Vert fluo" },
+        "IMG_5478": { "alt": "Un chanteur en veste de cuir brillante chante accroupi, le visage crispé, dans une lumière rouge.", "legende": "La voix" },
+        "IMG_5474": { "alt": "Un chanteur aux cœurs rouges lumineux sur la veste traverse la scène dans la pénombre.", "legende": "Les cœurs" },
+        "IMG_5506": { "alt": "Le chanteur aux cœurs lumineux ouvre grand les bras, ses tresses en mouvement.", "legende": "Bras ouverts" },
+        "IMG_5495": { "alt": "Un chanteur en costume noir et blanc écarte les bras au milieu de faisceaux violets.", "legende": "Faisceaux violets" },
+        "IMG_5504": { "alt": "Le chef d’orchestre dirige d’une main, l’autre levée, en chemise noire.", "legende": "Le chef" },
+        "IMG_5502": { "alt": "Une saxophoniste en robe noire joue d’un saxophone doré en marchant sur scène.", "legende": "Le saxophone" },
+        "IMG_5512": { "alt": "Une violoniste en robe pailletée joue les bras levés devant des lumières violettes.", "legende": "Le violon" }
+      }
+    },
+    {
+      "slug": "christophe-mae", "nom": "Christophe Maé", "dossier": "Christophe Maé",
+      "theme": "mae", "titre_serie": "Sous les guirlandes", "contexte_fichier": "concert",
+      "accroche": "Un soir de bal sous les ampoules.",
+      "presentation": "Des guirlandes d’ampoules comme un soir de bal. Christophe Maé passe de la guitare à l’harmonica, danse, laisse la lumière à un trompettiste. Puis la chemise verte du final, et ce doigt pointé droit sur vous. Impossible de rester assis.",
+      "contexte": { "evenement": "", "lieu": "", "date": "" },
+      "seo": { "title": "Christophe Maé en concert : photos | Gabin Spieser", "description": "8 photographies de Christophe Maé sur scène par Gabin Spieser : guitare, harmonica, danse et guirlandes d’ampoules." },
+      "liens": [
+        { "type": "site", "url": "https://www.christophe-mae.fr/", "source": "Wikidata, page vérifiée" },
+        { "type": "instagram", "url": "https://www.instagram.com/instamaeoff/", "source": "Wikidata" },
+        { "type": "facebook", "url": "https://www.facebook.com/christophemaeofficiel", "source": "Wikidata" },
+        { "type": "youtube", "url": "https://www.youtube.com/channel/UCAmxzskGsWYBf1PZJSLOmjg", "source": "Wikidata" },
+        { "type": "spotify", "url": "https://open.spotify.com/artist/7jgnJBnpZTiGnCF2Wvka2Z", "source": "Wikidata et Spotify" },
+        { "type": "deezer", "url": "https://www.deezer.com/artist/11907", "source": "Wikidata" }
+      ],
+      "scenes": [
+        { "type": "ouverture", "photo": "GAB00247", "cote": "droite" },
+        { "type": "texte" },
+        { "type": "duo", "chapitre": "Les instruments", "photos": ["GAB00145", "GAB00127"] },
+        { "type": "duo", "chapitre": "La danse", "photos": ["GAB00237", "GAB00242"] },
+        { "type": "respiration", "photo": "GAB00152", "texte": "Le trompettiste, assis sous les ampoules. Le temps d’un souffle, la fête retient sa respiration." },
+        { "type": "monumental", "photo": "GAB00240" },
+        { "type": "final", "chapitre": "Vers vous", "photo": "GAB00283" }
+      ],
+      "photos": {
+        "GAB00247": { "alt": "Christophe Maé lève le bras vers le ciel, micro en main, devant une guirlande d’ampoules.", "legende": "Le bras levé" },
+        "GAB00145": { "alt": "Christophe Maé chante en jouant de la guitare acoustique, en chemise bleue.", "legende": "La guitare" },
+        "GAB00127": { "alt": "Christophe Maé joue de l’harmonica, penché en avant, en chemise bleue brodée.", "legende": "L’harmonica" },
+        "GAB00237": { "alt": "Christophe Maé sourit, les mains sur les hanches, en chemise bleue.", "legende": "Les mains sur les hanches" },
+        "GAB00242": { "alt": "Christophe Maé danse, une jambe levée, au bord de la scène.", "legende": "La danse" },
+        "GAB00152": { "alt": "Un trompettiste en chemise blanche joue assis, devant des ampoules allumées, sur la scène de Christophe Maé.", "legende": "Le trompettiste" },
+        "GAB00240": { "alt": "Christophe Maé chante en levant la main vers le haut, dans l’ombre.", "legende": "Vers le haut" },
+        "GAB00283": { "alt": "Christophe Maé, en chemise verte, pointe le doigt vers le public en chantant.", "legende": "Vers vous" }
+      }
+    },
+    {
+      "slug": "feu-chatterton", "nom": "Feu! Chatterton", "dossier": "Feu! Chatterton",
+      "theme": "feu", "titre_serie": "De la couleur au noir et blanc", "contexte_fichier": "foire-en-scene-2026",
+      "accroche": "Le vert, le jaune, puis la bascule.",
+      "presentation": "Du vert acide, du jaune qui claque, puis plus rien que le noir et blanc. Feu! Chatterton sur la scène de Foire en Scène, à Châlons-en-Champagne : une bascule brutale, comme un projecteur qu’on coupe net. Et à la fin, le face-à-face avec le public, au plus près, là où ça brûle.",
+      "contexte": { "evenement": "Foire en Scène", "lieu": "Châlons-en-Champagne", "date": "2026" },
+      "seo": { "title": "Feu! Chatterton à Foire en Scène 2026 : photos | Gabin Spieser", "description": "6 photographies de Feu! Chatterton à Foire en Scène, Châlons-en-Champagne, 2026 : de la couleur au noir et blanc, par Gabin Spieser." },
+      "liens": [
+        { "type": "site", "url": "https://feuchatterton.fr/", "source": "Wikidata, page vérifiée" },
+        { "type": "instagram", "url": "https://www.instagram.com/feuchatterton/", "source": "site officiel et Wikidata" },
+        { "type": "facebook", "url": "https://www.facebook.com/feu.chatterton", "source": "site officiel et Wikidata" },
+        { "type": "youtube", "url": "https://www.youtube.com/channel/UC0ixDRQmVUvsKr_aiMBoD8Q", "source": "Wikidata" },
+        { "type": "spotify", "url": "https://open.spotify.com/artist/538TfjnJpRXI80MHYWfKlo", "source": "site officiel, Wikidata et Spotify" },
+        { "type": "deezer", "url": "https://www.deezer.com/fr/artist/5623138", "source": "site officiel et Wikidata" }
+      ],
+      "scenes": [
+        { "type": "ouverture", "variante": "paysage", "photo": "GAB00778", "halo": "#04c435" },
+        { "type": "texte", "fond": "#06120a", "halo": "#04c435" },
+        { "type": "duo", "chapitre": "Couleur", "photos": ["GAB00701-2", "GAB00741"] },
+        { "type": "monumental", "chapitre": "Noir et blanc", "photo": "GAB00843", "mot": "gris" },
+        { "type": "monumental", "photo": "GAB00923" },
+        { "type": "final", "chapitre": "Vers le public", "photo": "GAB00904" }
+      ],
+      "photos": {
+        "GAB00778": { "alt": "Le chanteur de Feu! Chatterton, allongé sur scène devant un fond vert, chante en levant un doigt.", "legende": "Allongé" },
+        "GAB00701-2": { "alt": "Le chanteur de Feu! Chatterton chante en costume sombre et cravate, le poing serré.", "legende": "Le poing serré" },
+        "GAB00741": { "alt": "Un guitariste de Feu! Chatterton en t-shirt blanc joue devant un fond jaune.", "legende": "Fond jaune" },
+        "GAB00843": { "alt": "En noir et blanc, un guitariste de Feu! Chatterton se penche, les cheveux projetés en avant.", "legende": "Les cheveux" },
+        "GAB00923": { "alt": "En noir et blanc, deux guitaristes de Feu! Chatterton jouent face à face dans la fumée.", "legende": "Face à face" },
+        "GAB00904": { "alt": "En noir et blanc, le chanteur de Feu! Chatterton se penche vers le public qui tend les mains.", "legende": "Vers le public" }
+      }
+    },
+    {
+      "slug": "m-pokora", "nom": "M. Pokora", "dossier": "M POKORA",
+      "theme": "pokora", "titre_serie": "Lumières blanches", "contexte_fichier": "concert",
+      "accroche": "Une veste blanche contre un mur de lumières.",
+      "presentation": "Une veste blanche, un mur de lumières, et un homme qui a fait de la scène son terrain de jeu. M. Pokora pointe la foule, partage un duo dans le violet, puis s’en va, de dos, en noir et blanc. Les plus belles sorties ne se retournent pas.",
+      "contexte": { "evenement": "", "lieu": "", "date": "" },
+      "seo": { "title": "M. Pokora en concert : photos | Gabin Spieser", "description": "6 photographies de M. Pokora sur scène par Gabin Spieser : veste blanche, mur de lumières et duo." },
+      "liens": [
+        { "type": "site", "url": "https://www.mpokoramusic.fr/", "source": "Wikidata ; le site refuse les vérifications automatiques (403)" },
+        { "type": "instagram", "url": "https://www.instagram.com/mattpokora/", "source": "Wikidata" },
+        { "type": "facebook", "url": "https://www.facebook.com/MPokora", "source": "Wikidata" },
+        { "type": "youtube", "url": "https://www.youtube.com/channel/UCBncFwz6ZQ4fiEkM65IGYvw", "source": "Wikidata" },
+        { "type": "spotify", "url": "https://open.spotify.com/artist/6euPnGzBlDysAC5ecVguNZ", "source": "Wikidata et Spotify" },
+        { "type": "deezer", "url": "https://www.deezer.com/artist/144446", "source": "Wikidata" }
+      ],
+      "scenes": [
+        { "type": "ouverture", "photo": "GAB09377", "cote": "droite" },
+        { "type": "texte" },
+        { "type": "monumental", "chapitre": "Le mur de lumières", "photo": "GAB09166", "mot": "lumières" },
+        { "type": "asymetrique", "photo": "GAB09150", "cote": "gauche", "texte": "Le doigt pointé droit devant, la veste blanche en feu sous le rouge. Il ne demande pas l’attention : il la prend." },
+        { "type": "duo", "chapitre": "En duo", "photos": ["GAB09333", "GAB09335"] },
+        { "type": "final", "chapitre": "Sortie", "photo": "GAB09274" }
+      ],
+      "photos": {
+        "GAB09377": { "alt": "M. Pokora chante le poing serré, en veste blanche, devant des lumières rouges floues.", "legende": "Le poing serré" },
+        "GAB09150": { "alt": "M. Pokora chante en pointant le doigt, en veste blanche, sous une lumière rouge.", "legende": "Le doigt pointé" },
+        "GAB09166": { "alt": "M. Pokora chante en avançant devant un mur de lumières blanches.", "legende": "Le mur de lumières" },
+        "GAB09333": { "alt": "M. Pokora chante en duo avec une chanteuse, sous une lumière violette.", "legende": "Le duo" },
+        "GAB09335": { "alt": "M. Pokora et une chanteuse chantent la tête en arrière, sous la lumière violette.", "legende": "En duo" },
+        "GAB09274": { "alt": "En noir et blanc, M. Pokora, de dos, marche sur scène en t-shirt imprimé.", "legende": "De dos" }
+      }
+    },
+    {
+      "slug": "silda", "nom": "Silda", "dossier": "Silda",
+      "theme": "silda", "titre_serie": "Du recueillement à la joie", "contexte_fichier": "concert",
+      "accroche": "Du dedans au dehors, dans un bleu presque marin.",
+      "presentation": "Un bleu profond, presque marin. Silda chante les yeux fermés, comme si la salle n’existait pas encore. Puis le rire arrive, la main sur le cœur. Et le bras se lève. Sept images pour passer du dedans au dehors.",
+      "contexte": { "evenement": "", "lieu": "", "date": "" },
+      "seo": { "title": "Silda en concert : photos | Gabin Spieser", "description": "7 photographies de Silda sur scène par Gabin Spieser, sur un fond bleu profond : du recueillement à la joie." },
+      "liens": [
+        { "type": "site", "url": "https://www.sildaofficiel.com/", "source": "lien déjà présent sur la page Merci, vérifié" },
+        { "type": "instagram", "url": "https://www.instagram.com/sildamusique/", "source": "site officiel" },
+        { "type": "facebook", "url": "https://www.facebook.com/SildaOfficiel/", "source": "site officiel" },
+        { "type": "tiktok", "url": "https://www.tiktok.com/@sildamusique", "source": "site officiel" },
+        { "type": "youtube", "url": "https://www.youtube.com/channel/UC1hSTo38y09GaQu1FiUUmKA", "source": "site officiel" },
+        { "type": "spotify", "url": "https://open.spotify.com/artist/40KSCqpLNeOrbqt9nvf8JR", "source": "site officiel et Spotify" },
+        { "type": "apple", "url": "https://music.apple.com/us/artist/silda/1595656582", "source": "site officiel" },
+        { "type": "deezer", "url": "https://www.deezer.com/fr/artist/149516562", "source": "site officiel" }
+      ],
+      "direction": "Un bleu profond qui s’éteint peu à peu dans le noir de la scène, puis revient. Chaque photo est montrée en très grand, sur un fond qui reprend la couleur de ses bords : l’image se prolonge dans la page. Typographie en minuscules, mots géants derrière les images.",
+      "scenes": [
+        { "type": "ouverture", "photo": "GAB02931", "cote": "droite" },
+        { "type": "texte", "style": "lede", "photo_couleur": "GAB02931", "texte": "Un bleu profond, presque marin. Silda chante les yeux fermés, comme si la salle n’existait pas encore. Puis le rire arrive, la main sur le cœur. Et le bras se lève. Sept images pour passer du dedans au dehors." },
+        { "type": "monumental", "chapitre": "Le bleu", "photo": "GAB02868", "mot": "recueillement", "mot_cote": "gauche" },
+        { "type": "duo", "chapitre": "Le rire", "photos": ["GAB02900", "GAB02907"], "mot": "rire" },
+        { "type": "monumental", "chapitre": "Le geste", "photo": "GAB02939" },
+        { "type": "asymetrique", "chapitre": "La violoniste", "photo": "GAB02987", "cote": "gauche", "accent": "#cac0e4", "texte": "Une violoniste à ses côtés. Haut blanc, pantalon rose, archet levé : la seule touche claire dans tout ce bleu. Un éclat qu’on n’attendait pas." },
+        { "type": "final", "chapitre": "La joie", "photo": "GAB03003", "mot": "joie" }
+      ],
+      "photos": {
+        "GAB02868": { "alt": "Silda chante les yeux fermés, le visage levé, devant un fond bleu.", "legende": "Les yeux fermés" },
+        "GAB02900": { "alt": "Silda rit en se penchant, la main sur la poitrine.", "legende": "Le rire" },
+        "GAB02907": { "alt": "Silda sourit, les deux mains sur le cœur.", "legende": "La main sur le cœur" },
+        "GAB02931": { "alt": "Silda chante au micro devant un fond bleu intense.", "legende": "Fond bleu" },
+        "GAB02939": { "alt": "Silda chante en tendant un bras sur le côté, devant un fond bleu.", "legende": "Le bras tendu" },
+        "GAB02987": { "alt": "Une violoniste en pantalon rose joue sur la scène de Silda.", "legende": "La violoniste" },
+        "GAB03003": { "alt": "Silda lève le micro au-dessus de sa tête en riant, une main sur la hanche.", "legende": "Bras levé" }
+      }
+    },
+    {
+      "slug": "madelaine", "nom": "Madelaine", "dossier": "Madelaine",
+      "theme": "madelaine", "titre_serie": "L’archet et le tulle", "contexte_fichier": "concert",
+      "accroche": "L’archet comme une épée, le tulle comme une danse.",
+      "presentation": "Des cheveux bleus, un violon électrique blanc, une jupe de tulle qui refuse de tenir en place. Madelaine ne choisit pas entre la danse et la musique : elle fait les deux, et l’archet devient un bras de plus.",
+      "contexte": { "evenement": "", "lieu": "", "date": "" },
+      "seo": { "title": "Madelaine en concert : photos | Gabin Spieser", "description": "4 photographies de Madelaine sur scène, violon électrique et cheveux bleus, par Gabin Spieser." },
+      "liens": [],
+      "scenes": [
+        { "type": "ouverture", "variante": "paysage", "photo": "GAB02071" },
+        { "type": "texte" },
+        { "type": "monumental", "photo": "GAB02042", "mot": "tulle" },
+        { "type": "asymetrique", "photo": "GAB02075", "cote": "droite", "texte": "L’archet brandi au-dessus de la tête comme une épée. Le violon blanc, le tulle qui vole. Un ballet armé." },
+        { "type": "final", "photo": "GAB02078" }
+      ],
+      "photos": {
+        "GAB02071": { "alt": "Madelaine, cheveux bleus, tend l’archet de son violon électrique blanc vers l’objectif.", "legende": "L’archet tendu" },
+        "GAB02042": { "alt": "Madelaine, cheveux bleus et jupe de tulle blanche, danse en riant, micro à la main.", "legende": "La danse" },
+        "GAB02075": { "alt": "Madelaine joue du violon électrique blanc, l’archet levé au-dessus de sa tête.", "legende": "L’archet levé" },
+        "GAB02078": { "alt": "Madelaine tourne sur elle-même en jouant du violon, sa jupe de tulle en mouvement.", "legende": "Le tulle" }
+      }
+    }
+  ],
+  "instantanes": {
+    "slug": "instantanes", "nom": "Instantanés", "theme": "instantanes",
+    "titre_serie": "Quelques images. Pas une de trop.",
+    "presentation": "Pas le temps d’une série. Juste le temps d’un geste, d’un cri, d’un rire. Ici, chaque artiste tient en trois images, parfois une seule : des instants attrapés au vol, gardés comme on garde un ticket de concert au fond d’une poche.",
+    "fin": "Dès la quatrième image, l’instantané devient une série.",
+    "seo": { "title": "Instantanés de concerts : Lokyto, Styleto, Virginie Rohart | Gabin Spieser", "description": "Photographies de concert de Lokyto, Styleto, Virginie Rohart et Milla Leika par Gabin Spieser." },
+    "artistes": [
+      { "slug": "lokyto", "nom": "Lokyto", "dossier": "Lokyto", "contexte_fichier": "concert", "presentation": "Veste de cuir rouge, lunettes teintées. Un genou à terre, un doigt pointé, puis ce sourire derrière les verres. Trois images, trois façons de prendre la scène.",
+        "liens": [ { "type": "spotify", "url": "https://open.spotify.com/artist/7uBrRphwTEWFcuJwkEY4kC", "source": "Spotify (nom vérifié)" } ],
+        "ordre": ["GAB08223", "GAB08197", "GAB08203"],
+        "photos": {
+          "GAB08223": { "alt": "Lokyto, en veste de cuir rouge, chante un genou à terre, le bras tendu vers le public.", "legende": "Le bras tendu" },
+          "GAB08197": { "alt": "Lokyto, de profil en veste rouge, pointe le doigt en chantant sous une structure de scène.", "legende": "Le doigt pointé" },
+          "GAB08203": { "alt": "Lokyto, en veste de cuir rouge et lunettes teintées, sourit devant un projecteur jaune.", "legende": "Le sourire" } } },
+      { "slug": "styleto", "nom": "Styleto", "dossier": "Styleto", "contexte_fichier": "concert", "presentation": "Un rideau violet, des cheveux qui partent dans tous les sens, une danse qui ne demande la permission à personne. Puis le noir et blanc, à genoux au bord de la scène. Le calme après la tornade.",
+        "liens": [
+          { "type": "youtube", "url": "https://www.youtube.com/channel/UCyJaJeQ78SDNPdjdRXiVPYQ", "source": "Wikidata" },
+          { "type": "spotify", "url": "https://open.spotify.com/artist/4vbZKiwmvbbW6onily9SJ5", "source": "Wikidata et Spotify" },
+          { "type": "deezer", "url": "https://www.deezer.com/artist/170886747", "source": "Wikidata" } ],
+        "ordre": ["GAB09552-2", "GAB09439", "GAB09414"],
+        "photos": {
+          "GAB09552-2": { "alt": "Styleto danse, les cheveux projetés en l’air, devant un rideau violet.", "legende": "Les cheveux" },
+          "GAB09439": { "alt": "Styleto danse en riant sur scène, devant une batterie et un rideau violet.", "legende": "La danse" },
+          "GAB09414": { "alt": "En noir et blanc, Styleto chante à genoux au bord de la scène.", "legende": "À genoux" } } },
+      { "slug": "virginie-rohart", "nom": "Virginie Rohart", "dossier": "Virginie Rohart", "contexte_fichier": "concert", "presentation": "Cambrée, en plein cri, la tête renversée. Une voix qui ne se retient pas, et un corps qui suit. Trois images qui ne murmurent jamais.",
+        "liens": [],
+        "ordre": ["GAB00040", "GAB00068", "GAB00026"],
+        "photos": {
+          "GAB00040": { "alt": "Virginie Rohart se cambre, un bras tendu avec le micro, l’autre main levée devant son visage.", "legende": "Cambrée" },
+          "GAB00068": { "alt": "Virginie Rohart chante en criant, les cheveux en mouvement.", "legende": "Le cri" },
+          "GAB00026": { "alt": "Virginie Rohart chante la tête renversée en arrière, sur fond sombre.", "legende": "La tête renversée" } } },
+      { "slug": "milla-leika", "nom": "Milla Leika", "dossier": "Milla Leika", "contexte_fichier": "concert", "presentation": "Une seule image. Un éclat de rire sous la lumière violette. Parfois, il n’en faut pas plus.",
+        "liens": [],
+        "ordre": ["GAB06483_1"],
+        "photos": {
+          "GAB06483_1": { "alt": "Milla Leika, de profil, rit sous une lumière violette.", "legende": "Le rire" } } }
+    ]
+  },
+  "public": {
+    "dossier": "Divers", "slug": "public", "contexte_fichier": "festival",
+    "photos": {
+      "IMG_3834": { "alt": "Quatre colonnes d’étincelles violettes jaillissent sur la scène d’un festival, devant le public." },
+      "IMG_3835": { "alt": "Une pluie de confettis tombe sur le public d’un festival, la scène éclairée en rose à gauche." },
+      "IMG_3836": { "alt": "Un nuage de confettis orange envahit la scène et le public d’un festival." },
+      "IMG_3838": { "alt": "Le public lève les bras sous une pluie dense de confettis dorés." }
+    }
+  }
+}

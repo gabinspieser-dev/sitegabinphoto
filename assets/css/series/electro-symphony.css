@@ -1,0 +1,10 @@
+/* =========================================================
+   Electro Symphony — « L'orchestre et la nuit » : une partition lumineuse (25/11/2026)
+   Violets (#541354, #411295, #58078b), cœurs rouges (#880c19), l'orchestre entier en ouverture.
+   Chaque titre de chapitre est posé sur une portée de cinq lignes ; les grands mots ont la couleur des lasers.
+   ========================================================= */
+.serie--electro{--sc-ink:#f1edf8;--sc-ink2:rgba(241,237,248,.66);--sc-acc:#d08bff;--rule:rgba(208,139,255,.24);--ink-base:#f1edf8;--ink-2:rgba(241,237,248,.64);--acc:#d08bff;background:#06040d}
+.serie--electro .sc-nom{text-transform:uppercase;text-shadow:0 0 40px rgba(199,125,255,.4)}
+.serie--electro .sc-chapitre{min-width:min(100%,30rem);padding-block:1rem;background:repeating-linear-gradient(to bottom,transparent 0 11px,color-mix(in srgb,var(--sc-acc) 30%,transparent) 11px 12px) 0 50%/100% 60px no-repeat}
+.serie--electro .sc-mot{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;text-transform:uppercase;background:linear-gradient(90deg,rgba(255,79,216,.22),rgba(141,95,255,.14));-webkit-background-clip:text;background-clip:text;color:transparent}
+.serie--electro .sc--sequence .serie-seq-reperes li.is-actif{background:#ff4fd8}

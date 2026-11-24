@@ -7,7 +7,8 @@
   const navigation = header.querySelector('.main-nav');
   if (!button || !navigation || button.getAttribute('aria-controls') !== navigation.id) return;
 
-  const phone = window.matchMedia('(max-width: 650px)');
+  // Menu compact (bouton « Menu ») jusqu'à 1199 px : en dessous, les liens ne tiennent plus sur une ligne (25/11/2026).
+  const phone = window.matchMedia('(max-width: 1199px)');
   const label = button.querySelector('.nav-toggle-label');
   const icon = button.querySelector('.nav-toggle-icon');
   let open = false;

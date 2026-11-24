@@ -1,0 +1,12 @@
+/* =========================================================
+   Christophe Maé — « Sous les guirlandes » : une guinguette du soir (25/11/2026)
+   Ampoules ambrées (#7d4d2e) et chemise bleu denim (#244476). Une guirlande d'ampoules sépare les chapitres,
+   le fond passe de l'ambre au bleu nuit, le trompettiste sert de respiration.
+   ========================================================= */
+.serie--mae{--sc-ink:#f8efe2;--sc-ink2:rgba(248,239,226,.68);--sc-acc:#f6b04a;--rule:rgba(246,176,74,.22);--ink-base:#f8efe2;--ink-2:rgba(248,239,226,.64);--acc:#f6b04a;background:#0c0805}
+.serie--mae .sc-nom{letter-spacing:.01em}
+.serie--mae .sc-titre{color:#f6b04a}
+.serie--mae .sc-chapitre{flex-wrap:wrap}
+.serie--mae .sc-chapitre::before{content:"";flex-basis:100%;max-width:min(100%,32rem);height:12px;margin-bottom:1.2rem;background:radial-gradient(circle,#f6b04a 0 3px,rgba(246,176,74,.28) 4px,transparent 6.5px) 0 50%/36px 12px repeat-x}
+.serie--mae .sc-photo .photo-open{box-shadow:0 40px 120px -50px rgba(246,176,74,.45)}
+.serie--mae .sc-note{font-size:clamp(1.1rem,1.5vw,1.3rem);color:#f8efe2}

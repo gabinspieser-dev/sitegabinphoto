@@ -1,0 +1,109 @@
+/* =========================================================
+   Séries photographiques — caractère propre à chaque artiste (24/11/2026)
+   Une section par série. Chaque thème donne : ses fonds (--fond-*), son encre, son accent (--acc),
+   le traitement du nom, et un motif tiré de ses photos. Aucun filtre n'est appliqué aux photos.
+   Nouvel artiste : copier un bloc, changer le nom de la classe (.serie--<thème>) et les couleurs.
+   ========================================================= */
+
+/* ---------- Ina Forsman : noir, blanc, noir ----------
+   Seulement du noir, du blanc papier et un gris. Le nom en contour, comme une épreuve.
+   Le rideau s'ouvre au premier défilement ; le fond passe au blanc pour les images proches. */
+.serie--ina{--fond-noir:#050505;--fond-papier:#f1efea;--fond-verso:#050505;--ink-base:#f4f2ee;--ink-2:rgba(244,242,238,.62);--acc:#f4f2ee;--rule:rgba(244,242,238,.16);--ink-papier:#0d0d0d;--ink2-papier:rgba(13,13,13,.6)}
+.serie--ina .serie-nom{color:transparent;-webkit-text-stroke:1px var(--ink-base);font-size:clamp(3.6rem,7.6vw,7.4rem);text-transform:uppercase}
+.serie--ina .serie-titre{font-size:.82rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-2)}
+.serie--ina .serie-chapitre-tete h2{text-transform:uppercase;letter-spacing:.04em}
+.serie--ina [data-fond="papier"] .serie-chapitre-tete h2{color:transparent;-webkit-text-stroke:1px var(--ink-papier)}
+.serie--ina [data-fond="papier"] .serie-photo .photo-open{outline:1px solid var(--ink-papier);outline-offset:10px}
+.serie--ina [data-fond="papier"] .serie-legende{margin-top:1.2rem}
+.serie--ina .serie-num{color:var(--ink-c)}
+.serie--ina .brand-logo{filter:grayscale(1) brightness(1.6)}
+.serie--ina .serie-compteur{background:rgba(5,5,5,.72);color:#f4f2ee}
+@supports (animation-timeline:scroll()){
+  @keyframes ina-rideau{from{clip-path:inset(0 30% 0 30%)}to{clip-path:inset(0 0 0 0)}}
+  html.serie-js:not(.serie-calme) .serie--ina .serie-ouverture--rideau .serie-photo .photo-open{animation:ina-rideau linear both;animation-timeline:scroll(root);animation-range:0 55vh}
+}
+
+/* ---------- Julien Doré : costume blanc, piano jaune ----------
+   Ivoire et noir chaud ; le jaune laqué du piano marque le nom et le chapitre « Au piano ». */
+.serie--julien{--fond-noir:#0b0a08;--fond-nuit:#0b0a08;--fond-piano:#14110a;--fond-verso:#0b0a08;--ink-base:#f4efe4;--ink-2:rgba(244,239,228,.64);--acc:#f5c518;--rule:rgba(244,239,228,.16)}
+.serie--julien .serie-nom{text-transform:uppercase}
+.serie--julien .serie-nom::after{content:"";display:block;width:min(42%,320px);height:10px;margin-top:1.1rem;background:#f5c518}
+.serie--julien [data-fond="piano"]{border-top:14px solid #f5c518}
+.serie--julien [data-fond="piano"] .serie-chapitre-tete h2{color:#f5c518}
+
+/* ---------- Mika : trois costumes, trois actes ----------
+   Chaque acte prend la couleur de son costume ; la page change de teinte entre les actes. */
+.serie--mika{--fond-noir:#05090b;--fond-acte1:#04191c;--fond-acte2:#1a1406;--fond-acte3:#080b1d;--fond-verso:#080b1d;--acc-acte1:#33c2c4;--acc-acte2:#f0bf3a;--acc-acte3:#93a8ff;--acc:#33c2c4;--ink-base:#f3f0ea;--ink-2:rgba(243,240,234,.66)}
+.serie--mika .serie-nom{text-transform:uppercase;letter-spacing:.03em}
+.serie--mika .serie-chapitre-num{display:none}
+.serie--mika .serie-chapitre-tete h2{font-size:clamp(3rem,7vw,6rem);color:var(--acc)}
+.serie--mika .serie-chapitre-tete{align-items:flex-end}
+
+/* ---------- Anna Winkin : un reportage ----------
+   Le rouge de sa tenue et des roses pour la scène, le papier pour les coulisses, une lumière de jour pour la rue. */
+.serie--anna{--fond-noir:#0d0607;--fond-scene:#120708;--fond-papier:#efebe4;--fond-jour:#efe5d6;--fond-verso:#120708;--acc:#ff5a6a;--ink-base:#f6efe9;--ink-2:rgba(246,239,233,.66)}
+.serie--anna .serie-nom{color:#ff5a6a}
+.serie--anna .serie-chapitre-tete{border-top:1px solid var(--rule-c);padding-top:1.1rem;margin-inline:var(--amb-gutter);padding-inline:0}
+.serie--anna .serie-chapitre-tete h2{font-family:var(--body,'DM Sans'),sans-serif;font-size:clamp(1.4rem,2.4vw,2rem);letter-spacing:.2em;text-transform:uppercase}
+.serie--anna .serie-chapitre-num::before{content:"";display:inline-block;width:.55em;height:.55em;margin-right:.6rem;border-radius:50%;background:var(--acc);vertical-align:.08em}
+.serie--anna [data-fond="papier"],.serie--anna [data-fond="jour"]{--acc:#b4141f}
+@media (max-width:700px){.serie--anna .serie-chapitre-tete{margin-inline:5vw}}
+
+/* ---------- Stomy Bugsy : dans le noir ----------
+   Noir absolu, la lumière orangée des contours ; ouverture en cinémascope. */
+.serie--stomy{--fond-noir:#000;--fond-fumee:#0d0a09;--fond-verso:#000;--acc:#f0a061;--ink-base:#f5efe8;--ink-2:rgba(245,239,232,.6);--rule:rgba(240,160,97,.25)}
+.serie--stomy .serie-nom{text-transform:uppercase;font-size:clamp(4rem,13vw,12rem);letter-spacing:-.005em}
+.serie--stomy .serie-ouverture--cinema .serie-photo{border-block:clamp(10px,3vw,40px) solid #000}
+.serie--stomy .serie-chapitre-tete h2{text-transform:uppercase}
+.serie--stomy .serie-chapitre-tete::after{content:"";flex-basis:100%;height:1px;background:linear-gradient(90deg,var(--acc),transparent 60%)}
+
+/* ---------- Electro Symphony : l'orchestre et la nuit ----------
+   Violet de nuit, accent laser ; les titres de chapitre posés sur une portée (cinq lignes). */
+.serie--electro{--fond-noir:#06040d;--fond-nuit:#07050f;--fond-laser:#0d0619;--fond-verso:#06040d;--acc:#c77dff;--ink-base:#f1edf8;--ink-2:rgba(241,237,248,.64);--rule:rgba(199,125,255,.22)}
+.serie--electro .serie-nom{text-transform:uppercase;text-shadow:0 0 38px rgba(199,125,255,.35)}
+.serie--electro .serie-chapitre-tete{padding-block:.9rem;background:repeating-linear-gradient(to bottom,transparent 0 11px,rgba(199,125,255,.22) 11px 12px) 0 50%/100% 60px no-repeat}
+.serie--electro [data-fond="laser"] .serie-chapitre-tete h2{color:#ff62d8}
+
+/* ---------- Christophe Maé : sous les guirlandes ----------
+   Nuit chaude et ampoules ambrées ; une guirlande de points lumineux sépare les chapitres. */
+.serie--mae{--fond-noir:#0c0805;--fond-ambre:#100b06;--fond-verso:#0c0805;--acc:#f6b04a;--ink-base:#f7efe3;--ink-2:rgba(247,239,227,.64);--rule:rgba(246,176,74,.22)}
+.serie--mae .serie-chapitre::before{content:"";display:block;height:10px;margin:0 var(--amb-gutter) clamp(2rem,5vw,3.5rem);background:radial-gradient(circle,#f6b04a 0 3px,rgba(246,176,74,.25) 4px,transparent 6px) 0 50%/34px 10px repeat-x;opacity:.85}
+.serie--mae .serie-nom{color:#f7efe3}
+.serie--mae .serie-nom em,.serie--mae .serie-titre{color:#f6b04a}
+
+/* ---------- Feu! Chatterton : de la couleur au noir et blanc ----------
+   Le vert et le jaune de la scène, puis tout bascule en gris. */
+.serie--feu{--fond-noir:#050805;--fond-couleur:#06100a;--fond-mono:#111;--fond-verso:#111;--acc:#46e05c;--acc-mono:#d8d8d8;--ink-base:#f2f2ee;--ink-2:rgba(242,242,238,.62)}
+.serie--feu .serie-nom{color:#46e05c;text-transform:uppercase}
+.serie--feu .serie-titre{background:linear-gradient(90deg,#46e05c,#f5d90a 45%,#d8d8d8 75%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.serie--feu [data-fond="mono"] .serie-chapitre-tete h2{color:#d8d8d8}
+
+/* ---------- M. Pokora : lumières blanches ----------
+   Nuit bleutée, violet du duo ; un mur de petites lumières carrées en séparateur. */
+.serie--pokora{--fond-noir:#06060f;--fond-nuit:#070713;--fond-violet:#120a24;--fond-verso:#06060f;--acc:#a98bff;--ink-base:#f4f2fb;--ink-2:rgba(244,242,251,.64)}
+.serie--pokora .serie-nom{text-transform:uppercase}
+.serie--pokora .serie-chapitre-tete::before{content:"";flex-basis:100%;height:14px;margin-bottom:1.2rem;background:linear-gradient(90deg,rgba(255,255,255,.7) 0 8px,transparent 8px) 0 0/22px 14px repeat-x;mask-image:linear-gradient(90deg,#000,transparent 70%);-webkit-mask-image:linear-gradient(90deg,#000,transparent 70%)}
+
+/* ---------- Silda : du recueillement à la joie ----------
+   Bleu profond et doux ; un halo bleu entoure les photos. */
+.serie--silda{--fond-noir:#040820;--fond-bleu:#060b28;--fond-verso:#040820;--acc:#8fb0ff;--ink-base:#f1f4ff;--ink-2:rgba(241,244,255,.66);--rule:rgba(143,176,255,.22)}
+.serie--silda .serie-nom{font-family:var(--body,'DM Sans'),sans-serif;font-weight:400;letter-spacing:-.02em;text-transform:lowercase;font-size:clamp(3.6rem,11vw,9.5rem)}
+.serie--silda .serie-photo .photo-open{box-shadow:0 0 0 1px rgba(143,176,255,.12),0 30px 110px -30px rgba(79,125,255,.55)}
+
+/* ---------- Madelaine : l'archet et le tulle ----------
+   Le bleu de ses cheveux, le blanc du tulle ; beaucoup d'air. */
+.serie--madelaine{--fond-noir:#050a0b;--fond-nuit:#061012;--fond-verso:#050a0b;--acc:#3fd0d9;--ink-base:#f2f8f8;--ink-2:rgba(242,248,248,.64);--rule:rgba(63,208,217,.22)}
+.serie--madelaine .serie-nom{color:#3fd0d9;text-transform:uppercase}
+.serie--madelaine .serie-chapitre-tete{position:relative}
+.serie--madelaine .serie-chapitre-tete::after{content:"";position:absolute;inset:-2rem 0 auto;height:7rem;background:radial-gradient(60% 100% at 30% 0,rgba(242,248,248,.08),transparent 70%);pointer-events:none}
+
+/* ---------- Instantanés : sobre, aux couleurs du site ---------- */
+.serie--instantanes{--fond-noir:#08090a;--fond-verso:#08090a;--acc:#ff4d32}
+.serie--instantanes .serie-chapitre-tete h2{font-size:clamp(2.6rem,6vw,4.6rem)}
+
+/* ---------- Couleur d'accent de chaque série sur la page d'entrée du portfolio ---------- */
+.serie-entree--julien{--entree-acc:#f5c518}.serie-entree--mika{--entree-acc:#33c2c4}.serie-entree--anna{--entree-acc:#ff5a6a}
+.serie-entree--stomy{--entree-acc:#f0a061}.serie-entree--electro{--entree-acc:#c77dff}.serie-entree--mae{--entree-acc:#f6b04a}
+.serie-entree--feu{--entree-acc:#46e05c}.serie-entree--pokora{--entree-acc:#a98bff}.serie-entree--silda{--entree-acc:#8fb0ff}
+.serie-entree--madelaine{--entree-acc:#3fd0d9}.serie-entree--instantanes{--entree-acc:#ff4d32}
+.serie-entree .serie-kicker::before{content:"";display:inline-block;width:1.6rem;height:2px;margin-right:.7rem;vertical-align:.25em;background:var(--entree-acc,var(--tone))}

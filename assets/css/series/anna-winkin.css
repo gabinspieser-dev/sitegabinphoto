@@ -1,0 +1,17 @@
+/* =========================================================
+   Anna Winkin — « Autour de la scène » : un carnet de reportage (25/11/2026)
+   Le seul vrai reportage : rouge de scène (#69020e), coulisses gris moyen (#555 à #838383),
+   lumière de jour beige (#c3bfa9), projecteurs vert (#566826) et violet (#8583b1), photo de groupe orangée (#9f693e).
+   Le fond suit ces couleurs scène après scène. Les textes s'écrivent comme des notes de carnet :
+   italique à empattements, un trait rouge dans la marge, des titres de chapitre comme des intercalaires.
+   ========================================================= */
+.serie--anna{--sc-ink:#f7efe9;--sc-ink2:rgba(247,239,233,.72);--sc-acc:#ff8e98;--acc-sombre:#9c1422;--rule:rgba(247,239,233,.18);--ink-base:#f7efe9;--ink-2:rgba(247,239,233,.68);--acc:#ff6b78;background:#0d0607}
+.serie--anna .sc-nom{color:#ff6b78}
+.serie--anna .sc-lede,.serie--anna .sc-note,.serie--anna .sc-asym-texte p{font-family:Georgia,'Times New Roman',serif;font-style:italic;letter-spacing:0}
+.serie--anna .sc-lede{font-size:clamp(1.5rem,2.8vw,2.6rem);line-height:1.35}
+.serie--anna .sc-chapitre{min-width:min(100%,24rem);padding-top:.9rem;border-top:1px solid currentColor}
+.serie--anna .sc-chapitre-num::before{content:"";display:inline-block;width:.55em;height:.55em;margin-right:.6rem;border-radius:50%;background:var(--sc-acc);vertical-align:.05em}
+.serie--anna .sc-note{max-width:44ch;padding-left:1rem;border-left:2px solid var(--sc-acc);text-align:left!important;margin-left:0!important;color:var(--sc-ink)}
+.serie--anna .sc-legende{font-family:Georgia,'Times New Roman',serif;font-style:italic;letter-spacing:0;font-size:.86rem}
+.serie--anna .sc-mot{font-family:Georgia,'Times New Roman',serif;font-style:italic;letter-spacing:-.03em;color:color-mix(in srgb,var(--sc-acc) 13%,transparent)}
+.serie--anna .sc-photo .photo-open{box-shadow:0 30px 80px -40px rgba(0,0,0,.7)}

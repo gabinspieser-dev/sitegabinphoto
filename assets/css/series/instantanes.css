@@ -1,0 +1,102 @@
+/* =========================================================
+   Instantanés — « le carnet de fosse » (25/11/2026)
+   Un flash ouvre la page. Chaque artiste a son pass photo (bande de couleur tirée de ses images, fente de badge),
+   ses photos sont des tirages instantanés scotchés, légendés à la machine à écrire, qui « développent »
+   en apparaissant (du pâle à la couleur). Aucune image décorative : tout est en CSS.
+   ========================================================= */
+.serie--instantanes{--sc-ink:#f3eee6;--sc-ink2:rgba(243,238,230,.72);--sc-acc:#ffd36b;--rule:rgba(243,238,230,.18);--ink-base:#f3eee6;--ink-2:rgba(243,238,230,.66);--acc:#ffd36b;--inst-papier:#f4f1ea;--inst-mono:"Courier New",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#0d0b09}
+
+/* ---------- Ouverture ---------- */
+.serie--instantanes .sc--inst-ouverture{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);grid-template-rows:auto 1fr auto;column-gap:clamp(2rem,5vw,5rem);row-gap:clamp(1.5rem,4vh,2.5rem);align-items:center;min-height:calc(100 * var(--u) - var(--sc-head));padding-bottom:clamp(2rem,5vh,3.5rem);overflow:hidden}
+.serie--instantanes .sc--inst-ouverture .serie-fil{grid-column:1 / -1;grid-row:1;padding:0}
+.inst-ouverture-texte{grid-column:1;grid-row:2;position:relative;z-index:2}
+.serie--instantanes .inst-nom{margin:.25em 0 0;font-size:clamp(3.4rem,10.5vw,10.5rem);line-height:.82;letter-spacing:.005em;text-shadow:0 0 60px rgba(255,236,190,.18)}
+.serie--instantanes .sc-titre{margin-top:1.2rem;font-family:var(--inst-mono);font-size:clamp(.95rem,1.25vw,1.1rem);letter-spacing:.02em;color:var(--sc-acc)}
+.inst-lede{max-width:46ch;margin:1.4rem 0 0;font-size:clamp(1.05rem,1.35vw,1.25rem);line-height:1.6;color:var(--sc-ink)}
+
+/* Pile de tirages posés sur la table (décor, répète la première image de chaque artiste) */
+.inst-pile{grid-column:2;grid-row:2;position:relative;height:min(64 * var(--u),560px);min-height:300px}
+.inst-pile-tirage{position:absolute;width:44%;padding:7px 7px 30px;background:var(--inst-papier);box-shadow:0 22px 44px -18px rgba(0,0,0,.8),0 2px 5px rgba(0,0,0,.35);transition:rotate .6s cubic-bezier(.2,.7,.2,1),translate .6s cubic-bezier(.2,.7,.2,1)}
+.inst-pile-tirage img{display:block;width:100%;height:auto;aspect-ratio:4 / 5;object-fit:cover}
+.inst-pile-tirage:nth-child(1){left:3%;top:4%;rotate:-9deg}
+.inst-pile-tirage:nth-child(2){left:44%;top:0;rotate:7deg}
+.inst-pile-tirage:nth-child(3){left:12%;top:36%;rotate:4deg}
+.inst-pile-tirage:nth-child(4){left:50%;top:33%;rotate:-6deg}
+@media (hover:hover){
+  .sc--inst-ouverture:hover .inst-pile-tirage:nth-child(1){rotate:-14deg;translate:-6% -3%}
+  .sc--inst-ouverture:hover .inst-pile-tirage:nth-child(2){rotate:11deg;translate:6% -4%}
+  .sc--inst-ouverture:hover .inst-pile-tirage:nth-child(3){rotate:1deg;translate:-5% 4%}
+  .sc--inst-ouverture:hover .inst-pile-tirage:nth-child(4){rotate:-10deg;translate:7% 5%}
+}
+
+/* Sommaire en talons de billets */
+.inst-sommaire{grid-column:1 / -1;grid-row:3;position:relative;z-index:2}
+.inst-sommaire ol{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(.6rem,1.2vw,1rem);margin:0;padding:0;list-style:none}
+.inst-sommaire a{display:grid;gap:.15rem;padding:.85rem 1rem .9rem;border:1px dashed rgba(243,238,230,.34);border-radius:4px;color:var(--sc-ink);text-decoration:none;transition:background-color .25s ease,border-color .25s ease}
+.inst-sommaire a:hover,.inst-sommaire a:focus-visible{background:rgba(243,238,230,.07);border-color:var(--sc-acc)}
+.inst-sommaire a:focus-visible{outline:2px solid var(--sc-acc);outline-offset:3px}
+.inst-som-num,.inst-som-n{font-family:var(--inst-mono);font-size:.74rem;letter-spacing:.08em;color:var(--sc-ink2)}
+.inst-som-num{color:var(--sc-acc)}
+.inst-som-nom{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-size:clamp(1.4rem,2vw,1.9rem);line-height:1;letter-spacing:.02em}
+
+/* Le flash : un seul éclair au chargement, jamais répété ; absent si moins d'animations est demandé */
+.inst-flash{position:absolute;inset:0;z-index:6;background:radial-gradient(circle at 72% 38%,#fff 0,#fff6e0 30%,rgba(255,246,224,.35) 62%,rgba(255,246,224,0) 85%);opacity:0;pointer-events:none}
+@keyframes inst-flash{0%{opacity:.9}100%{opacity:0}}
+html.sc-js:not(.serie-calme) .inst-flash{animation:inst-flash 1.25s cubic-bezier(.2,.7,.3,1) .2s backwards}
+
+/* ---------- Un artiste : le pass + les tirages ---------- */
+.serie--instantanes .inst-artiste{display:grid;grid-template-columns:minmax(0,1fr);row-gap:clamp(2.4rem,6vh,4rem);padding-block:clamp(5rem,14vh,9rem);overflow:hidden}
+.serie--instantanes .inst-artiste[data-n="1"]{grid-template-columns:minmax(17rem,27rem) minmax(0,1fr);align-items:center;column-gap:clamp(2rem,6vw,6rem)}
+.serie--instantanes .inst-mot{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;color:rgba(255,211,107,.06);letter-spacing:.02em}
+
+.inst-pass{position:relative;z-index:2;max-width:34rem;padding:2.7rem 1.6rem 1.5rem;border:1px solid rgba(243,238,230,.16);border-radius:16px;background:linear-gradient(180deg,var(--inst-acc,#ffd36b) 0 12px,rgba(243,238,230,.06) 12px);box-shadow:0 34px 70px -34px rgba(0,0,0,.85);rotate:-.6deg}
+.inst-artiste:nth-of-type(odd) .inst-pass{rotate:.5deg}
+.inst-pass-fente{position:absolute;top:22px;left:50%;width:58px;height:11px;border-radius:6px;translate:-50% 0;background:rgba(0,0,0,.6);box-shadow:inset 0 1px 2px rgba(0,0,0,.7),0 1px 0 rgba(255,255,255,.08)}
+.inst-pass-label{margin:0;font-family:var(--inst-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sc-ink2)}
+.inst-pass h2{margin:.55rem 0 .25rem;font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-weight:400;font-size:clamp(2.6rem,5vw,4.4rem);line-height:.9;letter-spacing:.01em;color:var(--sc-ink)}
+.inst-pass-meta{margin:0;font-family:var(--inst-mono);font-size:.8rem;color:var(--sc-acc)}
+.inst-pass-texte{margin:1.1rem 0 0;font-size:1rem;line-height:1.62;color:var(--sc-ink)}
+.inst-pass-liens{margin-top:1.3rem;padding-top:1rem;border-top:1px dashed rgba(243,238,230,.24)}
+.inst-pass-liens .serie-liens{margin-top:.5rem}
+
+/* Tirages instantanés : cadre papier, ruban adhésif, légende tapée à la machine */
+.inst-tirages{display:flex;justify-content:center;align-items:flex-start;gap:clamp(1.2rem,3.5vw,3.5rem);padding-top:1rem}
+.serie--instantanes .inst-tirage{--hk:60;--pad:clamp(9px,.9vw,14px);flex:0 1 auto;width:calc(var(--hk) * var(--u) * var(--r) + 2 * var(--pad));max-width:100%;box-sizing:border-box;padding:var(--pad) var(--pad) 0;background:var(--inst-papier);box-shadow:0 28px 50px -22px rgba(0,0,0,.8),0 2px 6px rgba(0,0,0,.3);rotate:-1.8deg;transition:rotate .45s ease,translate .45s ease,box-shadow .45s ease}
+.serie--instantanes .inst-tirage:nth-child(2){rotate:1.4deg;translate:0 2.2rem}
+.serie--instantanes .inst-tirage:nth-child(3){rotate:-.7deg;translate:0 1rem}
+.serie--instantanes .inst-tirages[data-n="1"] .inst-tirage{--hk:72;rotate:1.2deg}
+.serie--instantanes .inst-tirage img{display:block;width:100%;height:auto}
+.inst-tirage::before{content:"";position:absolute;z-index:3;top:-13px;left:50%;width:min(38%,8.5rem);height:28px;translate:-50% 0;rotate:-4deg;background:rgba(236,226,198,.62);box-shadow:0 1px 3px rgba(0,0,0,.2);pointer-events:none}
+.inst-tirage:nth-child(2)::before{left:32%;rotate:5deg}
+.inst-tirage:nth-child(3)::before{left:66%;rotate:-2deg}
+@media (hover:hover) and (pointer:fine){
+  .serie--instantanes .inst-tirage:hover{rotate:0deg;translate:0 -.6rem;z-index:3;box-shadow:0 40px 70px -24px rgba(0,0,0,.85),0 3px 8px rgba(0,0,0,.3)}
+}
+.serie--instantanes .inst-legende{display:flex;gap:.6rem;align-items:baseline;margin:0;padding:.75rem .15rem .95rem;font-family:var(--inst-mono);font-size:.82rem;letter-spacing:0;line-height:1.35;color:#2b2722}
+.serie--instantanes .inst-legende .serie-num{font-family:inherit;font-size:.82rem;font-weight:700;letter-spacing:.02em;color:#a3262a}
+.serie--instantanes .inst-tirage .photo-open:focus-visible{outline:2px solid #a3262a;outline-offset:3px}
+
+/* Le tirage « développe » en apparaissant : pâle et délavé, puis la couleur monte (une seule fois) */
+html.sc-js:not(.serie-calme) .serie--instantanes .sc-photo.est-cache .photo-open{clip-path:none;opacity:1;filter:brightness(1.7) saturate(.15) contrast(.6)}
+html.sc-js:not(.serie-calme) .serie--instantanes .sc-photo.est-vu .photo-open{clip-path:none;opacity:1;filter:none;transition:filter 2.4s cubic-bezier(.3,.6,.2,1)}
+
+/* ---------- La règle ---------- */
+.serie--instantanes .inst-fin{text-align:center}
+.serie--instantanes .inst-fin .sc-lede{max-width:15ch;margin-inline:auto;font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-size:clamp(2.4rem,5.6vw,5.2rem);line-height:.95;letter-spacing:.01em;text-transform:uppercase;text-align:center}
+
+/* ---------- Tablette ---------- */
+@media (max-width:1000px){
+  .inst-sommaire ol{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* ---------- Téléphone ---------- */
+@media (max-width:700px){
+  .serie--instantanes .sc--inst-ouverture{display:block;min-height:0}
+  .serie--instantanes .sc--inst-ouverture .serie-fil{padding:0 0 1rem}
+  .inst-pile{height:auto;min-height:0;aspect-ratio:1 / .95;margin:2.2rem 0 1.8rem}
+  .serie--instantanes .inst-artiste,.serie--instantanes .inst-artiste[data-n="1"]{grid-template-columns:minmax(0,1fr)}
+  .inst-pass{padding:2.5rem 1.2rem 1.3rem;rotate:0deg!important}
+  .inst-tirages{flex-direction:column;align-items:center;gap:2.4rem}
+  .serie--instantanes .inst-tirage,.serie--instantanes .inst-tirages[data-n="1"] .inst-tirage{width:min(86vw,calc(78 * var(--u) * var(--r) + 2 * var(--pad)));translate:none}
+  .serie--instantanes .inst-tirage:nth-child(odd){rotate:-1.2deg}
+  .serie--instantanes .inst-tirage:nth-child(even){rotate:1.1deg}
+}

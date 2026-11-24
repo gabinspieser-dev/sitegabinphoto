@@ -1,0 +1,13 @@
+/* =========================================================
+   Stomy Bugsy — « Seul, puis à deux » : cinémascope (25/11/2026)
+   Noir absolu (#010101), contours orangés (#835740), fumée. Ouverture en format cinéma
+   avec des bandes noires, typographie condensée géante, et le duo en écran partagé, bord à bord.
+   ========================================================= */
+.serie--stomy{--sc-ink:#f5efe8;--sc-ink2:rgba(245,239,232,.62);--sc-acc:#f0a061;--rule:rgba(240,160,97,.25);--ink-base:#f5efe8;--ink-2:rgba(245,239,232,.6);--acc:#f0a061;background:#000}
+.serie--stomy .sc--ouv-paysage .sc-photo .photo-open{border-block:clamp(14px,4vw,56px) solid #000}
+.serie--stomy .sc-nom{text-transform:uppercase;letter-spacing:-.005em;font-size:clamp(4rem,12vw,12rem)}
+.serie--stomy .sc-chapitre{flex-wrap:wrap}
+.serie--stomy .sc-chapitre h2{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-size:clamp(2.4rem,4.5vw,4.4rem);letter-spacing:.03em}
+.serie--stomy .sc-chapitre::after{content:"";flex-basis:100%;height:1px;margin-top:.8rem;background:linear-gradient(90deg,var(--sc-acc),transparent 55%)}
+.serie--stomy .sc-mot{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;text-transform:uppercase;color:rgba(240,160,97,.1)}
+.serie--stomy .sc-legende{text-transform:uppercase;letter-spacing:.16em;font-size:.68rem}

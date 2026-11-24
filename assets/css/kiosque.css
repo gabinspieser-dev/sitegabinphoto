@@ -1,0 +1,207 @@
+/* =========================================================
+   Le kiosque — page d'entrée des séries (25/11/2026)
+   Un sommaire de magazine, puis une couverture par artiste dans l'identité graphique de sa série.
+   Survol ou focus : seconde image, couverture qui se soulève et s'incline (kiosque.js), fond de page
+   aux couleurs de la couverture. Sur téléphone, la couverture au centre de l'écran montre sa seconde image.
+   Lisibilité : chaque couverture a un voile sombre en haut et en bas, renforcé quand la photo y est claire
+   (classes kq-clair-haut / kq-clair-bas posées d'après couleurs.json).
+   ========================================================= */
+@property --fg{syntax:'<color>';inherits:true;initial-value:#0a0a0b}
+@property --fd{syntax:'<color>';inherits:true;initial-value:#0a0a0b}
+@property --fh{syntax:'<color>';inherits:true;initial-value:#1a1410}
+
+.page-kiosque{--kq-ink:#f4f0e8;--kq-ink2:rgba(244,240,232,.74);--kq-gut:clamp(1.25rem,4vw,4.5rem);--kq-gap:clamp(10px,1.2vw,18px);--kq-pad:clamp(.9rem,1.6vw,1.4rem);background:#0a0a0b}
+.kq-page{position:relative;display:block;overflow-x:clip}
+.kq-fond{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(60% 60% at 50% 42%,color-mix(in srgb,var(--fh) 30%,transparent),transparent 72%),linear-gradient(90deg,var(--fg),var(--fd));transition:--fg 1.1s ease,--fd 1.1s ease,--fh 1.4s ease}
+
+/* ---------- En-tête et sommaire ---------- */
+.kq-entete{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,6vw,6rem);align-items:end;max-width:1500px;margin:0 auto;padding:clamp(2rem,6vh,4rem) var(--kq-gut) clamp(2.5rem,7vh,5rem)}
+.kq-entete h1{margin:.7rem 0 0;font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-weight:400;font-size:clamp(3.4rem,7.6vw,7.6rem);line-height:.88;letter-spacing:.005em;text-transform:uppercase;color:var(--kq-ink)}
+.kq-lede{margin:1.4rem 0 0;max-width:34ch;font-size:clamp(1.05rem,1.4vw,1.3rem);line-height:1.5;color:var(--kq-ink)}
+.kq-entete .kq-lede{align-self:end;justify-self:end}
+/* Sommaire repliable : une barre fine qui se déplie en table des matières (details/summary natif) */
+.kq-sommaire{grid-column:1 / -1;border-top:2px solid var(--kq-ink);border-bottom:1px solid rgba(244,240,232,.24)}
+.kq-sommaire summary{display:flex;align-items:center;gap:1.2rem;padding:1rem 0;cursor:pointer;list-style:none;color:var(--kq-ink)}
+.kq-sommaire summary::-webkit-details-marker{display:none}
+.kq-sommaire summary:focus-visible{outline:2px solid var(--kq-ink);outline-offset:4px}
+.kq-som-h{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-size:clamp(1.6rem,2.4vw,2.2rem);line-height:1;letter-spacing:.04em}
+.kq-som-meta{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--kq-ink2)}
+.kq-som-icone{position:relative;width:1.6rem;height:1.6rem;margin-left:auto;border:1px solid rgba(244,240,232,.5);border-radius:50%;transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .25s ease}
+.kq-som-icone::before,.kq-som-icone::after{content:"";position:absolute;top:50%;left:50%;width:.7rem;height:1.5px;background:var(--kq-ink);translate:-50% -50%}
+.kq-som-icone::after{rotate:90deg;transition:opacity .25s ease}
+.kq-sommaire summary:hover .kq-som-icone{border-color:var(--kq-ink);transform:rotate(90deg)}
+.kq-sommaire[open] .kq-som-icone{transform:rotate(180deg)}
+.kq-sommaire[open] .kq-som-icone::after{opacity:0}
+@keyframes kq-deplie{from{opacity:0;translate:0 -10px}to{opacity:1;translate:0 0}}
+.kq-sommaire[open] .kq-sommaire-liste{animation:kq-deplie .45s cubic-bezier(.2,.7,.2,1)}
+.kq-sommaire-liste{padding-bottom:1.2rem}
+.kq-sommaire ol{margin:0;padding:0;list-style:none;columns:3;column-gap:clamp(1.5rem,3vw,2.5rem)}
+.kq-sommaire li{margin:0;break-inside:avoid}
+.kq-sommaire a{display:grid;grid-template-columns:2rem minmax(0,1fr) auto;column-gap:.7rem;align-items:baseline;padding:.6rem 0 .55rem;border-bottom:1px solid rgba(244,240,232,.16);color:var(--kq-ink);text-decoration:none}
+.kq-som-num{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-size:1.05rem;letter-spacing:.04em;color:var(--kq-ink2)}
+.kq-som-nom{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-size:clamp(1.25rem,1.7vw,1.6rem);line-height:1;letter-spacing:.02em;transition:letter-spacing .35s ease}
+.kq-som-titre{grid-column:2;margin-top:.15rem;font-size:.8rem;line-height:1.35;color:var(--kq-ink2)}
+.kq-som-n{grid-column:3;grid-row:1;font-size:.8rem;color:var(--kq-ink2)}
+.kq-sommaire a:hover .kq-som-nom,.kq-sommaire a:focus-visible .kq-som-nom{letter-spacing:.07em}
+.kq-sommaire a:focus-visible{outline:2px solid var(--kq-ink);outline-offset:3px}
+
+/* ---------- Le kiosque ---------- */
+.kq-kiosque{display:grid;gap:var(--kq-gap);max-width:1500px;margin:0 auto;padding:0 var(--kq-gut) clamp(3rem,8vh,6rem)}
+.kq-rang{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--kq-gap)}
+.kq-portrait{grid-column:span 4}
+.kq-paysage{grid-column:span 8}
+.kq-couv{--rx:0deg;--ry:0deg;position:relative;perspective:1400px}
+.kq-lien{position:relative;display:block;height:100%;overflow:hidden;isolation:isolate;color:var(--kq-ink);text-decoration:none;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s ease;box-shadow:0 30px 60px -36px rgba(0,0,0,.9)}
+.kq-portrait .kq-lien{aspect-ratio:4 / 5}
+.kq-lien:focus-visible{outline:3px solid var(--kq-ink);outline-offset:4px}
+.kq-photos{position:absolute;inset:0;z-index:0;background:#000}
+.kq-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;transition:opacity .8s ease,transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.kq-img--2{opacity:0}
+.kq-couv:is(:hover,:focus-within) .kq-img--2,.kq-couv.kq-actif .kq-img--2{opacity:1}
+.kq-couv:is(:hover,:focus-within) .kq-img{transform:scale(1.045)}
+.kq-couv:is(:hover,:focus-within) .kq-lien{box-shadow:0 50px 90px -36px rgba(0,0,0,.95)}
+
+/* Anatomie d'une couverture : bandeau de tête, titre, lignes de couverture, code-barres */
+.kq-une{position:absolute;inset:0;z-index:2;display:grid;grid-template-rows:auto 1fr auto;padding:var(--kq-pad)}
+.kq-une::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.74) 0,rgba(0,0,0,.5) 22%,rgba(0,0,0,.16) 40%,rgba(0,0,0,0) 50%,rgba(0,0,0,0) 56%,rgba(0,0,0,.6) 74%,rgba(0,0,0,.88) 100%)}
+.kq-clair-haut .kq-une::before{background:linear-gradient(180deg,rgba(0,0,0,.86) 0,rgba(0,0,0,.72) 26%,rgba(0,0,0,.34) 44%,rgba(0,0,0,0) 56%,rgba(0,0,0,.6) 74%,rgba(0,0,0,.88) 100%)}
+.kq-clair-bas .kq-une::before{background:linear-gradient(180deg,rgba(0,0,0,.74) 0,rgba(0,0,0,.5) 22%,rgba(0,0,0,.16) 40%,rgba(0,0,0,0) 48%,rgba(0,0,0,.72) 66%,rgba(0,0,0,.92) 100%)}
+.kq-clair-haut.kq-clair-bas .kq-une::before{background:linear-gradient(180deg,rgba(0,0,0,.86) 0,rgba(0,0,0,.72) 26%,rgba(0,0,0,.34) 44%,rgba(0,0,0,.1) 52%,rgba(0,0,0,.72) 66%,rgba(0,0,0,.92) 100%)}
+.kq-tete{display:flex;justify-content:space-between;gap:1rem;font-size:.66rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--kq-ink2)}
+.kq-num{color:var(--kq-ink)}
+.kq-centre{align-self:start;padding-top:.7rem}
+.kq-nom{margin:0;font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-weight:400;font-size:clamp(2.6rem,4.8vw,4.9rem);line-height:.86;letter-spacing:.01em;text-transform:uppercase;color:var(--kq-ink);text-shadow:0 2px 26px rgba(0,0,0,.45)}
+.kq-paysage .kq-nom{font-size:clamp(2.8rem,5.6vw,5.8rem)}
+.kq-titre{margin:.55rem 0 0;font-size:clamp(.9rem,1.1vw,1.05rem);line-height:1.3;color:var(--kq-ink)}
+.kq-pied{display:grid;gap:.35rem;align-self:end;padding-right:70px}
+.kq-accroche{margin:0;max-width:30ch;font-size:clamp(.98rem,1.2vw,1.15rem);line-height:1.35;color:var(--kq-ink)}
+.kq-lignes{margin:0;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--kq-ink2)}
+.kq-code{position:absolute;right:var(--kq-pad);bottom:var(--kq-pad);width:52px;height:26px;background:repeating-linear-gradient(90deg,rgba(244,240,232,.85) 0 1px,transparent 1px 3px,rgba(244,240,232,.85) 3px 5px,transparent 5px 6px,rgba(244,240,232,.85) 6px 7px,transparent 7px 10px)}
+
+/* ---------- Une identité par artiste ---------- */
+/* Mika : trois costumes, trois bandes de couleur */
+.kq-deco--rayures{position:absolute;z-index:3;top:0;bottom:0;left:0;display:grid;grid-template-rows:repeat(3,1fr);width:12px}
+.kq-deco--rayures i:nth-child(1){background:#0e8a96}.kq-deco--rayures i:nth-child(2){background:#e5b651}.kq-deco--rayures i:nth-child(3){background:#2f3fae}
+.kq--mika .kq-une{padding-left:calc(var(--kq-pad) + 14px)}
+.kq--mika .kq-nom{font-size:clamp(3.4rem,7vw,7rem)}
+.kq--mika .kq-titre{color:#f0cd6e}
+/* Julien Doré : capitales et barre jaune */
+.kq--julien .kq-nom::after{content:"";display:block;width:3.4rem;height:.5rem;margin-top:.55rem;background:#f5c518}
+.kq--julien .kq-num{color:#f5c518}
+/* Anna Winkin : italique rouge et tampon « reportage » */
+.kq--anna .kq-nom{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.02em;line-height:.95;color:#ff9aa3}
+.kq-tampon{position:absolute;z-index:3;top:3.2rem;right:var(--kq-pad);padding:.35rem .6rem;border:2px solid #ff9aa3;background:rgba(12,4,6,.82);color:#ff9aa3;font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;rotate:-8deg}
+/* Stomy Bugsy : format cinéma, bandes noires */
+.kq-deco--cinema::before,.kq-deco--cinema::after{content:"";position:absolute;z-index:1;left:0;right:0;height:10%;background:#000}
+.kq-deco--cinema::before{top:0}.kq-deco--cinema::after{bottom:0}
+.kq--stomy .kq-titre{color:#ffab70}
+.kq--stomy .kq-nom{letter-spacing:.03em}
+/* Electro Symphony : une portée derrière le titre, lueur violette */
+.kq-deco--portee{position:absolute;z-index:1;left:var(--kq-pad);right:var(--kq-pad);top:2.7rem;height:4.4rem;background:repeating-linear-gradient(180deg,transparent 0 10px,rgba(214,160,255,.5) 10px 11px);pointer-events:none}
+.kq--electro .kq-nom{text-shadow:0 0 34px rgba(199,125,255,.75)}
+.kq--electro .kq-titre{color:#e2b8ff}
+/* Christophe Maé : guirlande d'ampoules */
+.kq-deco--guirlande{position:absolute;z-index:3;left:0;right:0;top:2.35rem;height:16px;background:radial-gradient(circle,#ffc56b 0 3.5px,rgba(255,197,107,.35) 4.5px,transparent 8px) 0 50%/34px 16px repeat-x;pointer-events:none}
+.kq--mae .kq-centre{padding-top:1.6rem}
+.kq--mae .kq-titre{color:#ffc56b}
+/* Feu! Chatterton : vert acide, puis la bascule en noir et blanc au survol */
+.kq--feu .kq-nom{color:#5ff073}
+.kq--feu .kq-titre{background:linear-gradient(90deg,#5ff073,#f5d90a 50%,#e2e2e2 85%);-webkit-background-clip:text;background-clip:text;color:transparent}
+/* M. Pokora : rangée de projecteurs carrés */
+.kq-deco--leds{position:absolute;z-index:3;left:var(--kq-pad);right:var(--kq-pad);top:2.4rem;height:9px;background:linear-gradient(90deg,rgba(255,255,255,.9) 0 7px,transparent 7px) 0 0/16px 9px repeat-x;-webkit-mask-image:linear-gradient(90deg,#000,transparent 75%);mask-image:linear-gradient(90deg,#000,transparent 75%);pointer-events:none}
+.kq--pokora .kq-centre{padding-top:1.4rem}
+.kq--pokora .kq-nom{letter-spacing:.05em}
+/* Silda : minuscules serrées, cadre bleu profond */
+.kq--silda .kq-nom{font-family:var(--body,'DM Sans'),sans-serif;font-weight:500;text-transform:lowercase;letter-spacing:-.075em;line-height:.8;font-size:clamp(3.6rem,7.4vw,7.4rem)}
+.kq--silda .kq-lien::after{content:"";position:absolute;inset:0;z-index:3;box-shadow:inset 0 0 0 9px #032f7c;pointer-events:none}
+.kq--silda .kq-titre{color:#b9ccff}
+/* Madelaine : minuscules turquoise, composition centrée et aérée */
+.kq--madelaine .kq-une{text-align:center}
+.kq--madelaine .kq-centre{justify-self:center;padding-top:1.2rem}
+.kq--madelaine .kq-nom{font-family:var(--body,'DM Sans'),sans-serif;font-weight:500;text-transform:lowercase;letter-spacing:-.06em;color:#6ce3eb}
+.kq--madelaine .kq-pied{justify-items:center;padding-right:0}
+.kq--madelaine .kq-code{display:none}
+
+/* ---------- Bandeaux : Ina Forsman (noir et blanc) et le hors-série Instantanés ---------- */
+.kq-bandeau .kq-lien{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:center;gap:clamp(1.5rem,4vw,4rem);min-height:min(80vh,720px);padding:clamp(1.5rem,3.5vw,3rem)}
+.kq-bandeau-texte{display:grid;gap:.9rem;align-content:center}
+.kq-bandeau-texte .kq-tete{margin-bottom:.6rem}
+.kq-bandeau .kq-nom{font-size:clamp(3.6rem,9vw,9rem);line-height:.84}
+.kq-bandeau .kq-titre,.kq-bandeau .kq-accroche{margin:0;max-width:36ch}
+.kq-cta{margin-top:.6rem;font-size:.74rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--kq-ink)}
+.kq-cta span{display:inline-block;transition:translate .3s ease}
+.kq-bandeau:is(:hover,:focus-within) .kq-cta span{translate:.4rem 0}
+.kq--ina .kq-lien{background:#050505}
+.kq--ina .kq-nom{color:transparent;-webkit-text-stroke:1.5px var(--kq-ink);text-shadow:none}
+.kq--ina .kq-photos{position:relative;inset:auto;justify-self:center;width:min(100%,calc(min(68vh,620px) * .714));aspect-ratio:2160 / 3025;padding:12px;background:#f1efea}
+.kq--ina .kq-img{inset:12px;width:calc(100% - 24px);height:calc(100% - 24px);object-position:50% 50%}
+.kq--instantanes .kq-lien{background:#0d0b09}
+.kq--instantanes .kq-tete span:first-child{color:#ffd36b}
+.kq--instantanes .kq-titre{font-family:"Courier New",ui-monospace,monospace;color:#ffd36b}
+.kq-pile{position:relative;height:min(60vh,520px);min-height:280px}
+.kq-tirage{position:absolute;width:44%;padding:7px 7px 28px;background:#f4f1ea;box-shadow:0 22px 44px -18px rgba(0,0,0,.85);transition:rotate .6s cubic-bezier(.2,.7,.2,1),translate .6s cubic-bezier(.2,.7,.2,1)}
+.kq-tirage img{display:block;width:100%;height:auto;aspect-ratio:4 / 5;object-fit:cover}
+.kq-tirage:nth-child(1){left:4%;top:5%;rotate:-9deg}
+.kq-tirage:nth-child(2){left:46%;top:0;rotate:7deg}
+.kq-tirage:nth-child(3){left:12%;top:36%;rotate:4deg}
+.kq-tirage:nth-child(4){left:50%;top:32%;rotate:-6deg}
+.kq--instantanes:is(:hover,:focus-within) .kq-tirage:nth-child(1){rotate:-14deg;translate:-6% -3%}
+.kq--instantanes:is(:hover,:focus-within) .kq-tirage:nth-child(2){rotate:11deg;translate:6% -4%}
+.kq--instantanes:is(:hover,:focus-within) .kq-tirage:nth-child(3){rotate:1deg;translate:-5% 4%}
+.kq--instantanes:is(:hover,:focus-within) .kq-tirage:nth-child(4){rotate:-10deg;translate:7% 5%}
+
+/* ---------- Entractes : une citation pleine page entre deux filets ---------- */
+.kq-entracte{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:clamp(1.5rem,4vw,4rem);align-items:start;margin-block:clamp(2.5rem,8vh,5rem);padding-block:clamp(2.2rem,7vh,4.5rem);border-top:1px solid rgba(244,240,232,.24);border-bottom:1px solid rgba(244,240,232,.24)}
+.kq-entracte-kicker{display:flex;align-items:baseline;gap:.9rem;margin:0;font-size:.7rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--kq-ink2)}
+.kq-entracte-num{color:var(--kq-ink)}
+.kq-citation{margin:0}
+.kq-citation blockquote{margin:0}
+.kq-entracte .kq-citation p{margin:0;font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-weight:400;font-size:clamp(2.3rem,5.2vw,5.4rem);line-height:.94;letter-spacing:.005em;text-transform:uppercase;text-wrap:balance;color:var(--kq-ink)}
+.kq-citation em,.kq-ambiance h2 em{font-style:normal;color:var(--tone,#e8a27c);transition:color 1s ease}
+.kq-citation figcaption{margin-top:1.4rem;font-size:.8rem;letter-spacing:.06em;color:var(--kq-ink2)}
+.kq-citation figcaption::before{content:"— "}
+.kq-citation figcaption a{color:var(--kq-ink);text-underline-offset:.2em}
+
+/* ---------- L'ambiance : trois cadres égaux ---------- */
+.kq-ambiance{margin-top:clamp(2.5rem,8vh,5rem);padding-top:clamp(2.2rem,6vh,4rem);border-top:1px solid rgba(244,240,232,.24)}
+.kq-ambiance-tete{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:clamp(1.5rem,4vw,4rem);align-items:baseline;margin-bottom:clamp(1.5rem,4vh,2.5rem)}
+.kq-ambiance h2{margin:0;font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-weight:400;font-size:clamp(2.2rem,4.4vw,4.4rem);line-height:.94;text-transform:uppercase;color:var(--kq-ink)}
+.kq-ambiance-grille{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--kq-gap)}
+.kq-ambiance-photo{margin:0;overflow:hidden;aspect-ratio:4 / 3;background:#000}
+.kq-ambiance-photo img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .6s ease}
+@media (hover:hover){
+  .kq-ambiance-grille:hover .kq-ambiance-photo:not(:hover) img{filter:brightness(.55) saturate(.7)}
+  .kq-ambiance-photo:hover img{transform:scale(1.04)}
+}
+
+/* ---------- Moins d'animations ---------- */
+@media (prefers-reduced-motion:reduce){.kq-sommaire[open] .kq-sommaire-liste{animation:none}.kq-lien,.kq-img,.kq-tirage,.kq-fond{transition:none}.kq-couv:is(:hover,:focus-within) .kq-img{transform:none}}
+html[data-motion="none"] :is(.kq-lien,.kq-img,.kq-tirage,.kq-fond){transition:none}
+html[data-motion="none"] .kq-sommaire[open] .kq-sommaire-liste{animation:none}
+html[data-motion="none"] .kq-couv:is(:hover,:focus-within) .kq-img{transform:none}
+
+/* ---------- Tablette ---------- */
+@media (max-width:1000px){
+  .kq-entete{grid-template-columns:minmax(0,1fr)}
+  .kq-entete .kq-lede{justify-self:start}
+  .kq-sommaire ol{columns:2}
+  .kq-portrait{grid-column:span 5}.kq-paysage{grid-column:span 7}
+}
+/* ---------- Téléphone ---------- */
+@media (max-width:700px){
+  .kq-sommaire ol{columns:1}
+  .kq-entracte,.kq-ambiance-tete{grid-template-columns:minmax(0,1fr);gap:1rem}
+  .kq-ambiance-grille{grid-template-columns:minmax(0,1fr)}
+  .kq-ambiance-photo{aspect-ratio:3 / 2}
+  .kq-rang{grid-template-columns:minmax(0,1fr)}
+  .kq-portrait,.kq-paysage{grid-column:auto}
+  .kq-paysage .kq-lien{aspect-ratio:4 / 3.4;height:auto}
+  .kq-nom{font-size:clamp(2.6rem,13vw,4rem)}
+  .kq--mika .kq-nom,.kq--silda .kq-nom{font-size:clamp(3rem,17vw,5rem)}
+  .kq-bandeau .kq-lien{grid-template-columns:minmax(0,1fr);min-height:0}
+  .kq-bandeau .kq-nom{font-size:clamp(3.2rem,17vw,5.4rem)}
+  .kq--ina .kq-photos{width:100%}
+  .kq-pile{height:auto;min-height:0;aspect-ratio:1 / .95}
+  .kq--anna .kq-centre{padding-top:3.4rem}
+  .kq-tampon{top:2.6rem}
+}

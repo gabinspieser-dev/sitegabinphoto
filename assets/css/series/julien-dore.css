@@ -1,0 +1,14 @@
+/* =========================================================
+   Julien Doré — « Costume blanc, piano jaune » : le jaune comme fil conducteur (25/11/2026)
+   Ivoire du costume, noir chaud, jaune laqué du piano (#daab26, #fde856), rouge des flammes (#81160d).
+   Ouverture en grand paysage (le cri) ; le chapitre « Au piano » baigne dans le jaune et s'ouvre
+   sur une bande jaune pleine largeur ; les cheveux au piano d'un bord à l'autre de l'écran.
+   ========================================================= */
+.serie--julien{--sc-ink:#f6f1e6;--sc-ink2:rgba(246,241,230,.68);--sc-acc:#f5c518;--acc-sombre:#6b5200;--rule:rgba(246,241,230,.18);--ink-base:#f6f1e6;--ink-2:rgba(246,241,230,.66);--acc:#f5c518;background:#0b0a08}
+.serie--julien .sc-nom{text-transform:uppercase;letter-spacing:.01em}
+.serie--julien .sc-nom::after{content:"";display:block;width:min(38%,320px);height:12px;margin-top:.12em;background:#f5c518}
+.serie--julien .sc-mot{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;text-transform:uppercase;letter-spacing:.01em;color:rgba(245,197,24,.12)}
+.serie--julien .sc-chapitre h2{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-size:clamp(1.8rem,3vw,2.8rem);letter-spacing:.06em}
+/* Scène 7 = « Au piano » : bande jaune laquée pleine largeur au-dessus (à revoir si l'ordre des scènes change) */
+.serie--julien [data-sc="7"]{border-top:16px solid #f5c518}
+.serie--julien .sc-asym-texte p{font-size:clamp(1.3rem,2.1vw,1.9rem)}

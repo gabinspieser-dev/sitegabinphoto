@@ -1,0 +1,25 @@
+/* =========================================================
+   Silda — « Du recueillement à la joie » (25/11/2026)
+   Analyse des 7 photos : un bleu cobalt profond (GAB02931 : 28 % de pixels bleus vifs, #032f7c),
+   des bords bleu nuit (#010a24 → #012065), puis le noir de la scène avec des reflets bleus,
+   et une seule touche claire : la violoniste en blanc et rose (#cac0e4).
+   Direction : les photos en très grand, le fond reprend la couleur de leurs bords pour qu'elles
+   se prolongent dans la page ; le bleu s'éteint dans le noir puis revient. Typographie en minuscules,
+   douce et ronde comme sa musique pop-folk ; de grands mots en filigrane derrière les images.
+   ========================================================= */
+.serie--silda{--sc-ink:#eef2ff;--sc-ink2:rgba(238,242,255,.68);--sc-acc:#a9c1ff;--rule:rgba(169,193,255,.2);--ink-base:#eef2ff;--ink-2:rgba(238,242,255,.66);--acc:#a9c1ff;background:#030612}
+/* Le nom : minuscules, DM Sans, serré — une signature plutôt qu'un titre d'affiche */
+.serie--silda .sc-nom{font-family:var(--body,'DM Sans'),sans-serif;text-transform:lowercase;letter-spacing:-.075em;line-height:.74;font-size:clamp(5rem,17vw,17rem)}
+.serie--silda .sc-titre{font-size:clamp(1.15rem,1.8vw,1.55rem);letter-spacing:-.005em}
+.serie--silda .sc-mot{text-transform:lowercase}
+/* Les photos flottent dans leur propre lumière : une ombre colorée par la couleur dominante de la scène */
+.serie--silda .sc-photo .photo-open{box-shadow:0 50px 140px -50px color-mix(in srgb,var(--h) 85%,transparent)}
+/* Le texte d'ouverture de la série, plus grand et plus doux */
+.serie--silda .sc-lede{font-size:clamp(1.6rem,3.2vw,3.1rem)}
+.serie--silda .sc-lede::first-line{color:#fff}
+/* La violoniste : la seule touche claire, reprise en lavande */
+.serie--silda .sc--asym .sc-chapitre-num,.serie--silda .sc--asym .serie-num{color:#cac0e4}
+.serie--silda .sc--asym .sc-asym-texte p{color:#ece8f7}
+/* Le verso garde le bleu de la dernière image */
+.serie--silda .serie-liens a::before{color:var(--sc-acc)}
+@media (max-width:700px){.serie--silda .sc-nom{font-size:clamp(4.6rem,27vw,8rem)}}

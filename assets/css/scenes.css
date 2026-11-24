@@ -1,0 +1,257 @@
+/* =========================================================
+   Scènes — système de composition des séries (25/11/2026)
+   Une série = une suite de scènes (ouverture, texte, monumental, duo, asymétrique, final).
+   - Tailles maîtrisées : chaque photo a une hauteur cible (--hk, en % de la hauteur d'écran) et sa largeur
+     en découle par son propre format (--r). Elle ne dépasse jamais ni l'écran, ni son conteneur.
+     Une photo en pleine hauteur est donc un choix écrit dans les données, jamais un accident du CSS.
+   - Fond continu : chaque scène porte les couleurs des bords de sa photo (--g gauche, --d droite, --h halo),
+     écrites dans assets/css/series/<série>-couleurs.css. Sans script, chaque scène a son fond ;
+     avec script, un calque fixe passe en douceur d'une scène à l'autre.
+   - Aucun style dans le HTML (politique de sécurité du site).
+   ========================================================= */
+@property --fg{syntax:'<color>';inherits:true;initial-value:#05070f}
+@property --fd{syntax:'<color>';inherits:true;initial-value:#05070f}
+@property --fh{syntax:'<color>';inherits:true;initial-value:#0a1430}
+@property --fx{syntax:'<percentage>';inherits:true;initial-value:70%}
+
+.page-scenes{--u:1vh;--sc-ink:#eef1f8;--sc-ink2:rgba(238,241,248,.68);--sc-acc:#9db5ff;--sc-gut:clamp(1.25rem,5vw,5.5rem);--sc-head:6.5rem;background:#05070f;color:var(--sc-ink)}
+@supports (height:1svh){.page-scenes{--u:1svh}}
+.page-scenes .site-header{background:transparent}
+.sc-page{position:relative;display:block;overflow-x:clip}
+
+/* ---------- Fond ---------- */
+.sc{--g:#05070f;--d:#05070f;--h:#0a1430;position:relative;padding:clamp(4rem,11vh,8rem) var(--sc-gut);background:radial-gradient(55% 65% at 50% 45%,color-mix(in srgb,var(--h) 30%,transparent),transparent 72%),linear-gradient(90deg,var(--g),var(--d));color:var(--sc-ink)}
+.sc-fond{display:none}
+html.sc-js .sc{background:none}
+html.sc-js .sc-fond{display:block;position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(52% 62% at var(--fx) 46%,color-mix(in srgb,var(--fh) 34%,transparent),transparent 72%),linear-gradient(90deg,var(--fg),var(--fd));transition:--fg 1.3s ease,--fd 1.3s ease,--fh 1.6s ease,--fx 1.6s ease}
+html.sc-js .sc-fond[data-cote="gauche"]{--fx:30%}
+html.sc-js .sc-fond[data-cote="droite"]{--fx:70%}
+html.sc-js .sc-fond[data-cote="centre"]{--fx:50%}
+
+/* ---------- Photos : dimensions maîtrisées ---------- */
+.sc-photo{--r:.8;--hk:86;position:relative;z-index:1;margin:0;width:min(100%,calc(var(--hk) * var(--u) * var(--r)))}
+.sc-photo[data-r="57"]{--r:.714}.sc-photo[data-r="23"]{--r:.667}.sc-photo[data-r="54"]{--r:1.25}.sc-photo[data-r="75"]{--r:1.4}
+.sc-photo[data-r="32"]{--r:1.5}.sc-photo[data-r="169"]{--r:1.778}.sc-photo[data-r="21"]{--r:2}
+.sc-photo .photo-open{display:block;position:relative;overflow:hidden;cursor:zoom-in;color:inherit;text-decoration:none}
+.sc-photo img{display:block;width:100%;height:auto;transition:transform 1.4s var(--amb-ease,ease)}
+.sc-photo .photo-open:focus-visible{outline:2px solid var(--sc-acc);outline-offset:5px}
+@media (hover:hover) and (pointer:fine){.sc-photo .photo-open:hover img{transform:scale(1.018)}}
+.sc-legende{display:flex;align-items:baseline;gap:.7rem;margin-top:.85rem;font-size:.78rem;line-height:1.35;letter-spacing:.05em;color:var(--sc-ink2)}
+.sc-legende .serie-num{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-size:1.05rem;letter-spacing:.06em;color:var(--sc-acc)}
+
+/* ---------- Titres de chapitre et mots géants ---------- */
+.sc-chapitre{position:relative;z-index:2;display:flex;align-items:baseline;gap:1rem;margin:0 0 clamp(1.5rem,4vh,3rem)}
+.sc-chapitre-num{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-size:1.05rem;letter-spacing:.24em;color:var(--sc-acc)}
+.sc-chapitre h2{margin:0;font-family:var(--body,'DM Sans'),sans-serif;font-weight:400;font-size:clamp(.95rem,1.25vw,1.15rem);letter-spacing:.32em;text-transform:uppercase;color:var(--sc-ink)}
+.sc-mot{position:absolute;z-index:0;top:50%;left:-1vw;margin:0;translate:0 -50%;font-family:var(--body,'DM Sans'),sans-serif;font-weight:400;font-size:clamp(5rem,19vw,21rem);line-height:.8;letter-spacing:-.055em;white-space:nowrap;color:color-mix(in srgb,var(--sc-acc) 15%,transparent);pointer-events:none;user-select:none}
+.sc-mot[data-cote="droite"]{left:auto;right:-1vw}
+@supports (animation-timeline:view()){
+  @keyframes sc-glisse{from{transform:translateX(7%)}to{transform:translateX(-7%)}}
+  html.sc-js:not(.serie-calme) .sc-mot{animation:sc-glisse linear both;animation-timeline:view();animation-range:cover}
+}
+
+/* ---------- Ouverture ---------- */
+.sc--ouverture{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto 1fr;column-gap:clamp(1rem,3vw,3rem);align-items:end;min-height:calc(100 * var(--u) - var(--sc-head));padding-top:.6rem;padding-bottom:clamp(1.5rem,4vh,3rem)}
+.sc--ouverture .serie-fil{grid-column:1;grid-row:1;align-self:start;padding:0 0 1.2rem;color:var(--sc-ink2)}
+.sc--ouverture .serie-fil [aria-current]{color:var(--sc-ink)}
+.sc--ouverture .sc-photo{grid-column:2;grid-row:1 / span 2;align-self:end;width:min(58vw,calc((100 * var(--u) - var(--sc-head) - 3.5rem) * var(--r)))}
+.sc--ouverture[data-cote="gauche"]{grid-template-columns:auto minmax(0,1fr)}
+.sc--ouverture[data-cote="gauche"] .sc-photo{grid-column:1}
+.sc--ouverture[data-cote="gauche"] .sc-ouverture-texte{grid-column:2}
+.sc-ouverture-texte{grid-row:2;position:relative;z-index:2;align-self:end;padding-bottom:clamp(1rem,6vh,4rem)}
+.sc-kicker{margin:0;font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:var(--sc-ink2)}
+.sc-nom{margin:.3em 0 0;font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-weight:400;font-size:clamp(4.5rem,15vw,15rem);line-height:.78;letter-spacing:-.01em;color:var(--sc-ink)}
+/* Le nom mord sur le bord de la photo (zone de fond uni), comme une couverture de magazine */
+.sc--ouverture[data-cote="droite"] .sc-ouverture-texte{justify-self:end;margin-right:calc(-1 * clamp(2rem,4.5vw,5.5rem))}
+.sc--ouverture[data-cote="gauche"] .sc-ouverture-texte{justify-self:start;margin-left:calc(-1 * clamp(2rem,4.5vw,5.5rem))}
+.sc--ouverture[data-cote="gauche"] .serie-fil{grid-column:2}
+/* Garde-fou : le bloc de texte occupe toute sa colonne et sert de repère de largeur ; un nom long (Christophe…)
+   rétrécit juste assez pour ne jamais sortir de l'écran. --nl = lettres du mot le plus long (fichier <série>-couleurs.css). */
+.sc--ouverture:not(.sc--ouv-paysage) .sc-ouverture-texte{container-type:inline-size;justify-self:stretch;display:grid;justify-items:start;align-content:end}
+.sc--ouverture[data-cote="droite"]:not(.sc--ouv-paysage) .sc-ouverture-texte{justify-content:end}
+.sc--ouverture[data-cote="gauche"]:not(.sc--ouv-paysage) .sc-ouverture-texte{justify-content:start}
+:where(.sc--ouverture:not(.sc--ouv-paysage)) .sc-nom{font-size:min(clamp(4.5rem,15vw,15rem),100cqi / (var(--nl,6) * .42))}
+.sc-titre{margin:1.4rem 0 0;font-size:clamp(1.05rem,1.6vw,1.35rem);color:var(--sc-ink)}
+.sc-contexte{margin:.5rem 0 0;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sc-acc)}
+.sc-cue{display:inline-flex;align-items:center;gap:.8rem;min-height:44px;margin-top:1.6rem;color:var(--sc-ink);text-decoration:none;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase}
+.sc-cue::after{content:"";width:46px;height:1px;background:currentColor;transform-origin:0 50%;transition:transform .5s var(--amb-ease,ease)}
+.sc-cue:hover::after,.sc-cue:focus-visible::after{transform:scaleX(1.6)}
+
+/* ---------- Texte éditorial ---------- */
+.sc--texte{display:flex;justify-content:center;padding-block:clamp(6rem,20vh,13rem)}
+.sc-lede{margin:0;max-width:min(100%,21em);font-size:clamp(1.55rem,3vw,2.9rem);line-height:1.28;letter-spacing:-.012em;color:var(--sc-ink)}
+
+/* ---------- Monumental : une photo, en très grand ---------- */
+.sc--monumental,.sc--final{display:flex;flex-direction:column;align-items:center}
+.sc--monumental .sc-chapitre,.sc--final .sc-chapitre{align-self:flex-start}
+.sc--monumental .sc-photo{--hk:90}
+.sc--monumental[data-orient="paysage"]{padding-inline:clamp(0rem,2vw,2rem)}
+.sc--monumental[data-orient="paysage"] .sc-chapitre{padding-inline:calc(var(--sc-gut) - clamp(0rem,2vw,2rem))}
+.sc--monumental[data-orient="paysage"] .sc-photo{--hk:90}
+
+/* ---------- Duo : deux photos grandes, à hauteur égale, légèrement décalées ---------- */
+.sc--duo .sc-chapitre{margin-bottom:clamp(2rem,6vh,4rem)}
+.sc-duo{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.25rem,3.2vw,3.5rem);align-items:start}
+.sc-duo .sc-photo{--hk:80;justify-self:end}
+.sc-duo .sc-photo+.sc-photo{justify-self:start;margin-top:clamp(2.5rem,12vh,8rem)}
+
+/* ---------- Asymétrique : une grande photo et un texte ---------- */
+.sc--asym{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center;gap:clamp(2rem,6vw,7rem)}
+.sc--asym .sc-photo{--hk:88;justify-self:end}
+.sc--asym[data-cote="droite"]{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+.sc--asym[data-cote="droite"] .sc-photo{order:2;justify-self:start}
+.sc-asym-texte p{margin:0;max-width:24ch;font-size:clamp(1.25rem,2vw,1.8rem);line-height:1.42;color:var(--sc-ink)}
+
+/* ---------- Final ---------- */
+.sc--final{padding-bottom:clamp(5rem,14vh,10rem)}
+.sc--final .sc-photo{--hk:88}
+
+/* ---------- Verso (crédits, liens, suite) dans le fond continu ---------- */
+.sc.serie-verso{padding:clamp(4rem,10vw,8rem) var(--sc-gut) clamp(3rem,8vw,6rem);border-top:1px solid var(--rule,rgba(238,241,248,.16));color:var(--sc-ink)}
+
+/* ---------- Rail de progression (ordinateur) ---------- */
+.sc-rail{position:fixed;top:50%;right:clamp(.6rem,1.4vw,1.5rem);z-index:30;translate:0 -50%;opacity:0;transition:opacity .5s ease}
+.sc-rail.est-visible{opacity:1}
+.sc-rail ol{display:grid;gap:.35rem;margin:0;padding:0;list-style:none}
+.sc-rail a{display:flex;align-items:center;justify-content:flex-end;gap:.7rem;min-height:26px;color:var(--sc-ink2);text-decoration:none;font-size:.7rem;letter-spacing:.12em}
+.sc-rail a::after{content:"";width:14px;height:1px;background:currentColor;transition:width .45s var(--amb-ease,ease),background-color .45s}
+.sc-rail a span{opacity:0;translate:6px 0;white-space:nowrap;transition:opacity .35s,translate .35s}
+.sc-rail a:hover span,.sc-rail a:focus-visible span{opacity:1;translate:0 0}
+.sc-rail a[aria-current="true"]{color:var(--sc-ink)}
+.sc-rail a[aria-current="true"]::after{width:36px;background:var(--sc-acc)}
+.page-scenes .serie-compteur{display:none}
+
+/* ---------- Dévoilement des photos (une seule fois ; jamais si le visiteur réduit les animations) ---------- */
+html.sc-js:not(.serie-calme) .sc-photo.est-cache .photo-open{clip-path:inset(9% 0 9% 0);opacity:0}
+html.sc-js:not(.serie-calme) .sc-photo.est-vu .photo-open{clip-path:inset(0 0 0 0);opacity:1;transition:clip-path 1.3s var(--amb-ease,ease),opacity .9s ease}
+
+/* ---------- Tablette ---------- */
+@media (max-width:1100px){
+  .sc-duo .sc-photo{--hk:70}
+  .sc--asym{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+}
+/* ---------- Téléphone : conçu pour le pouce, les photos sur toute la largeur ---------- */
+@media (max-width:900px){.sc-rail{display:none}.page-scenes .serie-compteur{display:block}}
+@media (max-width:700px){
+  .page-scenes{--sc-gut:5vw}
+  .sc{padding:3.5rem 5vw}
+  .sc--ouverture{display:block;min-height:0;padding-top:.4rem}
+  .sc--ouverture .sc-ouverture-texte{padding:0 0 1.6rem}
+  .sc-nom{font-size:min(clamp(4rem,23vw,7.5rem),100cqi / (var(--nl,6) * .42))}
+  .sc--ouverture[data-cote] .sc-ouverture-texte{margin:0;justify-self:auto}
+  .sc--ouverture[data-cote]:not(.sc--ouv-paysage) .sc-ouverture-texte{justify-content:start}
+  .sc--ouverture .sc-photo,.sc--monumental .sc-photo,.sc--final .sc-photo,.sc--asym .sc-photo,.sc-duo .sc-photo{width:auto;max-width:none;margin-inline:-5vw}
+  .sc-legende{padding-inline:5vw}
+  .sc--texte{padding-block:4.5rem}
+  .sc-lede{font-size:clamp(1.35rem,6.4vw,1.8rem)}
+  .sc--monumental[data-orient="paysage"]{padding-inline:5vw}
+  .sc--monumental[data-orient="paysage"] .sc-chapitre{padding-inline:0}
+  .sc-duo{grid-template-columns:1fr;gap:2.2rem}
+  .sc-duo .sc-photo+.sc-photo{margin-top:0}
+  .sc--asym{display:flex;flex-direction:column;align-items:stretch;gap:1.8rem}
+  .sc--asym[data-cote="droite"] .sc-photo{order:0}
+  /* Sur téléphone, le grand mot passe dans le flux, sous le titre du chapitre, au lieu de se superposer */
+  .sc-mot{position:relative;top:auto;left:auto;right:auto;translate:none;display:block;margin:-.15em 0 .05em -.06em;font-size:26vw}
+  .sc--monumental .sc-photo,.sc--final .sc-photo{align-self:stretch}
+  .sc--monumental .sc-mot,.sc--final .sc-mot{align-self:flex-start}
+}
+
+/* =========================================================
+   Compositions ajoutées le 25/11/2026 pour les autres séries
+   ========================================================= */
+/* Encre sombre : scène sur fond clair (papier, gris de galerie) — déduite de la couleur du fond par le générateur */
+.sc[data-encre="sombre"]{--sc-ink:#141414;--sc-ink2:rgba(20,20,20,.68);--sc-acc:var(--acc-sombre,#5a1414)}
+.sc[data-encre="sombre"] .sc-mot{color:rgba(20,20,20,.08)}
+
+/* Texte court sous une composition */
+.sc-note{position:relative;z-index:2;max-width:38ch;margin:clamp(1.5rem,4vh,2.5rem) 0 0;font-size:clamp(1rem,1.3vw,1.15rem);line-height:1.55;color:var(--sc-ink2)}
+.sc--duo .sc-note,.sc--trio .sc-note,.sc--planche .sc-note{margin-inline:auto;text-align:center}
+
+/* Ouverture en paysage : la photo en grand, le nom en dessous, sur deux colonnes */
+.sc--ouv-paysage{display:block;min-height:0;padding-top:.6rem}
+.sc--ouv-paysage .serie-fil{padding:0 0 1rem}
+.sc--ouv-paysage .sc-photo{width:min(100%,calc((100 * var(--u) - var(--sc-head) - 13rem) * var(--r)));margin:0 auto}
+.sc--ouv-paysage .sc-ouverture-texte{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);align-items:end;gap:.4rem 3rem;margin:clamp(1.2rem,3vh,2rem) 0 0!important;padding:0;justify-self:auto}
+.sc--ouv-paysage .sc-kicker{grid-column:1 / -1}
+.sc--ouv-paysage .sc-nom{grid-row:2;margin:0;font-size:clamp(3.5rem,9vw,9rem)}
+.sc--ouv-paysage .sc-titre,.sc--ouv-paysage .sc-contexte,.sc--ouv-paysage .sc-cue{grid-column:2;margin:0}
+.sc--ouv-paysage .sc-titre{grid-row:2;align-self:end;padding-bottom:.6em}
+.sc--ouv-paysage .sc-contexte{grid-row:3}
+.sc--ouv-paysage .sc-cue{grid-row:4;margin-top:.4rem}
+.sc--ouv-paysage .sc-legende{display:none}
+
+/* Ouverture « révélateur » : la photo sort du noir comme une épreuve dans le bain (au chargement, une fois) */
+@keyframes sc-revele{from{opacity:1}to{opacity:0}}
+.sc--ouv-revelateur .sc-photo .photo-open::after{content:"";position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;animation:sc-revele 2.6s cubic-bezier(.45,0,.2,1) .2s backwards}
+
+/* Carton : un titre plein écran entre deux parties (les actes de Mika) */
+.sc--carton{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-height:calc(78 * var(--u));padding-block:clamp(4rem,12vh,8rem)}
+.sc-carton-kicker{margin:0;font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-size:clamp(1.2rem,2vw,1.8rem);letter-spacing:.3em;color:var(--sc-acc)}
+.sc-carton-titre{margin:.2em 0 0;font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-weight:400;font-size:clamp(3.5rem,11vw,11rem);line-height:.86;color:var(--sc-ink)}
+.sc-carton-sous{margin:1.2rem 0 0;max-width:36ch;font-size:clamp(1.05rem,1.6vw,1.4rem);color:var(--sc-ink2)}
+
+/* Trio : trois photos d'une même séquence, à hauteur égale, celle du milieu décalée */
+.sc-trio{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,2.4vw,2.5rem);align-items:start}
+.sc-trio .sc-photo{--hk:66;justify-self:center}
+.sc-trio .sc-photo:nth-child(2){margin-top:clamp(2rem,9vh,6rem)}
+
+/* Planche-contact sur papier : les vraies vues, avec leur numéro */
+.sc-planche{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1.25rem,3vw,3rem);align-items:end}
+.sc-planche .sc-photo{--hk:54;justify-self:center}
+.sc-planche .sc-photo .photo-open{outline:1px solid currentColor;outline-offset:9px;color:var(--sc-ink)}
+.sc-planche .sc-legende{margin-top:1.3rem}
+.sc-vue{margin-left:auto;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;opacity:.75}
+
+/* Séquence : le cadre reste à l'écran, les instants se remplacent (script series.js) */
+.sc--sequence .sc-photo{--hk:80}
+html.serie-js:not(.serie-calme) .serie-seq-cadre>.sc-photo{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s}
+html.serie-js:not(.serie-calme) .serie-seq-cadre>.sc-photo.is-actif{opacity:1;visibility:visible;transition:opacity .35s ease,visibility 0s}
+.sc--sequence .serie-seq-reperes li{background:var(--sc-ink2)}
+.sc--sequence .serie-seq-reperes li.is-actif{background:var(--sc-acc)}
+
+/* Respiration : une image plus petite au milieu d'un grand vide */
+.sc--respiration{display:flex;flex-direction:column;align-items:center;padding-block:clamp(6rem,18vh,12rem)}
+.sc--respiration .sc-chapitre{align-self:flex-start}
+.sc--respiration .sc-photo{--hk:52}
+
+/* Duo « partagé » : deux photos bord à bord, sans espace, comme un écran coupé en deux */
+.sc--partage{padding-inline:0}
+.sc--partage .sc-chapitre{padding-inline:var(--sc-gut)}
+.sc--partage .sc-duo{gap:0}
+.sc--partage .sc-duo .sc-photo{--hk:92;margin-top:0!important}
+.sc--partage .sc-legende{padding-inline:1rem}
+
+/* Monumental « plein » : un paysage d'un bord à l'autre de l'écran (hauteur toujours limitée) */
+.sc--pleine{padding-inline:0!important}
+.sc--pleine .sc-chapitre{padding-inline:var(--sc-gut)!important}
+.sc--pleine .sc-photo{--hk:94;width:min(100%,calc(var(--hk) * var(--u) * var(--r)))}
+.sc--pleine .sc-legende{padding-inline:var(--sc-gut)}
+
+/* Final en paysage */
+.sc--final[data-orient="paysage"] .sc-photo{--hk:86}
+
+@media (max-width:1100px){
+  .sc-trio .sc-photo{--hk:52}
+  .sc-planche{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:3rem}
+}
+@media (max-width:700px){
+  .sc--ouv-paysage .sc-photo{width:auto;margin-inline:-5vw}
+  .sc--ouv-paysage .sc-ouverture-texte{grid-template-columns:1fr;gap:.6rem}
+  .sc--ouv-paysage .sc-nom,.sc--ouv-paysage .sc-titre,.sc--ouv-paysage .sc-contexte,.sc--ouv-paysage .sc-cue{grid-column:1;grid-row:auto;padding:0}
+  .sc--ouv-paysage .sc-nom{font-size:clamp(3.2rem,17vw,5.5rem)}
+  /* Trio et planche : une bande qui défile au doigt, une photo à la fois */
+  .sc-trio,.sc-planche{display:flex;gap:4vw;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;margin-inline:-5vw;padding:0 5vw 1rem}
+  .sc-trio::-webkit-scrollbar,.sc-planche::-webkit-scrollbar{display:none}
+  .sc-trio .sc-photo,.sc-planche .sc-photo{flex:0 0 82vw;width:82vw;max-width:none;margin:0!important;scroll-snap-align:center}
+  .sc-planche .sc-photo{flex-basis:72vw;width:72vw}
+  .sc-planche .sc-photo .photo-open{outline-offset:6px}
+  .sc--carton{min-height:60svh;padding-block:4rem}
+  .sc--respiration{padding-block:4.5rem}
+  .sc--respiration .sc-photo{width:72%;margin:0}
+  .sc--partage .sc-duo{gap:0}
+  .sc--partage .sc-duo .sc-photo{margin-inline:0}
+  .sc--pleine .sc-photo{width:100%;margin:0}
+  .sc-note{margin-top:1.4rem}
+}
+@media (prefers-reduced-motion:reduce){.sc *,.sc-fond{transition:none!important;animation:none!important}}
+html[data-motion="none"] .sc *,html[data-motion="none"] .sc-fond{transition:none!important;animation:none!important}

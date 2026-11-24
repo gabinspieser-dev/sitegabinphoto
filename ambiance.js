@@ -72,6 +72,10 @@
   });
   const has = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
   function toneOf(img) {
+    /* Depuis le 24/11/2026 : la couleur est écrite sur la photo par le générateur du portfolio
+       (data-tone="#rrggbb", ou "nb" pour une photo en noir et blanc). */
+    const own = img.getAttribute('data-tone');
+    if (own) return own === 'nb' ? NEUTRAL : own;
     const m = /\/assets\/photos\/([^/?#]+?)(?:-(?:small|medium|large|800))?\.webp/.exec(img.getAttribute('src') || '');
     if (!m) return undefined;
     if (has(TONES, m[1])) return TONES[m[1]] || NEUTRAL;
@@ -318,7 +322,7 @@
   });
 
   /* 10 ter. Téléphone : galeries en bande que l'on fait glisser au doigt, avec un filet de progression */
-  const strips = Array.from(document.querySelectorAll('.home-duet, .home-trio, .editorial-gallery:not(.editorial-gallery-single)'));
+  const strips = Array.from(document.querySelectorAll('.home-mosaique, .editorial-gallery:not(.editorial-gallery-single)'));
 
   /* 10 ter bis. Portfolio sur téléphone : chaque photo reçoit un format dans un rythme éditorial.
      Les classes n'ont d'effet que sous 600 px (voir ambiance.css) ; l'ordre des photos ne change pas. */

@@ -1,0 +1,16 @@
+/* =========================================================
+   Mika — « Trois costumes » : un théâtre en trois actes (25/11/2026)
+   Bleu canard (#035a6f, #0393a3), jaune brodé (#e5b651), bleu nuit pailleté.
+   Chaque acte s'ouvre sur un carton plein écran à la couleur du costume, plis de rideau en fond ;
+   le mégaphone sert d'entracte. Les couleurs d'accent changent avec l'acte.
+   ========================================================= */
+.serie--mika{--sc-ink:#f4f1ea;--sc-ink2:rgba(244,241,234,.68);--sc-acc:#33c2c4;--rule:rgba(244,241,234,.18);--ink-base:#f4f1ea;--ink-2:rgba(244,241,234,.66);--acc:#93a8ff;background:#05090b}
+.serie--mika .sc-nom{text-transform:uppercase;letter-spacing:.04em}
+.serie--mika .sc-chapitre-num{display:none}
+.serie--mika .sc-chapitre h2{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;font-size:clamp(2.2rem,4vw,3.6rem);letter-spacing:.08em;color:var(--sc-acc)}
+/* Le carton : plis de rideau très discrets, titre d'acte monumental */
+.serie--mika .sc--carton{overflow:hidden}
+.serie--mika .sc--carton::before{content:"";position:absolute;inset:0;z-index:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 2px,transparent 2px 22px,rgba(0,0,0,.18) 22px 40px,transparent 40px 58px);pointer-events:none}
+.serie--mika .sc--carton>*{position:relative;z-index:1}
+.serie--mika .sc-carton-kicker{font-size:clamp(1.6rem,3vw,2.8rem);letter-spacing:.4em}
+.serie--mika .sc-carton-titre{font-size:clamp(4rem,13vw,13rem)}

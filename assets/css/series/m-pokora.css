@@ -1,0 +1,10 @@
+/* =========================================================
+   M. Pokora — « Lumières blanches » : un mur de projecteurs (25/11/2026)
+   Violet du duo (#1d0256), peau chaude (#ebc890), mur de lumières blanches carrées.
+   Une grille de petites lumières sert de motif ; le duo passe en violet profond ; la sortie de dos en noir et blanc.
+   ========================================================= */
+.serie--pokora{--sc-ink:#f5f3fb;--sc-ink2:rgba(245,243,251,.66);--sc-acc:#b39bff;--rule:rgba(245,243,251,.18);--ink-base:#f5f3fb;--ink-2:rgba(245,243,251,.64);--acc:#b39bff;background:#06060f}
+.serie--pokora .sc-nom{text-transform:uppercase;letter-spacing:.03em}
+.serie--pokora .sc-chapitre{flex-wrap:wrap}
+.serie--pokora .sc-chapitre::before{content:"";flex-basis:100%;max-width:min(100%,30rem);height:14px;margin-bottom:1.2rem;background:linear-gradient(90deg,rgba(255,255,255,.75) 0 8px,transparent 8px) 0 0/22px 14px repeat-x;-webkit-mask-image:linear-gradient(90deg,#000,transparent 60%);mask-image:linear-gradient(90deg,#000,transparent 60%)}
+.serie--pokora .sc-mot{font-family:var(--display,'Bebas Neue'),Impact,sans-serif;text-transform:uppercase;color:rgba(255,255,255,.07)}
